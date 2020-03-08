@@ -30,15 +30,20 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TAB1 = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.labelInstallLocation = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.labelUnstallString2 = new System.Windows.Forms.Label();
+            this.labelPathInRegistry2 = new System.Windows.Forms.Label();
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.AppName1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.appVersion1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.appPublisher1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.appCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.appUninstallString1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.appInstallLocation1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.appPublisher1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.appPathInRegistry1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.appCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.AppItem = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.labelNamePathinRegistry = new System.Windows.Forms.Label();
             this.labelNameUninsatallStirng = new System.Windows.Forms.Label();
             this.labelUninstallStirng = new System.Windows.Forms.Label();
@@ -51,8 +56,8 @@
             this.UninstallString = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PathInRegistry = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ListPC = new System.Windows.Forms.ListBox();
-            this.GetPC = new System.Windows.Forms.Button();
-            this.ListApp = new System.Windows.Forms.ComboBox();
+            this.GetPCNames = new System.Windows.Forms.Button();
+            this.listShablons = new System.Windows.Forms.ComboBox();
             this.GetListShablons = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -75,12 +80,18 @@
             this.tabControl1.Multiline = true;
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1829, 848);
+            this.tabControl1.Size = new System.Drawing.Size(1291, 848);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             // 
             // TAB1
             // 
+            this.TAB1.Controls.Add(this.label3);
+            this.TAB1.Controls.Add(this.labelInstallLocation);
+            this.TAB1.Controls.Add(this.label1);
+            this.TAB1.Controls.Add(this.label2);
+            this.TAB1.Controls.Add(this.labelUnstallString2);
+            this.TAB1.Controls.Add(this.labelPathInRegistry2);
             this.TAB1.Controls.Add(this.dataGridView2);
             this.TAB1.Controls.Add(this.labelNamePathinRegistry);
             this.TAB1.Controls.Add(this.labelNameUninsatallStirng);
@@ -88,16 +99,73 @@
             this.TAB1.Controls.Add(this.labelPathInRegistry);
             this.TAB1.Controls.Add(this.dataGridView1);
             this.TAB1.Controls.Add(this.ListPC);
-            this.TAB1.Controls.Add(this.GetPC);
-            this.TAB1.Controls.Add(this.ListApp);
+            this.TAB1.Controls.Add(this.GetPCNames);
+            this.TAB1.Controls.Add(this.listShablons);
             this.TAB1.Controls.Add(this.GetListShablons);
             this.TAB1.Location = new System.Drawing.Point(204, 4);
             this.TAB1.Name = "TAB1";
             this.TAB1.Padding = new System.Windows.Forms.Padding(3);
-            this.TAB1.Size = new System.Drawing.Size(1621, 840);
+            this.TAB1.Size = new System.Drawing.Size(1083, 840);
             this.TAB1.TabIndex = 0;
-            this.TAB1.Text = "Name1";
+            this.TAB1.Text = "Search Apps";
             this.TAB1.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(265, 768);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(74, 13);
+            this.label3.TabIndex = 16;
+            this.label3.Text = "Install location";
+            // 
+            // labelInstallLocation
+            // 
+            this.labelInstallLocation.AutoSize = true;
+            this.labelInstallLocation.Location = new System.Drawing.Point(353, 768);
+            this.labelInstallLocation.Name = "labelInstallLocation";
+            this.labelInstallLocation.Size = new System.Drawing.Size(96, 13);
+            this.labelInstallLocation.TabIndex = 15;
+            this.labelInstallLocation.Text = "TextInstallLocation";
+            this.labelInstallLocation.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(265, 737);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 13);
+            this.label1.TabIndex = 14;
+            this.label1.Text = "Path in registry:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(265, 711);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(72, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Unistall string:";
+            // 
+            // labelUnstallString2
+            // 
+            this.labelUnstallString2.AutoSize = true;
+            this.labelUnstallString2.Location = new System.Drawing.Point(353, 711);
+            this.labelUnstallString2.Name = "labelUnstallString2";
+            this.labelUnstallString2.Size = new System.Drawing.Size(96, 13);
+            this.labelUnstallString2.TabIndex = 12;
+            this.labelUnstallString2.Text = "labelUninstallString";
+            this.labelUnstallString2.Visible = false;
+            // 
+            // labelPathInRegistry2
+            // 
+            this.labelPathInRegistry2.AutoSize = true;
+            this.labelPathInRegistry2.Location = new System.Drawing.Point(353, 737);
+            this.labelPathInRegistry2.Name = "labelPathInRegistry2";
+            this.labelPathInRegistry2.Size = new System.Drawing.Size(103, 13);
+            this.labelPathInRegistry2.TabIndex = 11;
+            this.labelPathInRegistry2.Text = "Text_PathInRegsitry";
+            this.labelPathInRegistry2.Visible = false;
             // 
             // dataGridView2
             // 
@@ -109,68 +177,33 @@
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.AppName1,
             this.appVersion1,
-            this.appPublisher1,
+            this.appCount,
             this.appUninstallString1,
             this.appInstallLocation1,
-            this.appPathInRegistry1,
-            this.appCount,
-            this.AppItem});
-            this.dataGridView2.Location = new System.Drawing.Point(310, 492);
+            this.appPublisher1,
+            this.appPathInRegistry1});
+            this.dataGridView2.Location = new System.Drawing.Point(268, 413);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(1156, 334);
+            this.dataGridView2.Size = new System.Drawing.Size(717, 287);
             this.dataGridView2.TabIndex = 10;
             this.dataGridView2.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView2_CellFormatting);
             this.dataGridView2.SelectionChanged += new System.EventHandler(this.dataGridView2_SelectionChanged);
             // 
             // AppName1
             // 
-            this.AppName1.DataPropertyName = "AppItem.DisplayName";
+            this.AppName1.DataPropertyName = "DisplayName";
             this.AppName1.HeaderText = "Name";
             this.AppName1.Name = "AppName1";
             this.AppName1.ReadOnly = true;
-            this.AppName1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // appVersion1
             // 
-            this.appVersion1.DataPropertyName = "AppItem.DisplayVersion";
+            this.appVersion1.DataPropertyName = "DisplayVersion";
             this.appVersion1.HeaderText = "Version";
             this.appVersion1.Name = "appVersion1";
             this.appVersion1.ReadOnly = true;
-            this.appVersion1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // appPublisher1
-            // 
-            this.appPublisher1.DataPropertyName = "AppItem.Publisher";
-            this.appPublisher1.HeaderText = "Publisher";
-            this.appPublisher1.Name = "appPublisher1";
-            this.appPublisher1.ReadOnly = true;
-            this.appPublisher1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // appUninstallString1
-            // 
-            this.appUninstallString1.DataPropertyName = "AppItem.UninstallString";
-            this.appUninstallString1.HeaderText = "\"Uninstall String\"";
-            this.appUninstallString1.Name = "appUninstallString1";
-            this.appUninstallString1.ReadOnly = true;
-            this.appUninstallString1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // appInstallLocation1
-            // 
-            this.appInstallLocation1.DataPropertyName = "AppItem.InstallLocation";
-            this.appInstallLocation1.HeaderText = "Install Location";
-            this.appInstallLocation1.Name = "appInstallLocation1";
-            this.appInstallLocation1.ReadOnly = true;
-            this.appInstallLocation1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // appPathInRegistry1
-            // 
-            this.appPathInRegistry1.DataPropertyName = "AppItem.PathInRegistry";
-            this.appPathInRegistry1.HeaderText = "Path In Registry";
-            this.appPathInRegistry1.Name = "appPathInRegistry1";
-            this.appPathInRegistry1.ReadOnly = true;
-            this.appPathInRegistry1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // appCount
             // 
@@ -178,21 +211,42 @@
             this.appCount.HeaderText = "Count";
             this.appCount.Name = "appCount";
             this.appCount.ReadOnly = true;
-            this.appCount.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // AppItem
+            // appUninstallString1
             // 
-            this.AppItem.DataPropertyName = "AppItem";
-            this.AppItem.HeaderText = "AppItem1";
-            this.AppItem.Name = "AppItem";
-            this.AppItem.ReadOnly = true;
-            this.AppItem.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.AppItem.Visible = false;
+            this.appUninstallString1.DataPropertyName = "UninstallString";
+            this.appUninstallString1.HeaderText = "\"Uninstall String\"";
+            this.appUninstallString1.Name = "appUninstallString1";
+            this.appUninstallString1.ReadOnly = true;
+            this.appUninstallString1.Visible = false;
+            // 
+            // appInstallLocation1
+            // 
+            this.appInstallLocation1.DataPropertyName = "InstallLocation";
+            this.appInstallLocation1.HeaderText = "Install Location";
+            this.appInstallLocation1.Name = "appInstallLocation1";
+            this.appInstallLocation1.ReadOnly = true;
+            this.appInstallLocation1.Visible = false;
+            // 
+            // appPublisher1
+            // 
+            this.appPublisher1.DataPropertyName = "Publisher";
+            this.appPublisher1.HeaderText = "Publisher";
+            this.appPublisher1.Name = "appPublisher1";
+            this.appPublisher1.ReadOnly = true;
+            // 
+            // appPathInRegistry1
+            // 
+            this.appPathInRegistry1.DataPropertyName = "PathInRegistry";
+            this.appPathInRegistry1.HeaderText = "Path In Registry";
+            this.appPathInRegistry1.Name = "appPathInRegistry1";
+            this.appPathInRegistry1.ReadOnly = true;
+            this.appPathInRegistry1.Visible = false;
             // 
             // labelNamePathinRegistry
             // 
             this.labelNamePathinRegistry.AutoSize = true;
-            this.labelNamePathinRegistry.Location = new System.Drawing.Point(307, 418);
+            this.labelNamePathinRegistry.Location = new System.Drawing.Point(268, 353);
             this.labelNamePathinRegistry.Name = "labelNamePathinRegistry";
             this.labelNamePathinRegistry.Size = new System.Drawing.Size(79, 13);
             this.labelNamePathinRegistry.TabIndex = 9;
@@ -201,7 +255,7 @@
             // labelNameUninsatallStirng
             // 
             this.labelNameUninsatallStirng.AutoSize = true;
-            this.labelNameUninsatallStirng.Location = new System.Drawing.Point(307, 392);
+            this.labelNameUninsatallStirng.Location = new System.Drawing.Point(265, 316);
             this.labelNameUninsatallStirng.Name = "labelNameUninsatallStirng";
             this.labelNameUninsatallStirng.Size = new System.Drawing.Size(72, 13);
             this.labelNameUninsatallStirng.TabIndex = 8;
@@ -210,20 +264,22 @@
             // labelUninstallStirng
             // 
             this.labelUninstallStirng.AutoSize = true;
-            this.labelUninstallStirng.Location = new System.Drawing.Point(395, 392);
+            this.labelUninstallStirng.Location = new System.Drawing.Point(265, 329);
             this.labelUninstallStirng.Name = "labelUninstallStirng";
             this.labelUninstallStirng.Size = new System.Drawing.Size(96, 13);
             this.labelUninstallStirng.TabIndex = 7;
             this.labelUninstallStirng.Text = "labelUninstallString";
+            this.labelUninstallStirng.Visible = false;
             // 
             // labelPathInRegistry
             // 
             this.labelPathInRegistry.AutoSize = true;
-            this.labelPathInRegistry.Location = new System.Drawing.Point(395, 418);
+            this.labelPathInRegistry.Location = new System.Drawing.Point(265, 366);
             this.labelPathInRegistry.Name = "labelPathInRegistry";
             this.labelPathInRegistry.Size = new System.Drawing.Size(103, 13);
             this.labelPathInRegistry.TabIndex = 6;
             this.labelPathInRegistry.Text = "Text_PathInRegsitry";
+            this.labelPathInRegistry.Visible = false;
             // 
             // dataGridView1
             // 
@@ -239,11 +295,11 @@
             this.InstallLocation,
             this.UninstallString,
             this.PathInRegistry});
-            this.dataGridView1.Location = new System.Drawing.Point(307, 33);
+            this.dataGridView1.Location = new System.Drawing.Point(268, 33);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1159, 352);
+            this.dataGridView1.Size = new System.Drawing.Size(720, 267);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -307,37 +363,37 @@
             // ListPC
             // 
             this.ListPC.FormattingEnabled = true;
-            this.ListPC.Location = new System.Drawing.Point(50, 328);
+            this.ListPC.Location = new System.Drawing.Point(50, 237);
             this.ListPC.Name = "ListPC";
-            this.ListPC.Size = new System.Drawing.Size(231, 498);
+            this.ListPC.Size = new System.Drawing.Size(196, 511);
             this.ListPC.TabIndex = 3;
             this.ListPC.SelectedIndexChanged += new System.EventHandler(this.ListPC_SelectedIndexChanged);
             // 
-            // GetPC
+            // GetPCNames
             // 
-            this.GetPC.Enabled = false;
-            this.GetPC.Location = new System.Drawing.Point(50, 218);
-            this.GetPC.Name = "GetPC";
-            this.GetPC.Size = new System.Drawing.Size(196, 40);
-            this.GetPC.TabIndex = 2;
-            this.GetPC.Text = "Get PC";
-            this.GetPC.UseVisualStyleBackColor = true;
-            this.GetPC.Click += new System.EventHandler(this.GetPC_Click);
+            this.GetPCNames.Enabled = false;
+            this.GetPCNames.Location = new System.Drawing.Point(50, 158);
+            this.GetPCNames.Name = "GetPCNames";
+            this.GetPCNames.Size = new System.Drawing.Size(196, 40);
+            this.GetPCNames.TabIndex = 2;
+            this.GetPCNames.Text = "Get PC";
+            this.GetPCNames.UseVisualStyleBackColor = true;
+            this.GetPCNames.Click += new System.EventHandler(this.GetPC_Click);
             // 
-            // ListApp
+            // listShablons
             // 
-            this.ListApp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ListApp.Enabled = false;
-            this.ListApp.FormattingEnabled = true;
-            this.ListApp.Location = new System.Drawing.Point(50, 153);
-            this.ListApp.Name = "ListApp";
-            this.ListApp.Size = new System.Drawing.Size(196, 21);
-            this.ListApp.TabIndex = 1;
-            this.ListApp.SelectedIndexChanged += new System.EventHandler(this.ListApp_SelectedIndexChanged);
+            this.listShablons.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.listShablons.Enabled = false;
+            this.listShablons.FormattingEnabled = true;
+            this.listShablons.Location = new System.Drawing.Point(50, 105);
+            this.listShablons.Name = "listShablons";
+            this.listShablons.Size = new System.Drawing.Size(196, 21);
+            this.listShablons.TabIndex = 1;
+            this.listShablons.SelectedIndexChanged += new System.EventHandler(this.ListApp_SelectedIndexChanged);
             // 
             // GetListShablons
             // 
-            this.GetListShablons.Location = new System.Drawing.Point(50, 47);
+            this.GetListShablons.Location = new System.Drawing.Point(50, 33);
             this.GetListShablons.Name = "GetListShablons";
             this.GetListShablons.Size = new System.Drawing.Size(106, 44);
             this.GetListShablons.TabIndex = 0;
@@ -350,7 +406,7 @@
             this.tabPage2.Location = new System.Drawing.Point(204, 4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1621, 840);
+            this.tabPage2.Size = new System.Drawing.Size(1163, 840);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -361,7 +417,7 @@
             this.tabPage3.Location = new System.Drawing.Point(204, 4);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1621, 840);
+            this.tabPage3.Size = new System.Drawing.Size(1163, 840);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             // 
@@ -369,7 +425,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1678, 848);
+            this.ClientSize = new System.Drawing.Size(1296, 848);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -392,9 +448,9 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Button GetListShablons;
-        private System.Windows.Forms.ComboBox ListApp;
+        private System.Windows.Forms.ComboBox listShablons;
         private System.Windows.Forms.ListBox ListPC;
-        private System.Windows.Forms.Button GetPC;
+        private System.Windows.Forms.Button GetPCNames;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labelPathInRegistry;
         private System.Windows.Forms.Label labelUninstallStirng;
@@ -407,14 +463,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UninstallString;
         private System.Windows.Forms.DataGridViewTextBoxColumn PathInRegistry;
         private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelUnstallString2;
+        private System.Windows.Forms.Label labelPathInRegistry2;
         private System.Windows.Forms.DataGridViewTextBoxColumn AppName1;
         private System.Windows.Forms.DataGridViewTextBoxColumn appVersion1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn appPublisher1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn appCount;
         private System.Windows.Forms.DataGridViewTextBoxColumn appUninstallString1;
         private System.Windows.Forms.DataGridViewTextBoxColumn appInstallLocation1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn appPublisher1;
         private System.Windows.Forms.DataGridViewTextBoxColumn appPathInRegistry1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn appCount;
-        private System.Windows.Forms.DataGridViewTextBoxColumn AppItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelInstallLocation;
     }
 }
 

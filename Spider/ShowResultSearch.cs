@@ -14,7 +14,7 @@ namespace Spider
         const string PathToDir = @"\\fileserv.omsu.vmr\Inventory$\SearchApps";
         public string CurrentDirectory { get; private set; }
         public string CurrentFile { get; private set; }
-        public SortedDictionary<string, List<App>> DicPCApps{get; private set;}
+        public SortedDictionary<string, List<App>> DicPCApps{ get { return GetPCApps(); } private set { } }
 
 
         public string[] GetNameDirectories()
@@ -48,9 +48,9 @@ namespace Spider
             CurrentFile = Path.Combine(CurrentDirectory, $"{namePC}.xml");
         }
 
-        public void GetPCApps()
+        private SortedDictionary<string,List<App>> GetPCApps()
         {
-            this.DicPCApps = new SortedDictionary<string, List<App>>();
+            SortedDictionary<string, List<App>>  dicPCApps = new SortedDictionary<string, List<App>>();
             FileInfo finfo;
             string NamePC = String.Empty;
             List<App> appsfromxml;
@@ -59,8 +59,9 @@ namespace Spider
                 finfo = new FileInfo(xmlfile);
                 NamePC = finfo.Name.Replace(finfo.Extension, "");
                 appsfromxml = ReadFromXmlFile<List<App>>(xmlfile);
-                this.DicPCApps.Add(NamePC, appsfromxml);
+                dicPCApps.Add(NamePC, appsfromxml);
             }
+            return dicPCApps;
         }
 
         public List<Appv2> GetUnicVersion() {
