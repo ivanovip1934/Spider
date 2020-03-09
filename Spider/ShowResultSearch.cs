@@ -33,21 +33,6 @@ namespace Spider
             CurrentDirectory = Path.Combine(PathToDir, nameDir);
         }
 
-        public string[] GetNamePC()
-        {
-            string[] listFiles = Directory.GetFiles(CurrentDirectory);
-            string[] namePC = new string[listFiles.Length];
-            for (int i = 0; i < listFiles.Length; i++)
-            {
-                namePC[i] = (new FileInfo(listFiles[i])).Name.Replace(".xml", "");
-            }
-            return namePC;
-        }
-
-        public void SetNameCurFile(string namePC) {
-            CurrentFile = Path.Combine(CurrentDirectory, $"{namePC}.xml");
-        }
-
         private SortedDictionary<string,List<App>> GetPCApps()
         {
             SortedDictionary<string, List<App>>  dicPCApps = new SortedDictionary<string, List<App>>();

@@ -15,7 +15,7 @@ namespace Spider
 
         ShowResultSearch showRes = new ShowResultSearch();
         List<App> apps = new List<App>();
-        BindingList<Appv2> unicapps = new BindingList<Appv2>();        
+        BindingList<Appv2> unicapps = new BindingList<Appv2>();
 
         public form1()
         {
@@ -70,9 +70,7 @@ namespace Spider
         private void GetPC_Click(object sender, EventArgs e)
         {
 
-            //showRes.GetPCApps(); 
             ClearDatafromControls();
-            this.unicapps = new BindingList<Appv2>();
             this.unicapps = new BindingList<Appv2>(showRes.GetUnicVersion());
             foreach (Appv2 appv2 in unicapps)
             {
@@ -86,7 +84,7 @@ namespace Spider
                                             );
             }
             dataGridView2.ClearSelection();
-            
+
             foreach (KeyValuePair<string, List<App>> item in showRes.DicPCApps)
             {
                 this.ListPC.Items.Add(item.Key);
@@ -112,26 +110,21 @@ namespace Spider
         {
             foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                this.labelUninstallStirng.Text = row.Cells[2].Value?.ToString();
-                this.labelPathInRegistry.Text = row.Cells["PathInRegistry"].Value.ToString();
+                this.labelUninstallStirng.Text = row.Cells["UninstallString"].Value?.ToString();
+                this.labelPathInRegistry.Text = row.Cells["PathInRegistry"].Value?.ToString();
                 this.labelUninstallStirng.Visible = true;
                 this.labelPathInRegistry.Visible = true;
             }
         }
-
         private void dataGridView2_SelectionChanged(object sender, EventArgs e)
         {
 
-            App testapp1 = new App();
+            App selectedapp = new App();
             this.ListPC.Items.Clear();
 
-            //if (this.firstStart)
-            //    this.firstStart = false;
-            //else
-            //{
             foreach (DataGridViewRow row in dataGridView2.SelectedRows)
             {
-                testapp1 = new App(row.Cells["AppName1"].Value?.ToString(),
+                selectedapp = new App(row.Cells["AppName1"].Value?.ToString(),
                     row.Cells["appVersion1"].Value?.ToString(),
                     row.Cells["appUninstallString1"].Value?.ToString(),
                     row.Cells["appInstallLocation1"].Value?.ToString(),
@@ -140,9 +133,9 @@ namespace Spider
                     );
             }
 
-            this.labelUnstallString2.Text = testapp1.UninstallString;
-            this.labelPathInRegistry2.Text = testapp1.PathInRegistry;
-            this.labelInstallLocation.Text = testapp1.InstallLocation;
+            this.labelUnstallString2.Text = selectedapp.UninstallString;
+            this.labelPathInRegistry2.Text = selectedapp.PathInRegistry;
+            this.labelInstallLocation.Text = selectedapp.InstallLocation;
             this.labelPathInRegistry2.Visible = true;
             this.labelUnstallString2.Visible = true;
             this.labelInstallLocation.Visible = true;
@@ -150,38 +143,17 @@ namespace Spider
             foreach (KeyValuePair<string, List<App>> item in showRes.DicPCApps)
             {
 
-                if (item.Value.Any(x => x.IsSame(testapp1)))
+                if (item.Value.Any(x => x.IsSame(selectedapp)))
                 {
                     this.ListPC.Items.Add(item.Key);
                 }
-
             }
-            //}
-
-            //    this.AppName1,
-            //this.appVersion1,
-            //this.appInstallLocation1,
-            //this.appUninstallString1,
-            //this.appPublisher1,
-            //this.appPathInRegistry1,
-            //this.appCount});
-
-
-            //    foreach (KeyValuePair<string, List<App>> item in showRes.DicPCApps)
-            //    {
-
-            //        if (item.Value.Any(x=>x.IsSame(testapp1)))
-            //        {                        
-            //            this.ListPC.Items.Add(item.Key);
-            //        }
-
-            //    }
-            //}
         }
 
         private void dataGridView2_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            if (dataGridView2.Rows[e.RowIndex].DataBoundItem != null && dataGridView2.Columns[e.ColumnIndex].DataPropertyName.Contains(".")) {
+            if (dataGridView2.Rows[e.RowIndex].DataBoundItem != null && dataGridView2.Columns[e.ColumnIndex].DataPropertyName.Contains("."))
+            {
 
                 e.Value = BindProperty(dataGridView2.Rows[e.RowIndex].DataBoundItem, dataGridView2.Columns[e.ColumnIndex].DataPropertyName);
             }
@@ -223,18 +195,19 @@ namespace Spider
             return retValue;
         }
 
-        public void ClearDatafromControls() {
-            this.ListPC.Items.Clear(); //3
-            this.ListPC.Items.Clear(); //1
-            this.dataGridView1.DataSource = new List<App>(); //2
-            this.dataGridView2.Rows.Clear(); //4   
-            this.labelPathInRegistry2.Visible = false; //5
-            this.labelUnstallString2.Visible = false;//6
+        public void ClearDatafromControls()
+        {
+            this.ListPC.Items.Clear(); 
+            this.ListPC.Items.Clear(); 
+            this.dataGridView1.DataSource = new List<App>(); 
+            this.dataGridView2.Rows.Clear(); 
+            this.labelPathInRegistry2.Visible = false; 
+            this.labelUnstallString2.Visible = false;
             this.labelUninstallStirng.Visible = false;
             this.labelPathInRegistry.Visible = false;
         }
 
-        
+
         //private void dataGridView2_ColumnHeaderMouseClick( object sender, DataGridViewCellMouseEventArgs e)
         //{
         //    DataGridViewColumn newColumn = dataGridView2.Columns[e.ColumnIndex];

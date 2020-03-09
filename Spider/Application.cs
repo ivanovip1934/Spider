@@ -43,7 +43,6 @@ namespace Spider
         public App AppItem { get; set; }
         public Appv2() { }
 
-        //public Appv2(string displayName, string displayVersion, string uninstallString, string installLocation, string publisher, string pathinregistry,int count) : base(displayName, displayVersion, uninstallString, installLocation, publisher, pathinregistry)
         public Appv2(App appitem, int count)
         {
             this.AppItem = appitem;
