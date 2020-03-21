@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace Spider
 {
-    public class ShowResultSearch
+    public  class ShowResultSearch
     {
         const string PathToDir = @"\\fileserv.omsu.vmr\Inventory$\SearchApps";
         public string CurrentDirectory { get; private set; }
@@ -70,6 +70,12 @@ namespace Spider
                     var serializer = new XmlSerializer(typeof(T));
                     reader = new StreamReader(stream);
                     return (T)serializer.Deserialize(reader);
+                }
+                catch(Exception e)
+                {
+                    MessageBox.Show($"{e.Message}");
+                    MessageBox.Show($"{filePath}");
+                    return default(T);
                 }
                 finally
                 {

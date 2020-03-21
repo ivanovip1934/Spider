@@ -13,7 +13,8 @@ namespace Spider
         [STAThread]
         static void Main()
         {
-            ShowResultSearch showRes = new ShowResultSearch();
+            //ShowResultSearch showRes = new ShowResultSearch();
+            //HWInfoGeneral showPC = new HWInfoGeneral();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new form1());

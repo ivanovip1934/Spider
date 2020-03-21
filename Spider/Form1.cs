@@ -54,6 +54,7 @@ namespace Spider
             _stringFlags.Alignment = StringAlignment.Center;
             _stringFlags.LineAlignment = StringAlignment.Center;
             g.DrawString(_tabPage.Text, _tabFont, _textBrush, _tabBounds, new StringFormat(_stringFlags));
+            
         }
 
         private void Update_Click(object sender, EventArgs e)
@@ -196,7 +197,7 @@ namespace Spider
         }
 
         public void ClearDatafromControls()
-        {
+        {           
             this.ListPC.Items.Clear(); 
             this.ListPC.Items.Clear(); 
             this.dataGridView1.DataSource = new List<App>(); 
@@ -206,6 +207,74 @@ namespace Spider
             this.labelUninstallStirng.Visible = false;
             this.labelPathInRegistry.Visible = false;
         }
+
+        private void tabControl2_Selected(object sender, TabControlEventArgs e)
+        {
+            AddControltoTab();
+        }
+
+        private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.tabControl1.SelectedIndex == 1) {
+                AddControltoTab();
+            }
+        }
+
+        private void AddControltoTab() {                        
+            Control control = this.tabControl2.SelectedTab;
+            control.Controls.Add(this.groupSTorage);
+            control.Controls.Add(this.groupRAM);
+            control.Controls.Add(this.groupBox4);
+            control.Controls.Add(this.groupBox3);
+            control.Controls.Add(this.groupNamePC);
+            control.Controls.Add(this.groupMainBoard);
+        }
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         //private void dataGridView2_ColumnHeaderMouseClick( object sender, DataGridViewCellMouseEventArgs e)
