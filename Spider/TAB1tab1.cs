@@ -47,14 +47,16 @@ namespace Spider
                 int Value = systempart.AvailableFreeSpace;                
                 this.progressBar1.Maximum = MaxValue;
                 this.progressBar1.Value = MaxValue - Value;
-                if (Value < 10)
-                    this.progressBar1.ColorBar = Brushes.Red;
-                else if (Value >= 10)
-                    this.progressBar1.ColorBar =Brushes.Lime;
+                if (Value < 10) {                    
+                    this.progressBar1.ColorBar = Brushes.Red;                    
+                }else if (Value >= 10)
+                {
+                   this.progressBar1.ColorBar = Brushes.Lime;
+                }
+                this.progressBar1.PerformStep();                
                 this.labelTextTotalSize.Text = $"{MaxValue} Gb.";       
                 this.labelTextFreeSpace.Text = $"{Value} Gb.";
                 this.labelViewModelStorage.Text = $"{pc.Storage.FirstOrDefault(x=>x.Index == systempart.IndexDisc).Model}";
-
                 this.labelTextTotalSize.Visible = true;
                 this.labelTextFreeSpace.Visible = true;                
                 this.labelTab2ShowNamePC.Visible = true;                

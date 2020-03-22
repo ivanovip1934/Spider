@@ -185,7 +185,9 @@ namespace Spider
                 this.labelTab2ShowOSVersion.Text = pc.OS.ProductName;
                 this.labelTab2ShowBuildOS.Text = pc.OS.Build;
                 this.labelTab2ShowOSBIT.Text = pc.OS.IsX64 ? "x64" : "x86";
-                this.labelTab2ShowOSInstallDate.Text = pc.OS.InstallDate.ToString();
+                this.labelTab2ShowOSInstallDate.Text = $"{this.pc.OS.InstallDate.Year}" +
+                                                       $"-{this.pc.OS.InstallDate.Month}" +
+                                                       $"-{this.pc.OS.InstallDate.Day}";
                 this.labelTab2ShowMainboardManufacturer.Text = pc.MainBoard.Manufacturer;
                 this.labelTab2ShowMainBoardModel.Text = pc.MainBoard.Product;
                 this.labelTab2ShowMainBoardVersionBIOS.Text = $"BIOS: {pc.MainBoard.SMBIOSBIOSVersion}";

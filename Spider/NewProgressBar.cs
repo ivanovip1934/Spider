@@ -19,6 +19,7 @@ namespace Spider
 
         protected override void OnPaint(PaintEventArgs e)
         {
+            
             Rectangle rec = e.ClipRectangle;
 
             rec.Width = (int)(rec.Width * ((double)Value / Maximum)) - 4;
