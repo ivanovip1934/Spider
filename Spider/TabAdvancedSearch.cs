@@ -12,7 +12,10 @@ namespace Spider
         private delegate bool FilterComputers(ComputerInfo compinfo, ref bool flag);
         FilterComputers filtercomputer;
         FilteredMethods filtermethods = new FilteredMethods();
+        Dictionary<string, ComputerInfo> filteredComputers;
+        ComputerInfo FilteredPC;
         private bool CheckSSD = true;
+        private bool IsX64OS = true;
 
         private void buttonTab3GetPC_Click(object sender, EventArgs e)
         {
@@ -44,9 +47,22 @@ namespace Spider
             this.comboBoxTab3ListMainBoard.SelectedIndex = -1;
             #endregion
 
+            #region Add data to comboBoxTab3ListSizeSSD
+
+            this.comboBoxTab3ListSizeSSD.Items.AddRange(filtermethods.DicSizeSSD.Keys.ToArray());
+
+            #endregion
+
+            #region Add date to comboBoxTab3ListVersionOS
+            this.comboBoxTab3ListBuildOS.Items.AddRange(dicPC.Where(x=>x.Value.OS.Version == "10").Select(x=>x.Value.OS.Build).Distinct().OrderBy(x=>x).ToArray());
+
+            #endregion 
+
             this.checkBoxTab3SearchByCPU.Enabled = true;
             this.checkBoxTab3SearchByMainBoard.Enabled = true;
             this.checkBoxTab3SearchByRAM.Enabled = true;
+            this.checkBoxTab3SearchBySSD.Enabled = true;
+            this.checkBoxTab3SearchByOS.Enabled = true;
 
 
         }
@@ -135,17 +151,14 @@ namespace Spider
 
         private void buttonAdvancedSearch_Click(object sender, EventArgs e)
         {
-            Dictionary<string, ComputerInfo> filteredComputers;
+            this.listBoxTab3FilteredPCNames.Items.Clear();
+           
             if (filtercomputer != null)
             {
                 bool flag = true;
                 filteredComputers = dicPC.Where(x =>  (flag = true) == true && filtercomputer(x.Value, ref flag)).ToDictionary(x => x.Key, x => x.Value);
                 string name_cpu_name = String.Empty;
-                foreach (KeyValuePair<string, ComputerInfo> item in filteredComputers)
-                {
-                    name_cpu_name += $"{item.Key} - {item.Value.CPU.Name} - {item.Value.MainBoard.Product} - {item.Value.Memory.Sum(x=>x.Capacity)}Gb.\n";
-                }
-                MessageBox.Show(name_cpu_name);
+                this.listBoxTab3FilteredPCNames.Items.AddRange(filteredComputers.Keys.ToArray());                
             }
             else
                 MessageBox.Show("Not filter SET");
@@ -387,18 +400,365 @@ namespace Spider
 
         #endregion
 
+        #region Search by SSD
+
+        private void checkBoxTab3SearchBySSD_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxTab3SearchBySSD.Checked == true)
+            {
+                this.radioButtonExistsSSD.Enabled = true;
+                this.radioButtonSizeSSD.Enabled = true;
+            }
+            else {
+                this.radioButtonExistsSSD.Enabled = false;
+                this.radioButtonSizeSSD.Enabled = false;
+                this.radioButtonExistsSSD.Checked = false;
+                this.radioButtonSizeSSD.Checked = false;
+            }
+        }
+
+        private void radioButtonExistsSSD_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonExistsSSD.Checked == true)
+            {
+                this.buttonOnOFFCheckSSD.Enabled = true;
+                this.filtercomputer += filtermethods.FilterByExistsSSD;
+
+            }
+            else
+            {
+                this.buttonOnOFFCheckSSD.Enabled = false;
+                this.filtercomputer -= filtermethods.FilterByExistsSSD;
+            }
+        }
+
+        private void radioButtonSizeSSD_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonSizeSSD.Checked == true)
+            {
+                this.comboBoxTab3ListSizeSSD.Enabled = true;
+                this.filtercomputer += filtermethods.FilterBySizeSSD;
+            }
+            else { 
+                this.comboBoxTab3ListSizeSSD.Enabled = false;
+                this.filtercomputer -= filtermethods.FilterBySizeSSD;            
+            }
+        }
+
+        private void radioButtonExistsSSD_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonExistsSSD.Enabled == false)
+                 this.buttonOnOFFCheckSSD.Enabled = false;
+        }
+
+        private void radioButtonSizeSSD_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonSizeSSD.Enabled == false)
+                this.comboBoxTab3ListSizeSSD.Enabled = false;
+        }
+
+        private void buttonOnOFFCheckSSD_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.buttonOnOFFCheckSSD.Enabled == true) { 
+                this.CheckSSD = true;
+                this.buttonOnOFFCheckSSD.Text = "YES";
+                filtermethods.ExistsSSD = this.CheckSSD;                
+            }            
+        }
+
+        private void comboBoxTab3ListSizeSSD_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxTab3ListSizeSSD.Enabled == false)
+                this.comboBoxTab3ListSizeSSD.SelectedIndex = -1;
+        }
+
+        private void comboBoxTab3ListSizeSSD_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxTab3ListSizeSSD.SelectedIndex != -1)
+                filtermethods.SizeSSD = this.comboBoxTab3ListSizeSSD.SelectedItem.ToString();
+            else
+                filtermethods.SizeSSD = String.Empty;
+        }
+
 
         private void buttonOnOFFCheckSSD_Click(object sender, EventArgs e)
         {
             if (CheckSSD) {
                 this.CheckSSD = false;
-                this.buttonOnOFFCheckSSD.Text = "OFF";
+                this.buttonOnOFFCheckSSD.Text = "NO";
             }
             else
             {
                 this.CheckSSD = true;
-                this.buttonOnOFFCheckSSD.Text = "ON";
-            }   
+                this.buttonOnOFFCheckSSD.Text = "YES";
+                
+            }
+            filtermethods.ExistsSSD = this.CheckSSD;
         }
+
+        private void listBoxTab3FilteredPCNames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.listBoxTab3FilteredPCNames.SelectedIndex != -1)
+            {
+                this.FilteredPC = this.filteredComputers?[this.listBoxTab3FilteredPCNames.SelectedItem.ToString()];
+                this.labelTab3ViewPCName.Text = this.FilteredPC.Name;
+                this.labelTab3ViewVersionOS.Text = this.FilteredPC.OS.ProductName;
+                this.labelTab3ViewBuildOS.Text = this.FilteredPC.OS.Build;
+                this.labelTab3ViewPlatformOS.Text = this.FilteredPC.OS.IsX64 ? "x64" : "x86";
+                this.labelTab3ViewInstallDateOS.Text = $"{this.FilteredPC.OS.InstallDate.Year}" +
+                                                       $"-{this.FilteredPC.OS.InstallDate.Month}" +
+                                                       $"-{this.FilteredPC.OS.InstallDate.Day}";
+                this.labelTab3ViewModelMainBoard.Text = this.FilteredPC.MainBoard.Product;
+                this.labelTab3ViewSNMainboard.Text = this.FilteredPC.MainBoard.SerialNumber;
+                this.labelTab3ViewManufacturerMainBoard.Text = this.FilteredPC.MainBoard.Manufacturer;
+                this.labelTab3ViewVersionBioslMainBoard.Text = this.FilteredPC.MainBoard.SMBIOSBIOSVersion;
+                if (this.FilteredPC.CPU.Name.Contains("Intel"))
+                    this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Blue;
+                else
+                    this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Red;
+                this.labelTab3ViewModelCPU.Text = this.FilteredPC.CPU.Name;
+                this.labelTab3ViewTotalSizeRAM.Text = this.FilteredPC.Memory.Sum(x => x.Capacity).ToString();
+                int count = this.FilteredPC.Memory.Count;
+                this.panelTab3ViewRAM.Size = new System.Drawing.Size(395, 85);
+                ResizePanel(panelTab3ViewRAM, count);
+
+                ViewRAM(this.FilteredPC.Memory, this.panelTab3ViewRAM, this.labelTab3TitleViewRAM);
+                ViewListDisk(this.FilteredPC.Storage, this.panelTab3ViewStorage, this.labelTab3TitleStorage);
+
+
+
+
+
+
+
+                this.labelTab3ViewPCName.Visible = true;
+                this.labelTab3ViewVersionOS.Visible = true;
+                this.labelTab3ViewBuildOS.Visible = true;
+                this.labelTab3ViewPlatformOS.Visible = true;
+                this.labelTab3ViewModelMainBoard.Visible = true;
+                this.labelTab3ViewManufacturerMainBoard.Visible = true;
+                this.labelTab3ViewVersionBioslMainBoard.Visible = true;
+                this.labelTab3ViewModelCPU.Visible = true;
+                this.labelTab3ViewTotalSizeRAM.Visible = true;
+                this.labelTab3ViewSNMainboard.Visible = true;
+                this.labelTab3ViewInstallDateOS.Visible = true;
+
+            }
+        }
+
+        private void panelTab3ViewRAM_SizeChanged(object sender, EventArgs e)
+        {
+            RelocationPanel(this.panelTab3ViewRAM, this.panelTab3ViewStorage);
+        }
+
+
+        public void ResizePanel(Panel panel, int count) {
+
+            int X = panel.Width;
+            int Y = panel.Height;
+            if (count == 1)
+                panel.Height = Y + 5;
+            else 
+                panel.Height = Y + count * 16;
+        }
+
+        public void RelocationPanel(Panel leadpanel, Panel slavepanel) {
+
+            int X = leadpanel.Location.X;
+            int Y = leadpanel.Location.Y + leadpanel.Height;
+
+            slavepanel.Location = new System.Drawing.Point(X, Y);
+        }
+
+
+        #endregion
+
+
+        #region Search by Operating System
+
+        private void checkBoxTab3SearchByOS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxTab3SearchByOS.Checked == true)
+            {
+                this.checkBoxTab3SelectSearchByVersionOS.Enabled = true;
+                //this.checkBoxTab3SelectSearchByBuildOS.Enabled = true;
+                this.checkBoxTab3SelectSearchByBitOS.Enabled = true;
+                this.checkBoxTab3SelectSearchByDateInstalledOS.Enabled = true;
+            }
+            else {
+                this.checkBoxTab3SelectSearchByVersionOS.Enabled = false;
+                //this.checkBoxTab3SelectSearchByBuildOS.Enabled = false;
+                this.checkBoxTab3SelectSearchByBitOS.Enabled = false;
+                this.checkBoxTab3SelectSearchByDateInstalledOS.Enabled = false;
+            }
+
+        }
+
+        private void Control_General_EnabledChanged(object sender, EventArgs e)
+        {
+            if (sender is CheckBox)
+            if (((CheckBox)sender).Enabled == false)
+                ((CheckBox)sender).Checked = false;
+            if (sender is RadioButton)
+                if (((RadioButton)sender).Enabled == false)
+                    ((RadioButton)sender).Checked = false;
+            if (sender is ComboBox) {
+                if (((ComboBox)sender).Enabled == false)
+                    ((ComboBox)sender).SelectedIndex = -1;
+            }
+        }
+
+        private void checkBoxTab3SelectSearchByVersionOS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxTab3SelectSearchByVersionOS.Checked == true)
+            {
+                this.comboBoxTab3ListVersionOS.Enabled = true;
+               this.filtercomputer += filtermethods.FilterByVersionOS;
+            }
+            else
+            { 
+                this.comboBoxTab3ListVersionOS.Enabled = false;
+                this.filtercomputer -= filtermethods.FilterByVersionOS;
+            }
+        }
+
+        private void checkBoxTab3SelectSearchByBuildOS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxTab3SelectSearchByBuildOS.Checked == true)
+            {
+                this.comboBoxTab3ListBuildOS.Enabled = true;
+                this.filtercomputer += filtermethods.FilterByBuildOS;
+            }
+            else
+            {
+                this.comboBoxTab3ListBuildOS.Enabled = false;
+                this.filtercomputer -= filtermethods.FilterByBuildOS;
+            }
+        }
+
+        private void checkBoxTab3SelectSearchByBitOS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxTab3SelectSearchByBitOS.Checked == true) { 
+            
+                this.buttonSelectBitOS.Enabled = true;
+                this.filtercomputer += filtermethods.FilterByBitOS;
+            }
+
+            else
+            {
+                this.buttonSelectBitOS.Enabled = false;    
+                this.filtercomputer -= filtermethods.FilterByBitOS;
+            }
+        }
+
+        private void checkBoxTab3SelectSearchByDateInstalledOS_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxTab3SelectSearchByDateInstalledOS.Checked == true)
+            {
+                this.dateTimePickerTab3SetStartInstalledOS.Enabled = true;
+                this.dateTimePickerTab3SetEndInstalledOS.Enabled = true;
+                this.filtercomputer += filtermethods.FilterByInstallDateOS; 
+            }
+            else {
+                this.dateTimePickerTab3SetStartInstalledOS.Enabled = false;
+                this.dateTimePickerTab3SetEndInstalledOS.Enabled = false;
+                this.filtercomputer -= filtermethods.FilterByInstallDateOS; 
+            }
+        }
+
+
+        private void comboBoxTab3ListVersionOS_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxTab3ListVersionOS.Enabled == false)
+                this.comboBoxTab3ListVersionOS.SelectedIndex = -1;
+        }
+
+        private void comboBoxTab3ListBuildOS_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxTab3ListBuildOS.Enabled == false)
+                this.comboBoxTab3ListBuildOS.SelectedIndex = -1;
+        }
+
+        private void buttonSelectBitOS_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.buttonSelectBitOS.Enabled == true)
+            {
+                this.IsX64OS = true;
+                this.buttonSelectBitOS.Text = "x64";
+                this.filtermethods.IsX64OS = this.IsX64OS;
+            }
+
+        }
+        private void buttonSelectBitOS_Click(object sender, EventArgs e)
+        {
+            if (this.IsX64OS)
+            {
+                this.IsX64OS = false;
+                this.buttonSelectBitOS.Text = "x86";
+            }
+            else {
+                this.IsX64OS = true;
+                this.buttonSelectBitOS.Text = "x64";
+            }
+            this.filtermethods.IsX64OS = this.IsX64OS;    
+        }
+
+        private void dateTimePickerTab3SetStartInstalledOS_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.dateTimePickerTab3SetStartInstalledOS.Enabled == false)
+                this.dateTimePickerTab3SetStartInstalledOS.Value = DateTime.Today;
+        }
+
+        private void dateTimePickerTab3SetEndInstalledOS_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.dateTimePickerTab3SetEndInstalledOS.Enabled == false)
+                this.dateTimePickerTab3SetEndInstalledOS.Value = DateTime.Today;
+        }
+
+        
+        private void comboBoxTab3ListVersionOS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (this.comboBoxTab3ListVersionOS.SelectedIndex != -1)
+            {
+                string versionOS = this.comboBoxTab3ListVersionOS.SelectedItem.ToString();
+                this.filtermethods.VersionOS = versionOS;
+                if (versionOS == "Windows 10")
+                    this.checkBoxTab3SelectSearchByBuildOS.Enabled = true;
+                else
+                    this.checkBoxTab3SelectSearchByBuildOS.Enabled = false;
+
+            }
+            else
+            {
+                this.filtermethods.VersionOS = "";
+            }
+
+
+        }
+
+        private void comboBoxTab3ListBuildOS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxTab3ListBuildOS.SelectedIndex != -1)
+            {
+                this.filtermethods.BuildOS = this.comboBoxTab3ListBuildOS.SelectedItem.ToString();
+            }
+            else
+            {
+                this.filtermethods.BuildOS = "";
+            }
+        }
+
+        private void dateTimePickerTab3SetStartInstalledOS_ValueChanged(object sender, EventArgs e)
+        {
+            this.filtermethods.RangeInstallDateOS["StartInstallDateOS"] = this.dateTimePickerTab3SetStartInstalledOS.Value;
+        }
+
+        private void dateTimePickerTab3SetEndInstalledOS_ValueChanged(object sender, EventArgs e)
+        {
+            this.filtermethods.RangeInstallDateOS["EndInstallDateOS"] = this.dateTimePickerTab3SetEndInstalledOS.Value;
+        }
+
+        #endregion
     }
 }

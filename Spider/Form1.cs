@@ -277,6 +277,54 @@ namespace Spider
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         //private void dataGridView2_ColumnHeaderMouseClick( object sender, DataGridViewCellMouseEventArgs e)
         //{
         //    DataGridViewColumn newColumn = dataGridView2.Columns[e.ColumnIndex];

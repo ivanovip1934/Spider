@@ -9,27 +9,53 @@ namespace Spider
 {
     class FilteredMethods
     {
-        public string ProcessorName { get; set; } 
+        public string ProcessorName { get; set; }
         public string PatternProcessorModel { get; set; }
         public string MainBoardModel { get; set; }
         public string PatternMainBoardModel { get; set; }
         public int TotalSizeRAM { get; set; }
-        public Dictionary<string,int> RangeSizeRAM { get; set; }
+        public Dictionary<string, int> RangeSizeRAM { get; set; }
         public int SizeOneModuleRAM { get; set; }
-       
+        public bool ExistsSSD { get; set; }
+        public Dictionary<string, (int Min, int Max)> DicSizeSSD { get; private set; }
+        public string SizeSSD { get; set; }
+        public Dictionary<string, string> DicVersionOS { get; private set; }
+        public string VersionOS { get; set; }
+        public string BuildOS { get; set; }
+        public bool IsX64OS { get; set; }
+        public Dictionary<string, DateTime> RangeInstallDateOS { get; set; }
+
 
 
         public FilteredMethods()
         {
-            RangeSizeRAM = new Dictionary<string, int>() {
+            this.RangeSizeRAM = new Dictionary<string, int>() {
                 { "MinSizeRAM", 0 } ,
                 { "ManSizeRAM", 0 },
             };
-            
+            this.DicSizeSSD = new Dictionary<string, (int, int)>() {
+                {"120-128",(111,119) },
+                {"240-256",(223,238) },
+                {"480-512",(447,476) },
+                {"960-1000",(894,931) }
+            };
+
+            this.DicVersionOS = new Dictionary<string, string>()
+            {
+                { "Windows 7", "6.1"},
+                { "Windows 10", "10"}
+            };
+
+            this.RangeInstallDateOS = new Dictionary<string, DateTime>() {
+                { "StartInstallDateOS", DateTime.Now},
+                { "EndInstallDateOS", DateTime.Now}
+            };
+
         }
         private delegate bool IsSame(ComputerInfo computerInfo, object parameterforSearch);
 
-        private bool GeneralFilter(ComputerInfo compinfo, ref bool flag, object parameterforSearch,IsSame issame) {
+        private bool GeneralFilter(ComputerInfo compinfo, ref bool flag, object parameterforSearch, IsSame issame)
+        {
             if (flag == false)
                 return flag;
             if (compinfo == null)
@@ -50,19 +76,20 @@ namespace Spider
                     return flag;
                 }
             }
-            else if (parameterforSearch is bool || parameterforSearch is int || parameterforSearch is Dictionary<string, int>)
+            else
             {
                 if (issame(compinfo, parameterforSearch))
                 {
                     flag = true;
                     return flag;
                 }
-            }            
+            }
             flag = false;
             return flag;
         }
 
-        private bool SearchbyCpuName(ComputerInfo computerInfo, object cpuName) {
+        private bool SearchbyCpuName(ComputerInfo computerInfo, object cpuName)
+        {
             if (cpuName is string)
                 return computerInfo.CPU.Name == (string)cpuName;
             return false;
@@ -104,17 +131,67 @@ namespace Spider
 
         private bool SearchByRangeSizeRAM(ComputerInfo computerInfo, object patternMainBoardName)
         {
-            if (patternMainBoardName is Dictionary<string,int>)
+            if (patternMainBoardName is Dictionary<string, int>)
                 if (computerInfo.Memory.Sum(x => x.Capacity) >= ((Dictionary<string, int>)patternMainBoardName)["MinSizeRAM"] &&
-                    computerInfo.Memory.Sum(x => x.Capacity)<= ((Dictionary<string, int>)patternMainBoardName)["MaxSizeRAM"])
-                return true;
+                    computerInfo.Memory.Sum(x => x.Capacity) <= ((Dictionary<string, int>)patternMainBoardName)["MaxSizeRAM"])
+                    return true;
+            return false;
+        }
+
+        private bool SearchByExistsSSD(ComputerInfo computerInfo, object patternMainBoardName)
+        {
+            if (patternMainBoardName is bool)
+                return computerInfo.Storage.Any(x => x.IsSSD) == (bool)patternMainBoardName;
+            return false;
+        }
+        private bool SearchBySizeSSD(ComputerInfo computerInfo, object patternMainBoardName)
+        {
+            if (patternMainBoardName is string)
+            {
+                return computerInfo.Storage.Where(x => x.IsSSD)
+                    .Any(x => x.Size >= (DicSizeSSD[(string)patternMainBoardName]).Min 
+                    && x.Size <= (DicSizeSSD[(string)patternMainBoardName]).Max);
+            }
             return false;
         }
 
         private bool SearchBySizeOneModuleRAM(ComputerInfo computerInfo, object patternMainBoardName)
         {
-            if (patternMainBoardName is int)                
+            if (patternMainBoardName is int)
                 return computerInfo.Memory.Any(x => x.Capacity == (int)patternMainBoardName);
+            return false;
+        }
+
+        private bool SearchByVersionOS(ComputerInfo computerInfo, object VersionOS)
+        {
+            if (VersionOS is string)
+                return computerInfo.OS.Version == this.DicVersionOS[(string)VersionOS];
+            return false;
+        }
+
+        private bool SearchByBuildOS(ComputerInfo computerInfo, object BuildOS)
+        {
+            if (BuildOS is string)
+                return computerInfo.OS.Build == (string)BuildOS;
+            return false;
+        }
+
+        private bool SearchByBitOS(ComputerInfo computerInfo, object BuildOS)
+        {
+            if (BuildOS is bool)
+                return computerInfo.OS.IsX64 == (bool)BuildOS;
+            return false;
+        }
+
+        private bool SearchByInstallDateOS(ComputerInfo computerInfo, object rangeInstallDate)
+        {
+            if (rangeInstallDate is Dictionary<string, DateTime>) {
+                Dictionary<string, DateTime> dicInstallDate = rangeInstallDate as Dictionary<string, DateTime>;                
+                if (computerInfo.OS.InstallDate.CompareTo(dicInstallDate["StartInstallDateOS"])>=0 
+                    && computerInfo.OS.InstallDate.CompareTo(dicInstallDate["EndInstallDateOS"])<=0)
+                    return true;
+                return false;
+            }
             return false;
         }
 
@@ -123,7 +200,7 @@ namespace Spider
             return GeneralFilter(compinfo, ref flag, this.ProcessorName, SearchbyCpuName);
         }
         public bool FilterByPatternCPU(ComputerInfo compinfo, ref bool flag)
-        { 
+        {
             return GeneralFilter(compinfo, ref flag, this.PatternProcessorModel, SearchbyPatterCPU);
         }
         public bool FilterByModelMainBoard(ComputerInfo compinfo, ref bool flag)
@@ -131,7 +208,7 @@ namespace Spider
             return GeneralFilter(compinfo, ref flag, this.MainBoardModel, SearchbyMainBoadName);
         }
 
-        public bool FilterByPatternMainBoard(ComputerInfo compinfo,ref bool flag)
+        public bool FilterByPatternMainBoard(ComputerInfo compinfo, ref bool flag)
         {
             return GeneralFilter(compinfo, ref flag, this.PatternMainBoardModel, SearchbyPatterMainBoard);
         }
@@ -148,6 +225,36 @@ namespace Spider
         public bool FilterBySizeOneModuleRAM(ComputerInfo compinfo, ref bool flag)
         {
             return GeneralFilter(compinfo, ref flag, this.SizeOneModuleRAM, SearchBySizeOneModuleRAM);
+        }
+
+        public bool FilterByExistsSSD(ComputerInfo compinfo, ref bool flag)
+        {
+            return GeneralFilter(compinfo, ref flag, this.ExistsSSD, SearchByExistsSSD);
+        }
+
+        public bool FilterBySizeSSD(ComputerInfo compinfo, ref bool flag)
+        {
+            return GeneralFilter(compinfo, ref flag, this.SizeSSD, SearchBySizeSSD);
+        }
+
+        public bool FilterByVersionOS(ComputerInfo compinfo, ref bool flag)
+        {
+            return GeneralFilter(compinfo, ref flag, this.VersionOS, SearchByVersionOS);
+        }
+
+        public bool FilterByBuildOS(ComputerInfo compinfo, ref bool flag)
+        {
+            return GeneralFilter(compinfo, ref flag, this.BuildOS, SearchByBuildOS);
+        }
+
+        public bool FilterByBitOS(ComputerInfo compinfo, ref bool flag)
+        {
+            return GeneralFilter(compinfo, ref flag, this.IsX64OS, SearchByBitOS);
+        }
+
+        public bool FilterByInstallDateOS(ComputerInfo compinfo, ref bool flag)
+        {
+            return GeneralFilter(compinfo, ref flag, this.RangeInstallDateOS, SearchByInstallDateOS);
         }
     }
 }

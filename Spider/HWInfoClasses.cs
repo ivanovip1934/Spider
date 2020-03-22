@@ -18,6 +18,7 @@ namespace Spider
         public List<PartitionInfo> Partitions { get; set; }
         public OperationSystem OS { get; set; }
         public List<MonitorInfo> Monitors { get; set; }
+        public DateTime DateCollectedInfo { get; set; }
 
         public ComputerInfo() { }
 
@@ -179,6 +180,7 @@ namespace Spider
         public string Version { get; set; }
         public string Build { get; set; }
         public string ProductName { get; set; }
+        public DateTime InstallDate { get; set; }
 
         public OperationSystem()
         {

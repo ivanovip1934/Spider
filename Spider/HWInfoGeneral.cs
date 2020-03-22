@@ -12,16 +12,21 @@ namespace Spider
     public class HWInfoGeneral        
     {
 
-        string PathToDirPC = @"\\fileserv.omsu.vmr\inventory$\ARM";
         
+        string GetPathToDirARM()
+        {
+            if (Environment.MachineName == "DESKTOP-JO3F2UG")
+                return @"P:\Progects\Spider\ARM";
+            return @"\\fileserv.omsu.vmr\inventory$\ARM";
+        }
 
-        public  SortedDictionary<string, ComputerInfo> GetDicPC()
+        public SortedDictionary<string, ComputerInfo> GetDicPC()
         {            
             SortedDictionary<string, ComputerInfo> dicPC = new SortedDictionary<string, ComputerInfo>();
             //FileInfo finfo;
             //string NamePC = String.Empty;
             ComputerInfo pcFromXml;
-            foreach (string xmlfile in Directory.GetFiles(PathToDirPC))
+            foreach (string xmlfile in Directory.GetFiles(GetPathToDirARM()))
             {
                 //finfo = new FileInfo(xmlfile);
                 //NamePC = finfo.Name.Replace(finfo.Extension, "");

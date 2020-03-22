@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,6 +14,18 @@ namespace Spider
         HWInfoGeneral showPC = new HWInfoGeneral();
         SortedDictionary<string,ComputerInfo> dicPC = new SortedDictionary<string,ComputerInfo>();
         ComputerInfo pc = new ComputerInfo();
+        
+
+        /*
+         this.progressBar1 = new System.Windows.Forms.ProgressBar();
+         this.tabPage1.Controls.Add(this.progressBar1);
+         this.progressBar1.ForeColor = System.Drawing.Color.Lime;
+            this.progressBar1.Location = new System.Drawing.Point(33, 502);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(153, 23);
+            this.progressBar1.TabIndex = 22;
+             
+             */
         private void butGetPC_Click(object sender, EventArgs e)
         {
             showPC = new HWInfoGeneral();
@@ -31,13 +44,13 @@ namespace Spider
                 this.pc = dicPC[this.listPC1.SelectedItem.ToString()]; // .GetItemText(this.listPC1.SelectedItem)];                
                 PartitionInfo systempart = pc.Partitions.FirstOrDefault(x => x.IsSystem == true);
                 int MaxValue = systempart.FullSize;
-                int Value = systempart.AvailableFreeSpace;
+                int Value = systempart.AvailableFreeSpace;                
                 this.progressBar1.Maximum = MaxValue;
                 this.progressBar1.Value = MaxValue - Value;
                 if (Value < 10)
-                    this.progressBar1.ForeColor = System.Drawing.Color.Red;
+                    this.progressBar1.ColorBar = Brushes.Red;
                 else if (Value >= 10)
-                    this.progressBar1.ForeColor = System.Drawing.Color.Lime;
+                    this.progressBar1.ColorBar =Brushes.Lime;
                 this.labelTextTotalSize.Text = $"{MaxValue} Gb.";       
                 this.labelTextFreeSpace.Text = $"{Value} Gb.";
                 this.labelViewModelStorage.Text = $"{pc.Storage.FirstOrDefault(x=>x.Index == systempart.IndexDisc).Model}";
@@ -98,7 +111,7 @@ namespace Spider
                         Name = $"LabelMemorybank{i+1}",
                         Size = new System.Drawing.Size(59, 20),
                         TabIndex = 30,
-                        Text = $"  {i+1}           {raminfo.Capacity.ToString()}             {raminfo.PartNumber}"
+                        Text = $"  {i+1}           {raminfo.Capacity}             {raminfo.PartNumber}"
                     }                    
                     );
                 tabPage.Controls.Add(TSTlabel[i]);               
@@ -107,7 +120,7 @@ namespace Spider
             }
         }
 
-        private void ViewDisc(List<DiskInfo> discinfos, Control tabPage, Label label) {
+        private void ViewListDisk(List<DiskInfo> discinfos, Control tabPage, Label label) {
             if (ArrlabelDiscView != null) {
                 for (int index_1 = 0; index_1 < ArrlabelDiscView.Length; index_1++) {
                     ArrlabelDiscView[index_1].Dispose();
@@ -119,8 +132,11 @@ namespace Spider
             this.ArrlabelDiscSizeView = new Label[discinfos.Count];
             int X = label.Location.X;
             int Y = label.Location.Y + 5;
+            int X_size = label.Font.Bold ? X + 100 : X;           
             int index_2 = 0;
             int shift = 20;
+
+           
             string typeStorage = String.Empty; // SSD or HDD
             discinfos.Sort();
             foreach (DiskInfo discinfo in discinfos)
@@ -138,13 +154,14 @@ namespace Spider
                         Text = $@" {discinfo.Index}       {(discinfo.IsSSD? "SSD":"HDD")}     {discinfo.Model}"
                     }
                     );
+               
                 ArrlabelDiscSizeView[index_2] = (
                     new Label
                     {
                         AutoSize = true,
                         Font = label.Font,
                         ForeColor = label.ForeColor,
-                        Location = new System.Drawing.Point(X + 400, Y + shift),
+                        Location = new System.Drawing.Point(X_size + 300, Y + shift),
                         Name = $"LabelDiscSizeView{index_2 + 1}",
                         Size = new System.Drawing.Size(59, 20),
                         TabIndex = 30,

@@ -181,9 +181,11 @@ namespace Spider
                 this.pc = dicPC[listBox.SelectedItem.ToString()]; // .GetItemText(this.listPC1.SelectedItem)];
                 ////this.dataGridView1.DataSource = this.apps;
                 this.labelTab2ShowNamePC.Text = pc.Name;
+                this.labelTab2ShowDateCollectedInfo.Text = pc.DateCollectedInfo.ToString();
                 this.labelTab2ShowOSVersion.Text = pc.OS.ProductName;
                 this.labelTab2ShowBuildOS.Text = pc.OS.Build;
                 this.labelTab2ShowOSBIT.Text = pc.OS.IsX64 ? "x64" : "x86";
+                this.labelTab2ShowOSInstallDate.Text = pc.OS.InstallDate.ToString();
                 this.labelTab2ShowMainboardManufacturer.Text = pc.MainBoard.Manufacturer;
                 this.labelTab2ShowMainBoardModel.Text = pc.MainBoard.Product;
                 this.labelTab2ShowMainBoardVersionBIOS.Text = $"BIOS: {pc.MainBoard.SMBIOSBIOSVersion}";
@@ -197,9 +199,10 @@ namespace Spider
                 this.labelTab2ShowCPUName.Text = nameCPU;
                 this.labelTab2ShowRAMTotal.Text = $"Total: {pc.Memory.Sum(x => x.Capacity)} GB.";
                 ViewRAM(pc.Memory, this.groupRAM, this.labelTab2ShowRAMtitle);
-                ViewDisc(pc.Storage, this.groupSTorage, this.labelTab2ShowStorageTitle);
+                ViewListDisk(pc.Storage, this.groupSTorage, this.labelTab2ShowStorageTitle);
 
                 this.labelTab2ShowOSBIT.Visible = true;
+                this.labelTab2ShowDateCollectedInfo.Visible = true;
                 this.labelTab2ShowBuildOS.Visible = true;
                 this.labelTab2ShowNamePC.Visible = true;
                 this.labelTab2ShowOSVersion.Visible = true;
@@ -210,6 +213,7 @@ namespace Spider
                 this.labelTab2ShowRAMTotal.Visible = true;
                 this.labelTab2ShowRAMtitle.Visible = true;
                 this.labelTab2ShowStorageTitle.Visible = true;
+                this.labelTab2ShowOSInstallDate.Visible = true;
 
             }
         }
