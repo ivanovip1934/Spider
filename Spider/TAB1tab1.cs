@@ -60,9 +60,7 @@ namespace Spider
                 this.labelTextTotalSize.Visible = true;
                 this.labelTextFreeSpace.Visible = true;                
                 this.labelTab2ShowNamePC.Visible = true;                
-                this.labelViewModelStorage.Visible = true;               
-
-
+                this.labelViewModelStorage.Visible = true;
             }
 
         }
