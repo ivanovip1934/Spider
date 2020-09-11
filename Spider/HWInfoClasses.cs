@@ -81,6 +81,7 @@ namespace Spider
         public string SerialNumber { get; set; }
         public string Manufacturer { get; set; }
         public string SMBIOSBIOSVersion { get; set; }
+        public string[] MAC { get; set; }
         public MainBoardInfo()
         {
 
@@ -103,6 +104,14 @@ namespace Spider
             MessageBox.Show("this obj not a MainBoard");
 
             return false;
+        }
+        public bool IsSameMAC(MainBoardInfo mainBoardInfo) {
+            foreach (string mac in this.MAC) {
+                if (mainBoardInfo.MAC.Contains(mac))
+                    return true;
+            }
+            return false;
+        
         }
 
         public override string ToString()
@@ -216,14 +225,58 @@ namespace Spider
         }
     }
     [Serializable]
-    public class MonitorInfo
+    public class MonitorInfo : IIsSame
     {
-        public string ManufacturerName { get; set; }
-        public string UserFriendlyName { get; set; }
-        public string SerialNumberID { get; set; }
+
+        public string ID { get; set; }
+        public Manufacturers Manufacturer { get; set; }
+        public string Model { get; set; }
+        public string PanelSize { get; set; }
+        public string TrueResolution { get; set; }
+
+        public string SerailNumber { get; set; }
+
+
 
         public MonitorInfo() { }
 
+        public bool IsSame(object obj)
+        {
+            if (obj is MonitorInfo)
+            {
+                MonitorInfo monitor = obj as MonitorInfo;
+                if (this.Manufacturer == monitor.Manufacturer &&
+                    this.Model == monitor.Model) 
+                {
+                    return true;
+                }
+                else
+                    return false;
 
+            }
+            MessageBox.Show("this obj not a MonitorInfo");
+            return false;
+        }
+
+    }
+    public enum Manufacturers
+    {
+        AOC = 1,
+        Acer = 2,
+        Asrock = 3,
+        Asus = 4,
+        BenQ = 5,
+        Dell = 6,
+        Gigabyte = 7,
+        HP = 8,
+        Iiyama = 9,
+        Lenovo = 10,
+        LG = 11,
+        MSI = 12,
+        Pegatron = 13,
+        Philips = 14,
+        Samsung = 15,
+        ViewSonic = 16,
+        Unknown = 17
     }
 }

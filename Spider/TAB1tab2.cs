@@ -18,6 +18,7 @@ namespace Spider
             this.dgShowMainBoard.Rows.Clear();
             this.dgShowStorages.Rows.Clear();
             this.dgShowOSs.Rows.Clear();
+            this.dgShowMonitors.Rows.Clear();
 
             var query = dicPC.OrderBy(x => x.Value.CPU.Name).
                 GroupBy(x => x.Value.CPU.Name,
@@ -60,6 +61,19 @@ namespace Spider
             }
             this.dgShowOSs.ClearSelection();
 
+            var query4 = dicPC.Select(x => x.Value).SelectMany(x => x.Monitors).GroupBy(x => new { x.Manufacturer, x.Model, x.PanelSize, x.TrueResolution },
+                            (Monitor, Monitors) => new { Monitor.Manufacturer, Monitor.Model, Size = Monitor.PanelSize, Resolution = Monitor.TrueResolution, Count = Monitors.Count() }).
+                            OrderBy(x => x.Manufacturer).ThenBy(x => x.Model);
+
+            foreach (var item in query4)
+            {
+                this.dgShowMonitors.Rows.Add(item.Manufacturer, item.Model, item.Size, item.Resolution, item.Count);
+            }
+            this.dgShowMonitors.ClearSelection();
+
+
+
+
             this.listFilteredPC.Items.Clear();
 
 
@@ -81,6 +95,25 @@ namespace Spider
                     IsX64 = row.Cells["isX64"].Value?.ToString() == "YES" ? true : false
                 };
                 ShowPCtoList(dicPC, os);
+            }
+
+        }
+        private void dgShowMonitors_SelectionChanged(object sender, EventArgs e)
+        {
+            foreach (DataGridViewRow row in dgShowMonitors.SelectedRows)
+            {
+                if (Enum.TryParse(row.Cells["Manufacturer1"].Value?.ToString(), out Manufacturers manufacturer)) {
+                MonitorInfo monitor = new MonitorInfo()
+                {
+                    ID = String.Empty,
+                    Manufacturer = manufacturer,
+                    Model = row.Cells["Model1"].Value?.ToString(),
+                    PanelSize = String.Empty,
+                    TrueResolution = String.Empty,
+                    SerailNumber = String.Empty
+                };
+                ShowPCtoList(dicPC, monitor);
+                }
             }
 
         }
@@ -142,8 +175,8 @@ namespace Spider
                 if (memberInfo.PropertyType == typeof(List<T>)) {                    
                     foreach (KeyValuePair<string, ComputerInfo> item in dicComputers)
                     {
-                        List<T> os = (List<T>)memberInfo.GetValue(item.Value);
-                        foreach (T ositem in os) {
+                        List<T> obj = (List<T>)memberInfo.GetValue(item.Value);
+                        foreach (T ositem in obj) {
                             if (ositem is IIsSame) {
                                 if ((ositem as IIsSame).IsSame(pattern))
                                 {
@@ -157,10 +190,10 @@ namespace Spider
                 {
                     foreach (KeyValuePair<string, ComputerInfo> item in dicComputers)
                     {
-                        T os = (T)memberInfo.GetValue(item.Value);
-                        if (os is IIsSame)
+                        T obj = (T)memberInfo.GetValue(item.Value);
+                        if (obj is IIsSame)
                         {
-                            if ((os as IIsSame).IsSame(pattern))
+                            if ((obj as IIsSame).IsSame(pattern))
                             {
                                 this.listFilteredPC.Items.Add(item.Key);
                             }
@@ -192,7 +225,7 @@ namespace Spider
                 this.labelTab2ShowMainBoardModel.Text = pc.MainBoard.Product;
                 this.labelTab2ShowMainBoardVersionBIOS.Text = $"BIOS: {pc.MainBoard.SMBIOSBIOSVersion}";
                 string nameCPU = pc.CPU.Name;
-                if (nameCPU.Contains("Intel"))
+                if (nameCPU.Contains("Intel") || nameCPU.Contains("Pentium"))
                 {
                     this.labelTab2ShowCPUName.ForeColor = System.Drawing.Color.Blue;
                 }

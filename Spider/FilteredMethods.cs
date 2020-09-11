@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -24,6 +25,10 @@ namespace Spider
         public string BuildOS { get; set; }
         public bool IsX64OS { get; set; }
         public Dictionary<string, DateTime> RangeInstallDateOS { get; set; }
+
+        public string PanelSize { get; set; }
+
+        public string RangePanelSize { get; set; }
 
 
 
@@ -195,6 +200,32 @@ namespace Spider
             return false;
         }
 
+        private bool SearchBySizeMonitor(ComputerInfo computerInfo, object panelSize)
+        {
+            if (panelSize is string)
+                return computerInfo.Monitors.Any(x=>x.PanelSize == (string)panelSize);
+            return false;
+        }
+        private bool SearchByRangeSizeMonitor(ComputerInfo computerInfo, object panelSize)
+        {
+            double[] minmaxSize = new double[2];
+            if (panelSize is double[]) {
+                double[] arrSize = panelSize as double[];
+                if (arrSize.Length == 2)
+                {
+                    minmaxSize = arrSize.OrderBy(x => x).ToArray();
+                    foreach(MonitorInfo monitor in computerInfo.Monitors)
+                    {
+                        if (monitor.PanelSize != null && double.TryParse(monitor.PanelSize, System.Globalization.NumberStyles.AllowDecimalPoint, CultureInfo.GetCultureInfo("en-US"), out double size)) {
+                            if (size >= minmaxSize[0] && size <= minmaxSize[1])
+                                return true;
+                        }
+                    }                    
+                }
+            }                
+            return false;
+        }
+
         public bool FilterByNameCPU(ComputerInfo compinfo, ref bool flag)
         {
             return GeneralFilter(compinfo, ref flag, this.ProcessorName, SearchbyCpuName);
@@ -255,6 +286,39 @@ namespace Spider
         public bool FilterByInstallDateOS(ComputerInfo compinfo, ref bool flag)
         {
             return GeneralFilter(compinfo, ref flag, this.RangeInstallDateOS, SearchByInstallDateOS);
+        }
+
+        public bool FilterBySizeMonitor(ComputerInfo compinfo, ref bool flag) {
+            return GeneralFilter(compinfo, ref flag, this.PanelSize, SearchBySizeMonitor);
+        }
+
+        public bool FilterByRangeSizeMonitor(ComputerInfo compinfo, ref bool flag)
+        {
+            
+            double[] minmaxsize = new double[2];
+
+            string[] lstpattern = this.RangePanelSize.Trim().Split(',');
+            string[] rangesize;
+            foreach (string pattern in lstpattern) {
+                rangesize = pattern.Trim().Split('-');
+                if (rangesize.Length == 1)
+                    if (GeneralFilter(compinfo, ref flag, rangesize[0], SearchBySizeMonitor))
+                        return true;
+                    else
+                        flag = true;
+                if (rangesize.Length == 2)
+                {
+                    if (Double.TryParse(rangesize[0], System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out minmaxsize[0]) && Double.TryParse(rangesize[1], System.Globalization.NumberStyles.Any, CultureInfo.GetCultureInfo("en-US"), out minmaxsize[1])) {
+                        if (GeneralFilter(compinfo, ref flag, minmaxsize, SearchByRangeSizeMonitor))
+                            return true;
+                        else 
+                            flag = true;
+                    }
+                }
+            }
+
+            flag = false;
+            return flag;
         }
     }
 }

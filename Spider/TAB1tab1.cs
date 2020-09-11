@@ -47,16 +47,17 @@ namespace Spider
                 int Value = systempart.AvailableFreeSpace;                
                 this.progressBar1.Maximum = MaxValue;
                 this.progressBar1.Value = MaxValue - Value;
+                this.progressBar1.Step = 0;
                 if (Value < 10) {                    
                     this.progressBar1.ColorBar = Brushes.Red;                    
                 }else if (Value >= 10)
                 {
                    this.progressBar1.ColorBar = Brushes.Lime;
                 }
-                this.progressBar1.PerformStep();                
+                this.progressBar1.PerformStep();
                 this.labelTextTotalSize.Text = $"{MaxValue} Gb.";       
                 this.labelTextFreeSpace.Text = $"{Value} Gb.";
-                this.labelViewModelStorage.Text = $"{pc.Storage.FirstOrDefault(x=>x.Index == systempart.IndexDisc).Model}";
+                this.labelViewModelStorage.Text = $"{this.pc.Storage.FirstOrDefault(x=>x.Index == systempart.IndexDisc)?.Model}";
                 this.labelTextTotalSize.Visible = true;
                 this.labelTextFreeSpace.Visible = true;                
                 this.labelTab2ShowNamePC.Visible = true;                
@@ -89,7 +90,7 @@ namespace Spider
         }
 
         private void ViewRAM(List<RAMInfo> memoryinfos, Control tabPage, Label label) {
-            if (TSTlabel != null)
+            if (this.TSTlabel != null)
             {
                 for (int k = 0; k < TSTlabel.Length; k++) {
                     TSTlabel[k].Dispose();                   
@@ -108,12 +109,13 @@ namespace Spider
                         Font = label.Font,
                         ForeColor = label.ForeColor,
                         Location = new System.Drawing.Point(label.Location.X, Y + 2 + b),
-                        Name = $"LabelMemorybank{i+1}",
+                        Name = $"LabelMemorybank{i + 1}",
                         Size = new System.Drawing.Size(59, 20),
                         TabIndex = 30,
-                        Text = $"  {i+1}           {raminfo.Capacity}             {raminfo.PartNumber}"
-                    }                    
-                    );
+                        Text = $"  {i + 1}           {raminfo.Capacity}             {raminfo.PartNumber}",
+                        Visible = true
+                    }
+                    ); ;
                 tabPage.Controls.Add(TSTlabel[i]);               
                 i++;
                 b += 20;
@@ -175,6 +177,41 @@ namespace Spider
             }
         }
 
+        private void ViewMonitor(List<MonitorInfo> monitorinfos, Control tabPage, Label label)
+        {
+            if (this.ArrlabelMonitorView != null)
+            {
+                for (int k = 0; k < this.ArrlabelMonitorView.Length; k++)
+                {
+                    this.ArrlabelMonitorView[k].Dispose();
+                }
+            }
+
+            this.ArrlabelMonitorView = new Label[monitorinfos.Count];
+            int Y = label.Location.Y;
+            int i = 0;
+            int b = 20;
+            foreach (MonitorInfo monitorinfo in monitorinfos)
+            {
+                this.ArrlabelMonitorView[i] = (
+                    new Label
+                    {
+                        AutoSize = true,
+                        Font = label.Font,
+                        ForeColor = label.ForeColor,
+                        Location = new System.Drawing.Point(label.Location.X, Y + 2 + b),
+                        Name = $"LabelMemorybank{i + 1}",
+                        Size = new System.Drawing.Size(59, 20),
+                        TabIndex = 30,
+                        Text = $"  {i + 1}           {monitorinfo.Manufacturer}     {monitorinfo.Model} {monitorinfo.PanelSize} {monitorinfo.TrueResolution}"
+                    }
+                    );
+                tabPage.Controls.Add(this.ArrlabelMonitorView[i]);
+                i++;
+                b += 20;
+            }
+        }
+
         private void textPatternProcessor_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)13)
@@ -184,6 +221,21 @@ namespace Spider
         private void textPatternProcessor_TextChanged(object sender, EventArgs e)
         {
             this.butShowFilteredPC.Text = $"Показать ПК подпавшие поп фильтр:  {this.textPatternProcessor.Text}";
+        }
+
+        private void Char_Click(object sender, EventArgs e)
+        {
+            if (sender is Button)
+            {
+                Button button = sender as Button;
+                string pattern = $"^{button.Text.Trim()}";
+                Regex rgx = new Regex(pattern, RegexOptions.IgnoreCase);
+                string[] query = dicPC.Where(x => rgx.IsMatch(x.Value.Name)).Select(x => x.Key).ToArray();
+                this.listPC1.Items.Clear();
+                this.listPC1.Items.AddRange(query);
+                this.labelTextAllPC.Text = query.Length.ToString();
+                this.labelTextAllPC.Visible = true;
+            }
         }
 
 

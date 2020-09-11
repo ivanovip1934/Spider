@@ -14,6 +14,7 @@ namespace Spider
         FilteredMethods filtermethods = new FilteredMethods();
         Dictionary<string, ComputerInfo> filteredComputers;
         ComputerInfo FilteredPC;
+        List<RadioButton> controls = new List<RadioButton>();
         private bool CheckSSD = true;
         private bool IsX64OS = true;
 
@@ -23,6 +24,7 @@ namespace Spider
             dicPC = showPC.GetDicPC();
 
             #region Add data to comboBoxTab3ListCPU
+            this.comboBoxTab3ListCPU.Items.Clear();
             var query = dicPC.OrderBy(x => x.Value.CPU.Name).
                 GroupBy(x => x.Value.CPU.Name,
                     (modelCPU, cpus) => new { ModelCPU = modelCPU, Count = cpus.Count() });
@@ -37,6 +39,7 @@ namespace Spider
             #endregion
 
             #region Add data to comboBoxTab3ListMainBoard
+            this.comboBoxTab3ListMainBoard.Items.Clear();
             var queryMainBoard = dicPC.OrderBy(x => x.Value.MainBoard.Product).
                 GroupBy(x => x.Value.MainBoard.Product,
                     (modelMainBoard, cpus) => new { ModelMainBoard = modelMainBoard, Count = cpus.Count() });
@@ -49,30 +52,50 @@ namespace Spider
 
             #region Add data to comboBoxTab3ListSizeSSD
 
+            this.comboBoxTab3ListSizeSSD.Items.Clear();
             this.comboBoxTab3ListSizeSSD.Items.AddRange(filtermethods.DicSizeSSD.Keys.ToArray());
 
             #endregion
 
             #region Add date to comboBoxTab3ListVersionOS
-            this.comboBoxTab3ListBuildOS.Items.AddRange(dicPC.Where(x=>x.Value.OS.Version == "10").Select(x=>x.Value.OS.Build).Distinct().OrderBy(x=>x).ToArray());
+            this.comboBoxTab3ListBuildOS.Items.Clear();
+            this.comboBoxTab3ListBuildOS.Items.AddRange(dicPC.Where(x => x.Value.OS.Version == "10").Select(x => x.Value.OS.Build).Distinct().OrderBy(x => x).ToArray());
 
-            #endregion 
+            #endregion
+
+            #region Add date to comboBoxTab3ListSizeMonitor
+            this.comboBoxTab3ListSizeMonitor.Items.Clear();
+            //this.comboBoxTab3ListSizeMonitor.Items.AddRange(dicPC.SelectMany(x => x.Value.Monitors).Select(x => x.PanelSize).Distinct().OrderBy(x => x).ToArray());
+            List<string> ArrSizeMonitors = new List<string>();
+            foreach (MonitorInfo monitor in dicPC.SelectMany(x => x.Value.Monitors)) {
+                if (monitor.PanelSize != null)
+                    ArrSizeMonitors.Add(monitor.PanelSize.ToString());
+            }
+
+            ArrSizeMonitors = ArrSizeMonitors.Distinct().OrderBy(x => x).ToList();
+            this.comboBoxTab3ListSizeMonitor.Items.AddRange(ArrSizeMonitors.Distinct().OrderBy(x => x).ToArray());
+
+            #endregion
 
             this.checkBoxTab3SearchByCPU.Enabled = true;
             this.checkBoxTab3SearchByMainBoard.Enabled = true;
             this.checkBoxTab3SearchByRAM.Enabled = true;
             this.checkBoxTab3SearchBySSD.Enabled = true;
             this.checkBoxTab3SearchByOS.Enabled = true;
+            this.checkBoxTab3SearchByMonitor.Enabled = true;
 
 
         }
 
         private void checkBoxTab3SearchByCPU_CheckedChanged(object sender, EventArgs e)
         {
-            List<Control> controls = new List<Control>() {
+            if (controls.Count == 0)
+            {
+                controls = new List<RadioButton>() {
             this.radioButtonSelectCPUFromList,
-            this.radioButtonUseCPUPattern,            
+            this.radioButtonUseCPUPattern,
             };
+            }
 
 
             if (this.checkBoxTab3SearchByCPU.Checked == true)
@@ -86,13 +109,18 @@ namespace Spider
 
         }
 
-        private static void ChangeControlEnable(List<Control> controls, bool flag)
+        private static void ChangeControlEnable(List<RadioButton> controls, bool flag)
         {
 
             if (flag)
-                controls.ForEach(x => x.Enabled = true);
-            else
+            {
+                controls.ForEach(x => x.Enabled = true);                
+
+            }
+            else { 
                 controls.ForEach(x => x.Enabled = false);
+                controls.ForEach(x => x.Checked = false);
+            }
 
         }
 
@@ -102,7 +130,7 @@ namespace Spider
             {
                 this.comboBoxTab3ListCPU.Enabled = true;
                 this.filtercomputer += filtermethods.FilterByNameCPU;
-               
+
             }
             else
             {
@@ -127,14 +155,14 @@ namespace Spider
 
         private void comboBoxTab3ListCPU_EnabledChanged(object sender, EventArgs e)
         {
-            if (this.comboBoxTab3ListCPU.Enabled == false)
+            if (this.comboBoxTab3ListCPU.Enabled == false) 
                 this.comboBoxTab3ListCPU.SelectedIndex = -1;
         }
 
         private void radioButtonSelectCPUFromList_EnabledChanged(object sender, EventArgs e)
         {
             if (this.radioButtonSelectCPUFromList.Enabled == false)
-                this.comboBoxTab3ListCPU.Enabled = false;            
+                this.comboBoxTab3ListCPU.Enabled = false;
         }
 
         private void radioButtonUseCPUPattern_EnabledChanged(object sender, EventArgs e)
@@ -193,7 +221,7 @@ namespace Spider
             if (this.checkBoxTab3SearchByMainBoard.Checked == true)
             {
                 this.radioButtonSelectMainBoardFromList.Enabled = true;
-                this.radioButtonUseMainBoardPattern.Enabled = true;               
+                this.radioButtonUseMainBoardPattern.Enabled = true;
             }
             else
             {
@@ -211,7 +239,7 @@ namespace Spider
 
             }
             else
-            { 
+            {
                 this.comboBoxTab3ListMainBoard.Enabled = false;
                 this.filtercomputer -= filtermethods.FilterByModelMainBoard;
             }
@@ -443,16 +471,16 @@ namespace Spider
                 this.comboBoxTab3ListSizeSSD.Enabled = true;
                 this.filtercomputer += filtermethods.FilterBySizeSSD;
             }
-            else { 
+            else {
                 this.comboBoxTab3ListSizeSSD.Enabled = false;
-                this.filtercomputer -= filtermethods.FilterBySizeSSD;            
+                this.filtercomputer -= filtermethods.FilterBySizeSSD;
             }
         }
 
         private void radioButtonExistsSSD_EnabledChanged(object sender, EventArgs e)
         {
             if (this.radioButtonExistsSSD.Enabled == false)
-                 this.buttonOnOFFCheckSSD.Enabled = false;
+                this.buttonOnOFFCheckSSD.Enabled = false;
         }
 
         private void radioButtonSizeSSD_EnabledChanged(object sender, EventArgs e)
@@ -463,11 +491,11 @@ namespace Spider
 
         private void buttonOnOFFCheckSSD_EnabledChanged(object sender, EventArgs e)
         {
-            if (this.buttonOnOFFCheckSSD.Enabled == true) { 
+            if (this.buttonOnOFFCheckSSD.Enabled == true) {
                 this.CheckSSD = true;
                 this.buttonOnOFFCheckSSD.Text = "YES";
-                filtermethods.ExistsSSD = this.CheckSSD;                
-            }            
+                filtermethods.ExistsSSD = this.CheckSSD;
+            }
         }
 
         private void comboBoxTab3ListSizeSSD_EnabledChanged(object sender, EventArgs e)
@@ -495,16 +523,26 @@ namespace Spider
             {
                 this.CheckSSD = true;
                 this.buttonOnOFFCheckSSD.Text = "YES";
-                
+
             }
             filtermethods.ExistsSSD = this.CheckSSD;
         }
 
-        
+
 
         private void panelTab3ViewRAM_SizeChanged(object sender, EventArgs e)
         {
             RelocationPanel(this.panelTab3ViewRAM, this.panelTab3ViewStorage);
+        }
+
+        private void panelTab3ViewStorage_SizeChanged(object sender, EventArgs e)
+        {
+            RelocationPanel(this.panelTab3ViewStorage, this.panelTab3ViewMonitor);
+        }
+
+        private void panelTab3ViewStorage_LocationChanged(object sender, EventArgs e)
+        {
+            RelocationPanel(this.panelTab3ViewStorage, this.panelTab3ViewMonitor);
         }
 
 
@@ -514,7 +552,7 @@ namespace Spider
             int Y = panel.Height;
             if (count == 1)
                 panel.Height = Y + 5;
-            else 
+            else
                 panel.Height = Y + count * 16;
         }
 
@@ -553,8 +591,8 @@ namespace Spider
         private void Control_General_EnabledChanged(object sender, EventArgs e)
         {
             if (sender is CheckBox)
-            if (((CheckBox)sender).Enabled == false)
-                ((CheckBox)sender).Checked = false;
+                if (((CheckBox)sender).Enabled == false)
+                    ((CheckBox)sender).Checked = false;
             if (sender is RadioButton)
                 if (((RadioButton)sender).Enabled == false)
                     ((RadioButton)sender).Checked = false;
@@ -569,10 +607,10 @@ namespace Spider
             if (this.checkBoxTab3SelectSearchByVersionOS.Checked == true)
             {
                 this.comboBoxTab3ListVersionOS.Enabled = true;
-               this.filtercomputer += filtermethods.FilterByVersionOS;
+                this.filtercomputer += filtermethods.FilterByVersionOS;
             }
             else
-            { 
+            {
                 this.comboBoxTab3ListVersionOS.Enabled = false;
                 this.filtercomputer -= filtermethods.FilterByVersionOS;
             }
@@ -594,15 +632,15 @@ namespace Spider
 
         private void checkBoxTab3SelectSearchByBitOS_CheckedChanged(object sender, EventArgs e)
         {
-            if (this.checkBoxTab3SelectSearchByBitOS.Checked == true) { 
-            
+            if (this.checkBoxTab3SelectSearchByBitOS.Checked == true) {
+
                 this.buttonSelectBitOS.Enabled = true;
                 this.filtercomputer += filtermethods.FilterByBitOS;
             }
 
             else
             {
-                this.buttonSelectBitOS.Enabled = false;    
+                this.buttonSelectBitOS.Enabled = false;
                 this.filtercomputer -= filtermethods.FilterByBitOS;
             }
         }
@@ -613,12 +651,12 @@ namespace Spider
             {
                 this.dateTimePickerTab3SetStartInstalledOS.Enabled = true;
                 this.dateTimePickerTab3SetEndInstalledOS.Enabled = true;
-                this.filtercomputer += filtermethods.FilterByInstallDateOS; 
+                this.filtercomputer += filtermethods.FilterByInstallDateOS;
             }
             else {
                 this.dateTimePickerTab3SetStartInstalledOS.Enabled = false;
                 this.dateTimePickerTab3SetEndInstalledOS.Enabled = false;
-                this.filtercomputer -= filtermethods.FilterByInstallDateOS; 
+                this.filtercomputer -= filtermethods.FilterByInstallDateOS;
             }
         }
 
@@ -626,7 +664,13 @@ namespace Spider
         private void comboBoxTab3ListVersionOS_EnabledChanged(object sender, EventArgs e)
         {
             if (this.comboBoxTab3ListVersionOS.Enabled == false)
+            {
                 this.comboBoxTab3ListVersionOS.SelectedIndex = -1;
+                this.comboBoxTab3ListBuildOS.Enabled = false;
+                this.checkBoxTab3SelectSearchByBuildOS.Enabled = false;
+            }
+
+
         }
 
         private void comboBoxTab3ListBuildOS_EnabledChanged(object sender, EventArgs e)
@@ -656,7 +700,7 @@ namespace Spider
                 this.IsX64OS = true;
                 this.buttonSelectBitOS.Text = "x64";
             }
-            this.filtermethods.IsX64OS = this.IsX64OS;    
+            this.filtermethods.IsX64OS = this.IsX64OS;
         }
 
         private void dateTimePickerTab3SetStartInstalledOS_EnabledChanged(object sender, EventArgs e)
@@ -671,7 +715,7 @@ namespace Spider
                 this.dateTimePickerTab3SetEndInstalledOS.Value = DateTime.Today;
         }
 
-        
+
         private void comboBoxTab3ListVersionOS_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -688,6 +732,8 @@ namespace Spider
             else
             {
                 this.filtermethods.VersionOS = "";
+                this.checkBoxTab3SelectSearchByBuildOS.Enabled = false;
+
             }
 
 
@@ -717,6 +763,96 @@ namespace Spider
 
         #endregion
 
+        #region Filtered by Monitor
+
+
+        private void checkBoxTab3SearchByMonitor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.checkBoxTab3SearchByMonitor.Checked == true)
+            {
+                this.radioButtonRangeSizeMonitor.Enabled = true;
+                this.radioButtonSizeMonitor.Enabled = true;
+            }
+            else {
+                this.radioButtonRangeSizeMonitor.Enabled = false;
+                this.radioButtonSizeMonitor.Enabled = false;
+
+            }
+        }
+
+        private void radioButtonSizeMonitor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonSizeMonitor.Checked == true)
+            {
+                this.comboBoxTab3ListSizeMonitor.Enabled = true;
+                this.filtercomputer += filtermethods.FilterBySizeMonitor;
+            }
+            else {
+                this.comboBoxTab3ListSizeMonitor.Enabled = false;
+                this.filtercomputer -= filtermethods.FilterBySizeMonitor;
+            }
+        }
+
+        private void radioButtonRangeSizeMonitor_CheckedChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonRangeSizeMonitor.Checked == true)
+            {
+                this.textBoxTab3PatternSizeMonitor.Enabled = true;
+                this.filtercomputer += filtermethods.FilterByRangeSizeMonitor;
+
+            }
+            else {
+                this.textBoxTab3PatternSizeMonitor.Enabled = false;
+                this.filtercomputer -= filtermethods.FilterByRangeSizeMonitor;
+            }
+        }
+
+        private void radioButtonSizeMonitor_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonSizeMonitor.Enabled == false)            
+                this.radioButtonSizeMonitor.Checked = false;
+        }
+
+        private void radioButtonRangeSizeMonitor_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.radioButtonRangeSizeMonitor.Enabled == false)
+            {
+                this.radioButtonRangeSizeMonitor.Checked = false;
+            }
+        }
+
+        private void comboBoxTab3ListSizeMonitor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxTab3ListSizeMonitor.SelectedIndex != -1)
+            {
+                this.filtermethods.PanelSize = this.comboBoxTab3ListSizeMonitor.SelectedItem.ToString();
+            }
+            else
+            {
+                this.filtermethods.PanelSize = String.Empty;
+            }
+        }
+
+        private void comboBoxTab3ListSizeMonitor_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.comboBoxTab3ListSizeMonitor.Enabled == false)
+                this.comboBoxTab3ListSizeMonitor.SelectedIndex = -1;
+        }
+
+        private void textBoxTab3PatternSizeMonitor_TextChanged(object sender, EventArgs e)
+        {
+            if (this.textBoxTab3PatternSizeMonitor.Text.Trim() != String.Empty)
+                filtermethods.RangePanelSize = this.textBoxTab3PatternSizeMonitor.Text;
+            else
+                filtermethods.RangePanelSize = String.Empty;
+        }
+        private void textBoxTab3PatternSizeMonitor_EnabledChanged(object sender, EventArgs e)
+        {
+            if (this.textBoxTab3PatternSizeMonitor.Enabled == false)
+                this.textBoxTab3PatternSizeMonitor.Text = String.Empty;
+        }
+        #endregion
+
 
         private void listBoxTab3FilteredPCNames_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -734,7 +870,7 @@ namespace Spider
                 this.labelTab3ViewSNMainboard.Text = this.FilteredPC.MainBoard.SerialNumber;
                 this.labelTab3ViewManufacturerMainBoard.Text = this.FilteredPC.MainBoard.Manufacturer;
                 this.labelTab3ViewVersionBioslMainBoard.Text = this.FilteredPC.MainBoard.SMBIOSBIOSVersion;
-                if (this.FilteredPC.CPU.Name.Contains("Intel"))
+                if (this.FilteredPC.CPU.Name.Contains("Intel") || this.FilteredPC.CPU.Name.Contains("Pentium"))
                     this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Blue;
                 else
                     this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Red;
@@ -742,10 +878,11 @@ namespace Spider
                 this.labelTab3ViewTotalSizeRAM.Text = this.FilteredPC.Memory.Sum(x => x.Capacity).ToString();
                 int count = this.FilteredPC.Memory.Count;
                 this.panelTab3ViewRAM.Size = new System.Drawing.Size(395, 85);
-                ResizePanel(panelTab3ViewRAM, count);
+                ResizePanel(this.panelTab3ViewRAM, count);
 
                 ViewRAM(this.FilteredPC.Memory, this.panelTab3ViewRAM, this.labelTab3TitleViewRAM);
                 ViewListDisk(this.FilteredPC.Storage, this.panelTab3ViewStorage, this.labelTab3TitleStorage);
+                ViewMonitor(this.FilteredPC.Monitors, this.panelTab3ViewMonitor, this.labelTab3TitleMonitor);
 
 
 
@@ -768,7 +905,4 @@ namespace Spider
             }
         }
     }
-
-
-
 }
