@@ -277,6 +277,7 @@ namespace Spider
         Philips = 14,
         Samsung = 15,
         ViewSonic = 16,
-        Unknown = 17
+        Unknown = 17,
+        NEC = 18
     }
 }
