@@ -62,6 +62,7 @@ namespace Spider
                 this.labelTextFreeSpace.Visible = true;                
                 this.labelTab2ShowNamePC.Visible = true;                
                 this.labelViewModelStorage.Visible = true;
+                DisableRMS();
             }
 
         }
@@ -134,7 +135,7 @@ namespace Spider
             this.ArrlabelDiscSizeView = new Label[discinfos.Count];
             int X = label.Location.X;
             int Y = label.Location.Y + 5;
-            int X_size = label.Font.Bold ? X + 100 : X;           
+            int X_size = label.Font.Bold ? X + 55 : X;           
             int index_2 = 0;
             int shift = 20;
 
@@ -220,7 +221,7 @@ namespace Spider
 
         private void textPatternProcessor_TextChanged(object sender, EventArgs e)
         {
-            this.butShowFilteredPC.Text = $"Показать ПК подпавшие поп фильтр:  {this.textPatternProcessor.Text}";
+            this.butShowFilteredPC.Text = $"Показать ПК подпавшие под фильтр:  {this.textPatternProcessor.Text}";
         }
 
         private void Char_Click(object sender, EventArgs e)

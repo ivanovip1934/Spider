@@ -38,6 +38,10 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\spider web.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -104,6 +108,19 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider web.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spider3.ico" />
+    <Content Include="spider web.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
