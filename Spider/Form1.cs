@@ -378,10 +378,6 @@ namespace Spider
 
             this.radioButtonRMSRemoteControle.Checked = true;
 
-            this.labelDNSname.Text = String.Empty;
-            this.labelIP.Text = String.Empty;
-            this.labelOnline.Text = String.Empty;   
-
         }
 
         
