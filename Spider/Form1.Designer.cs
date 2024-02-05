@@ -52,6 +52,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.TAB1 = new System.Windows.Forms.TabPage();
+            this.button_DelOutdateData = new System.Windows.Forms.Button();
+            this.button_LoadToXLSX = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.labelInstallLocation = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -84,6 +86,15 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabControl2 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.groupBoxViewCountPC = new System.Windows.Forms.GroupBox();
+            this.label31 = new System.Windows.Forms.Label();
+            this.labelTextOfflinePC = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.labelTextOnlinePC = new System.Windows.Forms.Label();
+            this.labelAll = new System.Windows.Forms.Label();
+            this.labelTextAllPC = new System.Windows.Forms.Label();
+            this.listViewPC1 = new System.Windows.Forms.ListView();
+            this.PC = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.button26 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
@@ -121,13 +132,14 @@
             this.label12 = new System.Windows.Forms.Label();
             this.progressBar1 = new Spider.ColorProgressBar();
             this.labelDisc_C = new System.Windows.Forms.Label();
-            this.labelTextAllPC = new System.Windows.Forms.Label();
             this.butShowFilteredPC = new System.Windows.Forms.Button();
-            this.labelAll = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.listPC1 = new System.Windows.Forms.ListBox();
             this.butGetPC = new System.Windows.Forms.Button();
             this.groupBoxPingRMS = new System.Windows.Forms.GroupBox();
+            this.buttonViewOffline = new System.Windows.Forms.Button();
+            this.buttonViewOnline = new System.Windows.Forms.Button();
+            this.buttonViewOFFandON = new System.Windows.Forms.Button();
+            this.buttonTestListPCOnlone = new System.Windows.Forms.Button();
             this.radioButtonRMSInventory = new System.Windows.Forms.RadioButton();
             this.radioButtonRMSRemoteRegistry = new System.Windows.Forms.RadioButton();
             this.radioButtonRMSRemoteTerminal = new System.Windows.Forms.RadioButton();
@@ -139,9 +151,18 @@
             this.labelDNSname = new System.Windows.Forms.Label();
             this.labelIP = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.labelOnline = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.groupSMonitor = new System.Windows.Forms.GroupBox();
+            this.labelTab2ShowMonitorTitle = new System.Windows.Forms.Label();
+            this.groupBox9 = new System.Windows.Forms.GroupBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.labelTextOfflinePC2 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.labelTextOnlinePC2 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.labelTextAllPC2 = new System.Windows.Forms.Label();
+            this.listViewSortedPC1 = new System.Windows.Forms.ListView();
+            this.namepc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgShowMonitors = new System.Windows.Forms.DataGridView();
             this.Manufacturer1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -182,7 +203,6 @@
             this.groupNamePC = new System.Windows.Forms.GroupBox();
             this.labelTab2ShowDateCollectedInfo = new System.Windows.Forms.Label();
             this.labelTab2ShowNamePC = new System.Windows.Forms.Label();
-            this.listFilteredPC = new System.Windows.Forms.ListBox();
             this.butGetPC2 = new System.Windows.Forms.Button();
             this.groupMainBoard = new System.Windows.Forms.GroupBox();
             this.labelTab2ShowMainBoardVersionBIOS = new System.Windows.Forms.Label();
@@ -232,59 +252,29 @@
             this.radioButtonUseCPUPattern = new System.Windows.Forms.RadioButton();
             this.radioButtonSelectCPUFromList = new System.Windows.Forms.RadioButton();
             this.buttonTab3GetPC = new System.Windows.Forms.Button();
+            this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.labelTextOfflinePC3 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.labelTextOnlinePC3 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.labelTextAllPC3 = new System.Windows.Forms.Label();
+            this.listViewSortedPC2 = new System.Windows.Forms.ListView();
+            this.pcname = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.groupBox8 = new System.Windows.Forms.GroupBox();
             this.textBoxTab3PatternSizeMonitor = new System.Windows.Forms.TextBox();
             this.radioButtonRangeSizeMonitor = new System.Windows.Forms.RadioButton();
             this.radioButtonSizeMonitor = new System.Windows.Forms.RadioButton();
             this.comboBoxTab3ListSizeMonitor = new System.Windows.Forms.ComboBox();
             this.checkBoxTab3SearchByMonitor = new System.Windows.Forms.CheckBox();
-            this.labelTab3ViewListFilteredARM = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.panelTab3ViewMonitor = new System.Windows.Forms.Panel();
-            this.label25 = new System.Windows.Forms.Label();
-            this.labelTab3TitleMonitor = new System.Windows.Forms.Label();
-            this.panelTab3ViewStorage = new System.Windows.Forms.Panel();
-            this.label20 = new System.Windows.Forms.Label();
-            this.labelTab3TitleStorage = new System.Windows.Forms.Label();
-            this.panelTab3ViewRAM = new System.Windows.Forms.Panel();
-            this.labelTab3ViewTotalSizeRAM = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.labelTab3TitleViewRAM = new System.Windows.Forms.Label();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label13 = new System.Windows.Forms.Label();
-            this.labelTab3ViewModelCPU = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.labelTab3ViewSNMainboard = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.labelTab3ViewModelMainBoard = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.labelTab3ViewManufacturerMainBoard = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.labelTab3ViewVersionBioslMainBoard = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelTab3ViewPCName = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label24 = new System.Windows.Forms.Label();
-            this.labelTab3ViewInstallDateOS = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
-            this.labelTab3ViewBuildOS = new System.Windows.Forms.Label();
-            this.labelTab3ViewVersionOS = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.labelTab3ViewPlatformOS = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.listBoxTab3FilteredPCNames = new System.Windows.Forms.ListBox();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.button_DeletePreviosARM = new System.Windows.Forms.Button();
+            this.button_DelAllOldPC = new System.Windows.Forms.Button();
+            this.listViewPCSameMB = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listBoxTab5ListManufacturer = new System.Windows.Forms.ListBox();
             this.buttonTab4GetMainBoardMAC = new System.Windows.Forms.Button();
             this.buttonTab4GetMainBoardWithSameSN = new System.Windows.Forms.Button();
-            this.listBoxTab5ListSerail = new System.Windows.Forms.ListBox();
             this.buttonTab4GetPC = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -295,8 +285,11 @@
             this.tabPage2.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.groupBoxViewCountPC.SuspendLayout();
             this.groupBoxPingRMS.SuspendLayout();
             this.tabPage4.SuspendLayout();
+            this.groupSMonitor.SuspendLayout();
+            this.groupBox9.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgShowMonitors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgShowMainBoard)).BeginInit();
@@ -323,15 +316,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSelectTotalSizeRAM)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBoxsearchbyCPU.SuspendLayout();
+            this.groupBox10.SuspendLayout();
             this.groupBox8.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.panelTab3ViewMonitor.SuspendLayout();
-            this.panelTab3ViewStorage.SuspendLayout();
-            this.panelTab3ViewRAM.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tabPage6.SuspendLayout();
             this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -358,6 +344,8 @@
             // 
             // TAB1
             // 
+            this.TAB1.Controls.Add(this.button_DelOutdateData);
+            this.TAB1.Controls.Add(this.button_LoadToXLSX);
             this.TAB1.Controls.Add(this.label3);
             this.TAB1.Controls.Add(this.labelInstallLocation);
             this.TAB1.Controls.Add(this.label1);
@@ -381,6 +369,26 @@
             this.TAB1.TabIndex = 0;
             this.TAB1.Text = "Search Apps";
             this.TAB1.UseVisualStyleBackColor = true;
+            // 
+            // button_DelOutdateData
+            // 
+            this.button_DelOutdateData.Location = new System.Drawing.Point(787, 42);
+            this.button_DelOutdateData.Name = "button_DelOutdateData";
+            this.button_DelOutdateData.Size = new System.Drawing.Size(201, 35);
+            this.button_DelOutdateData.TabIndex = 18;
+            this.button_DelOutdateData.Text = "Deleting outdate  data";
+            this.button_DelOutdateData.UseVisualStyleBackColor = true;
+            this.button_DelOutdateData.Click += new System.EventHandler(this.button_DelOutdateData_Click);
+            // 
+            // button_LoadToXLSX
+            // 
+            this.button_LoadToXLSX.Location = new System.Drawing.Point(50, 757);
+            this.button_LoadToXLSX.Name = "button_LoadToXLSX";
+            this.button_LoadToXLSX.Size = new System.Drawing.Size(196, 43);
+            this.button_LoadToXLSX.TabIndex = 17;
+            this.button_LoadToXLSX.Text = "Выгрузить в EXCEL";
+            this.button_LoadToXLSX.UseVisualStyleBackColor = true;
+            this.button_LoadToXLSX.Click += new System.EventHandler(this.button_LoadToXLSX_Click);
             // 
             // label3
             // 
@@ -608,7 +616,7 @@
             dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle5;
-            this.dataGridView1.Location = new System.Drawing.Point(268, 33);
+            this.dataGridView1.Location = new System.Drawing.Point(268, 126);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -621,7 +629,7 @@
             this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(720, 267);
+            this.dataGridView1.Size = new System.Drawing.Size(720, 174);
             this.dataGridView1.TabIndex = 5;
             this.dataGridView1.SelectionChanged += new System.EventHandler(this.dataGridView1_SelectionChanged);
             // 
@@ -749,6 +757,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.groupBoxViewCountPC);
+            this.tabPage1.Controls.Add(this.listViewPC1);
             this.tabPage1.Controls.Add(this.button26);
             this.tabPage1.Controls.Add(this.button27);
             this.tabPage1.Controls.Add(this.button22);
@@ -786,11 +796,8 @@
             this.tabPage1.Controls.Add(this.label12);
             this.tabPage1.Controls.Add(this.progressBar1);
             this.tabPage1.Controls.Add(this.labelDisc_C);
-            this.tabPage1.Controls.Add(this.labelTextAllPC);
             this.tabPage1.Controls.Add(this.butShowFilteredPC);
-            this.tabPage1.Controls.Add(this.labelAll);
             this.tabPage1.Controls.Add(this.label11);
-            this.tabPage1.Controls.Add(this.listPC1);
             this.tabPage1.Controls.Add(this.butGetPC);
             this.tabPage1.Controls.Add(this.groupBoxPingRMS);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
@@ -802,9 +809,102 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
             // 
+            // groupBoxViewCountPC
+            // 
+            this.groupBoxViewCountPC.Controls.Add(this.label31);
+            this.groupBoxViewCountPC.Controls.Add(this.labelTextOfflinePC);
+            this.groupBoxViewCountPC.Controls.Add(this.label28);
+            this.groupBoxViewCountPC.Controls.Add(this.labelTextOnlinePC);
+            this.groupBoxViewCountPC.Controls.Add(this.labelAll);
+            this.groupBoxViewCountPC.Controls.Add(this.labelTextAllPC);
+            this.groupBoxViewCountPC.Location = new System.Drawing.Point(439, 369);
+            this.groupBoxViewCountPC.Margin = new System.Windows.Forms.Padding(1);
+            this.groupBoxViewCountPC.Name = "groupBoxViewCountPC";
+            this.groupBoxViewCountPC.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBoxViewCountPC.Size = new System.Drawing.Size(200, 33);
+            this.groupBoxViewCountPC.TabIndex = 74;
+            this.groupBoxViewCountPC.TabStop = false;
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(129, 14);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(40, 13);
+            this.label31.TabIndex = 20;
+            this.label31.Text = "Offline:";
+            // 
+            // labelTextOfflinePC
+            // 
+            this.labelTextOfflinePC.AutoSize = true;
+            this.labelTextOfflinePC.Location = new System.Drawing.Point(167, 14);
+            this.labelTextOfflinePC.Name = "labelTextOfflinePC";
+            this.labelTextOfflinePC.Size = new System.Drawing.Size(27, 13);
+            this.labelTextOfflinePC.TabIndex = 21;
+            this.labelTextOfflinePC.Text = "num";
+            this.labelTextOfflinePC.Visible = false;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(58, 14);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(40, 13);
+            this.label28.TabIndex = 18;
+            this.label28.Text = "Online:";
+            // 
+            // labelTextOnlinePC
+            // 
+            this.labelTextOnlinePC.AutoSize = true;
+            this.labelTextOnlinePC.Location = new System.Drawing.Point(96, 14);
+            this.labelTextOnlinePC.Name = "labelTextOnlinePC";
+            this.labelTextOnlinePC.Size = new System.Drawing.Size(27, 13);
+            this.labelTextOnlinePC.TabIndex = 19;
+            this.labelTextOnlinePC.Text = "num";
+            this.labelTextOnlinePC.Visible = false;
+            // 
+            // labelAll
+            // 
+            this.labelAll.AutoSize = true;
+            this.labelAll.Location = new System.Drawing.Point(4, 14);
+            this.labelAll.Name = "labelAll";
+            this.labelAll.Size = new System.Drawing.Size(21, 13);
+            this.labelAll.TabIndex = 14;
+            this.labelAll.Text = "All:";
+            // 
+            // labelTextAllPC
+            // 
+            this.labelTextAllPC.AutoSize = true;
+            this.labelTextAllPC.Location = new System.Drawing.Point(23, 14);
+            this.labelTextAllPC.Name = "labelTextAllPC";
+            this.labelTextAllPC.Size = new System.Drawing.Size(27, 13);
+            this.labelTextAllPC.TabIndex = 17;
+            this.labelTextAllPC.Text = "num";
+            this.labelTextAllPC.Visible = false;
+            // 
+            // listViewPC1
+            // 
+            this.listViewPC1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.PC});
+            this.listViewPC1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listViewPC1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewPC1.HideSelection = false;
+            this.listViewPC1.Location = new System.Drawing.Point(402, 15);
+            this.listViewPC1.MultiSelect = false;
+            this.listViewPC1.Name = "listViewPC1";
+            this.listViewPC1.Size = new System.Drawing.Size(241, 353);
+            this.listViewPC1.TabIndex = 73;
+            this.listViewPC1.UseCompatibleStateImageBehavior = false;
+            this.listViewPC1.View = System.Windows.Forms.View.Details;
+            this.listViewPC1.SelectedIndexChanged += new System.EventHandler(this.listViewPC1_SelectedIndexChanged);
+            // 
+            // PC
+            // 
+            this.PC.Width = 200;
+            // 
             // button26
             // 
-            this.button26.Location = new System.Drawing.Point(232, 320);
+            this.button26.Location = new System.Drawing.Point(53, 313);
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(30, 25);
             this.button26.TabIndex = 63;
@@ -814,7 +914,7 @@
             // 
             // button27
             // 
-            this.button27.Location = new System.Drawing.Point(196, 320);
+            this.button27.Location = new System.Drawing.Point(17, 313);
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(30, 25);
             this.button27.TabIndex = 62;
@@ -824,7 +924,7 @@
             // 
             // button22
             // 
-            this.button22.Location = new System.Drawing.Point(268, 289);
+            this.button22.Location = new System.Drawing.Point(89, 282);
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(30, 25);
             this.button22.TabIndex = 61;
@@ -834,7 +934,7 @@
             // 
             // button23
             // 
-            this.button23.Location = new System.Drawing.Point(232, 289);
+            this.button23.Location = new System.Drawing.Point(53, 282);
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(30, 25);
             this.button23.TabIndex = 60;
@@ -844,7 +944,7 @@
             // 
             // button24
             // 
-            this.button24.Location = new System.Drawing.Point(196, 289);
+            this.button24.Location = new System.Drawing.Point(17, 282);
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(30, 25);
             this.button24.TabIndex = 59;
@@ -854,7 +954,7 @@
             // 
             // button19
             // 
-            this.button19.Location = new System.Drawing.Point(268, 258);
+            this.button19.Location = new System.Drawing.Point(89, 251);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(30, 25);
             this.button19.TabIndex = 58;
@@ -864,7 +964,7 @@
             // 
             // button20
             // 
-            this.button20.Location = new System.Drawing.Point(232, 258);
+            this.button20.Location = new System.Drawing.Point(53, 251);
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(30, 25);
             this.button20.TabIndex = 57;
@@ -874,7 +974,7 @@
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(196, 258);
+            this.button21.Location = new System.Drawing.Point(17, 251);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(30, 25);
             this.button21.TabIndex = 56;
@@ -884,7 +984,7 @@
             // 
             // button16
             // 
-            this.button16.Location = new System.Drawing.Point(268, 227);
+            this.button16.Location = new System.Drawing.Point(89, 220);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(30, 25);
             this.button16.TabIndex = 55;
@@ -894,7 +994,7 @@
             // 
             // button17
             // 
-            this.button17.Location = new System.Drawing.Point(232, 227);
+            this.button17.Location = new System.Drawing.Point(53, 220);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(30, 25);
             this.button17.TabIndex = 54;
@@ -904,7 +1004,7 @@
             // 
             // button18
             // 
-            this.button18.Location = new System.Drawing.Point(196, 227);
+            this.button18.Location = new System.Drawing.Point(17, 220);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(30, 25);
             this.button18.TabIndex = 53;
@@ -914,7 +1014,7 @@
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(268, 196);
+            this.button13.Location = new System.Drawing.Point(89, 189);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(30, 25);
             this.button13.TabIndex = 52;
@@ -924,7 +1024,7 @@
             // 
             // button14
             // 
-            this.button14.Location = new System.Drawing.Point(232, 196);
+            this.button14.Location = new System.Drawing.Point(53, 189);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(30, 25);
             this.button14.TabIndex = 51;
@@ -934,7 +1034,7 @@
             // 
             // button15
             // 
-            this.button15.Location = new System.Drawing.Point(196, 196);
+            this.button15.Location = new System.Drawing.Point(17, 189);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(30, 25);
             this.button15.TabIndex = 50;
@@ -944,7 +1044,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(268, 165);
+            this.button10.Location = new System.Drawing.Point(89, 158);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(30, 25);
             this.button10.TabIndex = 49;
@@ -954,7 +1054,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(232, 165);
+            this.button11.Location = new System.Drawing.Point(53, 158);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(30, 25);
             this.button11.TabIndex = 48;
@@ -964,7 +1064,7 @@
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(196, 165);
+            this.button12.Location = new System.Drawing.Point(17, 158);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(30, 25);
             this.button12.TabIndex = 47;
@@ -974,7 +1074,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(268, 134);
+            this.button7.Location = new System.Drawing.Point(89, 127);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(30, 25);
             this.button7.TabIndex = 46;
@@ -984,7 +1084,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(232, 134);
+            this.button8.Location = new System.Drawing.Point(53, 127);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(30, 25);
             this.button8.TabIndex = 45;
@@ -994,7 +1094,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(196, 134);
+            this.button9.Location = new System.Drawing.Point(17, 127);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(30, 25);
             this.button9.TabIndex = 44;
@@ -1004,7 +1104,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(268, 103);
+            this.button4.Location = new System.Drawing.Point(89, 96);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(30, 25);
             this.button4.TabIndex = 43;
@@ -1014,7 +1114,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(232, 103);
+            this.button5.Location = new System.Drawing.Point(53, 96);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(30, 25);
             this.button5.TabIndex = 42;
@@ -1024,7 +1124,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(196, 103);
+            this.button6.Location = new System.Drawing.Point(17, 96);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(30, 25);
             this.button6.TabIndex = 41;
@@ -1034,7 +1134,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(268, 72);
+            this.button3.Location = new System.Drawing.Point(89, 65);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(30, 25);
             this.button3.TabIndex = 40;
@@ -1044,7 +1144,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(232, 72);
+            this.button2.Location = new System.Drawing.Point(53, 65);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(30, 25);
             this.button2.TabIndex = 39;
@@ -1054,7 +1154,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(196, 72);
+            this.button1.Location = new System.Drawing.Point(17, 65);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(30, 25);
             this.button1.TabIndex = 38;
@@ -1065,7 +1165,7 @@
             // checkSSDExists
             // 
             this.checkSSDExists.AutoSize = true;
-            this.checkSSDExists.Location = new System.Drawing.Point(307, 151);
+            this.checkSSDExists.Location = new System.Drawing.Point(128, 139);
             this.checkSSDExists.Name = "checkSSDExists";
             this.checkSSDExists.Size = new System.Drawing.Size(83, 17);
             this.checkSSDExists.TabIndex = 37;
@@ -1075,7 +1175,7 @@
             // labelViewModelStorage
             // 
             this.labelViewModelStorage.AutoSize = true;
-            this.labelViewModelStorage.Location = new System.Drawing.Point(107, 505);
+            this.labelViewModelStorage.Location = new System.Drawing.Point(436, 505);
             this.labelViewModelStorage.Name = "labelViewModelStorage";
             this.labelViewModelStorage.Size = new System.Drawing.Size(73, 13);
             this.labelViewModelStorage.TabIndex = 36;
@@ -1085,7 +1185,7 @@
             // labelModelStorage
             // 
             this.labelModelStorage.AutoSize = true;
-            this.labelModelStorage.Location = new System.Drawing.Point(15, 505);
+            this.labelModelStorage.Location = new System.Drawing.Point(436, 487);
             this.labelModelStorage.Name = "labelModelStorage";
             this.labelModelStorage.Size = new System.Drawing.Size(79, 13);
             this.labelModelStorage.TabIndex = 35;
@@ -1093,7 +1193,7 @@
             // 
             // buttonSizeDiscSless10G
             // 
-            this.buttonSizeDiscSless10G.Location = new System.Drawing.Point(307, 267);
+            this.buttonSizeDiscSless10G.Location = new System.Drawing.Point(128, 260);
             this.buttonSizeDiscSless10G.Name = "buttonSizeDiscSless10G";
             this.buttonSizeDiscSless10G.Size = new System.Drawing.Size(226, 78);
             this.buttonSizeDiscSless10G.TabIndex = 28;
@@ -1104,9 +1204,9 @@
             // textPatternProcessor
             // 
             this.textPatternProcessor.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textPatternProcessor.Location = new System.Drawing.Point(307, 100);
+            this.textPatternProcessor.Location = new System.Drawing.Point(128, 96);
             this.textPatternProcessor.Name = "textPatternProcessor";
-            this.textPatternProcessor.Size = new System.Drawing.Size(208, 32);
+            this.textPatternProcessor.Size = new System.Drawing.Size(226, 32);
             this.textPatternProcessor.TabIndex = 27;
             this.textPatternProcessor.TextChanged += new System.EventHandler(this.textPatternProcessor_TextChanged);
             this.textPatternProcessor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textPatternProcessor_KeyPress);
@@ -1114,7 +1214,7 @@
             // labelTextFreeSpace
             // 
             this.labelTextFreeSpace.AutoSize = true;
-            this.labelTextFreeSpace.Location = new System.Drawing.Point(107, 485);
+            this.labelTextFreeSpace.Location = new System.Drawing.Point(528, 467);
             this.labelTextFreeSpace.Name = "labelTextFreeSpace";
             this.labelTextFreeSpace.Size = new System.Drawing.Size(62, 13);
             this.labelTextFreeSpace.TabIndex = 26;
@@ -1124,7 +1224,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(15, 485);
+            this.label14.Location = new System.Drawing.Point(436, 467);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(62, 13);
             this.label14.TabIndex = 25;
@@ -1133,7 +1233,7 @@
             // labelTextTotalSize
             // 
             this.labelTextTotalSize.AutoSize = true;
-            this.labelTextTotalSize.Location = new System.Drawing.Point(107, 462);
+            this.labelTextTotalSize.Location = new System.Drawing.Point(528, 444);
             this.labelTextTotalSize.Name = "labelTextTotalSize";
             this.labelTextTotalSize.Size = new System.Drawing.Size(54, 13);
             this.labelTextTotalSize.TabIndex = 24;
@@ -1143,7 +1243,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(14, 462);
+            this.label12.Location = new System.Drawing.Point(435, 444);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(54, 13);
             this.label12.TabIndex = 23;
@@ -1153,7 +1253,7 @@
             // 
             this.progressBar1.BackColor = System.Drawing.SystemColors.MenuBar;
             this.progressBar1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.progressBar1.Location = new System.Drawing.Point(39, 427);
+            this.progressBar1.Location = new System.Drawing.Point(460, 409);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(153, 23);
             this.progressBar1.TabIndex = 22;
@@ -1161,25 +1261,15 @@
             // labelDisc_C
             // 
             this.labelDisc_C.AutoSize = true;
-            this.labelDisc_C.Location = new System.Drawing.Point(11, 429);
+            this.labelDisc_C.Location = new System.Drawing.Point(432, 411);
             this.labelDisc_C.Name = "labelDisc_C";
             this.labelDisc_C.Size = new System.Drawing.Size(22, 13);
             this.labelDisc_C.TabIndex = 21;
             this.labelDisc_C.Text = "C:\\";
             // 
-            // labelTextAllPC
-            // 
-            this.labelTextAllPC.AutoSize = true;
-            this.labelTextAllPC.Location = new System.Drawing.Point(76, 402);
-            this.labelTextAllPC.Name = "labelTextAllPC";
-            this.labelTextAllPC.Size = new System.Drawing.Size(59, 13);
-            this.labelTextAllPC.TabIndex = 17;
-            this.labelTextAllPC.Text = "Text All PC";
-            this.labelTextAllPC.Visible = false;
-            // 
             // butShowFilteredPC
             // 
-            this.butShowFilteredPC.Location = new System.Drawing.Point(307, 174);
+            this.butShowFilteredPC.Location = new System.Drawing.Point(128, 167);
             this.butShowFilteredPC.Name = "butShowFilteredPC";
             this.butShowFilteredPC.Size = new System.Drawing.Size(226, 69);
             this.butShowFilteredPC.TabIndex = 16;
@@ -1187,34 +1277,14 @@
             this.butShowFilteredPC.UseVisualStyleBackColor = true;
             this.butShowFilteredPC.Click += new System.EventHandler(this.butShowOldCPU_Click);
             // 
-            // labelAll
-            // 
-            this.labelAll.AutoSize = true;
-            this.labelAll.Location = new System.Drawing.Point(25, 402);
-            this.labelAll.Name = "labelAll";
-            this.labelAll.Size = new System.Drawing.Size(35, 13);
-            this.labelAll.TabIndex = 14;
-            this.labelAll.Text = "All PC";
-            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(304, 72);
+            this.label11.Location = new System.Drawing.Point(125, 65);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(284, 13);
+            this.label11.Size = new System.Drawing.Size(169, 26);
             this.label11.TabIndex = 12;
-            this.label11.Text = "Фильтр процессоров, пример: CPU G1|CPU G2|i3-2|i3-3";
-            // 
-            // listPC1
-            // 
-            this.listPC1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listPC1.FormattingEnabled = true;
-            this.listPC1.ItemHeight = 19;
-            this.listPC1.Location = new System.Drawing.Point(15, 72);
-            this.listPC1.Name = "listPC1";
-            this.listPC1.Size = new System.Drawing.Size(175, 327);
-            this.listPC1.TabIndex = 1;
-            this.listPC1.SelectedIndexChanged += new System.EventHandler(this.listPC1_SelectedIndexChanged);
+            this.label11.Text = "Фильтр процессоров,\r\nпример: CPU G1|CPU G2|i3-2|i3-3";
             // 
             // butGetPC
             // 
@@ -1229,6 +1299,10 @@
             // 
             // groupBoxPingRMS
             // 
+            this.groupBoxPingRMS.Controls.Add(this.buttonViewOffline);
+            this.groupBoxPingRMS.Controls.Add(this.buttonViewOnline);
+            this.groupBoxPingRMS.Controls.Add(this.buttonViewOFFandON);
+            this.groupBoxPingRMS.Controls.Add(this.buttonTestListPCOnlone);
             this.groupBoxPingRMS.Controls.Add(this.radioButtonRMSInventory);
             this.groupBoxPingRMS.Controls.Add(this.radioButtonRMSRemoteRegistry);
             this.groupBoxPingRMS.Controls.Add(this.radioButtonRMSRemoteTerminal);
@@ -1240,19 +1314,60 @@
             this.groupBoxPingRMS.Controls.Add(this.labelDNSname);
             this.groupBoxPingRMS.Controls.Add(this.labelIP);
             this.groupBoxPingRMS.Controls.Add(this.label30);
-            this.groupBoxPingRMS.Controls.Add(this.label29);
-            this.groupBoxPingRMS.Controls.Add(this.labelOnline);
-            this.groupBoxPingRMS.Location = new System.Drawing.Point(20, 529);
+            this.groupBoxPingRMS.Location = new System.Drawing.Point(17, 364);
             this.groupBoxPingRMS.Name = "groupBoxPingRMS";
             this.groupBoxPingRMS.Size = new System.Drawing.Size(172, 272);
             this.groupBoxPingRMS.TabIndex = 72;
             this.groupBoxPingRMS.TabStop = false;
             // 
+            // buttonViewOffline
+            // 
+            this.buttonViewOffline.Enabled = false;
+            this.buttonViewOffline.Location = new System.Drawing.Point(117, 39);
+            this.buttonViewOffline.Name = "buttonViewOffline";
+            this.buttonViewOffline.Size = new System.Drawing.Size(49, 30);
+            this.buttonViewOffline.TabIndex = 80;
+            this.buttonViewOffline.Text = "offline";
+            this.buttonViewOffline.UseVisualStyleBackColor = true;
+            this.buttonViewOffline.Click += new System.EventHandler(this.buttonViewOffline_Click);
+            // 
+            // buttonViewOnline
+            // 
+            this.buttonViewOnline.Enabled = false;
+            this.buttonViewOnline.Location = new System.Drawing.Point(60, 39);
+            this.buttonViewOnline.Name = "buttonViewOnline";
+            this.buttonViewOnline.Size = new System.Drawing.Size(49, 30);
+            this.buttonViewOnline.TabIndex = 79;
+            this.buttonViewOnline.Text = "online";
+            this.buttonViewOnline.UseVisualStyleBackColor = true;
+            this.buttonViewOnline.Click += new System.EventHandler(this.buttonViewOnline_Click);
+            // 
+            // buttonViewOFFandON
+            // 
+            this.buttonViewOFFandON.Enabled = false;
+            this.buttonViewOFFandON.Location = new System.Drawing.Point(5, 39);
+            this.buttonViewOFFandON.Name = "buttonViewOFFandON";
+            this.buttonViewOFFandON.Size = new System.Drawing.Size(49, 30);
+            this.buttonViewOFFandON.TabIndex = 78;
+            this.buttonViewOFFandON.Text = "all";
+            this.buttonViewOFFandON.UseVisualStyleBackColor = true;
+            this.buttonViewOFFandON.Click += new System.EventHandler(this.buttonViewOFFandON_Click);
+            // 
+            // buttonTestListPCOnlone
+            // 
+            this.buttonTestListPCOnlone.Location = new System.Drawing.Point(5, 13);
+            this.buttonTestListPCOnlone.Name = "buttonTestListPCOnlone";
+            this.buttonTestListPCOnlone.Size = new System.Drawing.Size(161, 26);
+            this.buttonTestListPCOnlone.TabIndex = 77;
+            this.buttonTestListPCOnlone.Text = "test ping the computer list";
+            this.buttonTestListPCOnlone.UseVisualStyleBackColor = true;
+            this.buttonTestListPCOnlone.Click += new System.EventHandler(this.buttonTestListPCOnlone_Click);
+            // 
             // radioButtonRMSInventory
             // 
             this.radioButtonRMSInventory.AutoSize = true;
             this.radioButtonRMSInventory.Enabled = false;
-            this.radioButtonRMSInventory.Location = new System.Drawing.Point(5, 245);
+            this.radioButtonRMSInventory.Location = new System.Drawing.Point(5, 250);
             this.radioButtonRMSInventory.Name = "radioButtonRMSInventory";
             this.radioButtonRMSInventory.Size = new System.Drawing.Size(110, 17);
             this.radioButtonRMSInventory.TabIndex = 76;
@@ -1265,7 +1380,7 @@
             // 
             this.radioButtonRMSRemoteRegistry.AutoSize = true;
             this.radioButtonRMSRemoteRegistry.Enabled = false;
-            this.radioButtonRMSRemoteRegistry.Location = new System.Drawing.Point(5, 221);
+            this.radioButtonRMSRemoteRegistry.Location = new System.Drawing.Point(5, 226);
             this.radioButtonRMSRemoteRegistry.Name = "radioButtonRMSRemoteRegistry";
             this.radioButtonRMSRemoteRegistry.Size = new System.Drawing.Size(121, 17);
             this.radioButtonRMSRemoteRegistry.TabIndex = 75;
@@ -1278,7 +1393,7 @@
             // 
             this.radioButtonRMSRemoteTerminal.AutoSize = true;
             this.radioButtonRMSRemoteTerminal.Enabled = false;
-            this.radioButtonRMSRemoteTerminal.Location = new System.Drawing.Point(5, 198);
+            this.radioButtonRMSRemoteTerminal.Location = new System.Drawing.Point(5, 203);
             this.radioButtonRMSRemoteTerminal.Name = "radioButtonRMSRemoteTerminal";
             this.radioButtonRMSRemoteTerminal.Size = new System.Drawing.Size(135, 17);
             this.radioButtonRMSRemoteTerminal.TabIndex = 74;
@@ -1291,7 +1406,7 @@
             // 
             this.radioButtonRMSFileTransfer.AutoSize = true;
             this.radioButtonRMSFileTransfer.Enabled = false;
-            this.radioButtonRMSFileTransfer.Location = new System.Drawing.Point(5, 175);
+            this.radioButtonRMSFileTransfer.Location = new System.Drawing.Point(5, 180);
             this.radioButtonRMSFileTransfer.Name = "radioButtonRMSFileTransfer";
             this.radioButtonRMSFileTransfer.Size = new System.Drawing.Size(115, 17);
             this.radioButtonRMSFileTransfer.TabIndex = 73;
@@ -1304,7 +1419,7 @@
             // 
             this.radioButtonRMSRemoteControle.AutoSize = true;
             this.radioButtonRMSRemoteControle.Enabled = false;
-            this.radioButtonRMSRemoteControle.Location = new System.Drawing.Point(5, 152);
+            this.radioButtonRMSRemoteControle.Location = new System.Drawing.Point(5, 157);
             this.radioButtonRMSRemoteControle.Name = "radioButtonRMSRemoteControle";
             this.radioButtonRMSRemoteControle.Size = new System.Drawing.Size(143, 17);
             this.radioButtonRMSRemoteControle.TabIndex = 72;
@@ -1315,7 +1430,7 @@
             // 
             // buttonTestOnlinePC
             // 
-            this.buttonTestOnlinePC.Location = new System.Drawing.Point(6, 19);
+            this.buttonTestOnlinePC.Location = new System.Drawing.Point(5, 69);
             this.buttonTestOnlinePC.Name = "buttonTestOnlinePC";
             this.buttonTestOnlinePC.Size = new System.Drawing.Size(161, 26);
             this.buttonTestOnlinePC.TabIndex = 64;
@@ -1326,7 +1441,7 @@
             // buttonRMS
             // 
             this.buttonRMS.Enabled = false;
-            this.buttonRMS.Location = new System.Drawing.Point(5, 113);
+            this.buttonRMS.Location = new System.Drawing.Point(5, 129);
             this.buttonRMS.Name = "buttonRMS";
             this.buttonRMS.Size = new System.Drawing.Size(162, 25);
             this.buttonRMS.TabIndex = 71;
@@ -1337,7 +1452,7 @@
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(5, 68);
+            this.label27.Location = new System.Drawing.Point(5, 114);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(20, 13);
             this.label27.TabIndex = 65;
@@ -1346,7 +1461,7 @@
             // labelDNSname
             // 
             this.labelDNSname.AutoSize = true;
-            this.labelDNSname.Location = new System.Drawing.Point(44, 48);
+            this.labelDNSname.Location = new System.Drawing.Point(43, 98);
             this.labelDNSname.Name = "labelDNSname";
             this.labelDNSname.Size = new System.Drawing.Size(41, 13);
             this.labelDNSname.TabIndex = 70;
@@ -1356,7 +1471,7 @@
             // labelIP
             // 
             this.labelIP.AutoSize = true;
-            this.labelIP.Location = new System.Drawing.Point(31, 68);
+            this.labelIP.Location = new System.Drawing.Point(30, 114);
             this.labelIP.Name = "labelIP";
             this.labelIP.Size = new System.Drawing.Size(41, 13);
             this.labelIP.TabIndex = 66;
@@ -1366,40 +1481,23 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(5, 48);
+            this.label30.Location = new System.Drawing.Point(2, 98);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(33, 13);
             this.label30.TabIndex = 69;
             this.label30.Text = "DNS:";
             // 
-            // label29
-            // 
-            this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(5, 88);
-            this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(50, 13);
-            this.label29.TabIndex = 67;
-            this.label29.Text = "ONLINE:";
-            // 
-            // labelOnline
-            // 
-            this.labelOnline.AutoSize = true;
-            this.labelOnline.Location = new System.Drawing.Point(57, 88);
-            this.labelOnline.Name = "labelOnline";
-            this.labelOnline.Size = new System.Drawing.Size(41, 13);
-            this.labelOnline.TabIndex = 68;
-            this.labelOnline.Text = "label30";
-            this.labelOnline.Visible = false;
-            // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.groupSMonitor);
+            this.tabPage4.Controls.Add(this.groupBox9);
+            this.tabPage4.Controls.Add(this.listViewSortedPC1);
             this.tabPage4.Controls.Add(this.panel5);
             this.tabPage4.Controls.Add(this.groupSTorage);
             this.tabPage4.Controls.Add(this.groupRAM);
             this.tabPage4.Controls.Add(this.groupBox4);
             this.tabPage4.Controls.Add(this.groupBox3);
             this.tabPage4.Controls.Add(this.groupNamePC);
-            this.tabPage4.Controls.Add(this.listFilteredPC);
             this.tabPage4.Controls.Add(this.butGetPC2);
             this.tabPage4.Controls.Add(this.groupMainBoard);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -1410,6 +1508,121 @@
             this.tabPage4.Text = "tabPage4";
             this.tabPage4.UseVisualStyleBackColor = true;
             this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
+            // 
+            // groupSMonitor
+            // 
+            this.groupSMonitor.Controls.Add(this.labelTab2ShowMonitorTitle);
+            this.groupSMonitor.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.groupSMonitor.Location = new System.Drawing.Point(651, 685);
+            this.groupSMonitor.Name = "groupSMonitor";
+            this.groupSMonitor.Size = new System.Drawing.Size(416, 99);
+            this.groupSMonitor.TabIndex = 76;
+            this.groupSMonitor.TabStop = false;
+            this.groupSMonitor.Text = "MONITOR";
+            // 
+            // labelTab2ShowMonitorTitle
+            // 
+            this.labelTab2ShowMonitorTitle.AutoSize = true;
+            this.labelTab2ShowMonitorTitle.Font = new System.Drawing.Font("Calibri", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTab2ShowMonitorTitle.ForeColor = System.Drawing.Color.SteelBlue;
+            this.labelTab2ShowMonitorTitle.Location = new System.Drawing.Point(5, 20);
+            this.labelTab2ShowMonitorTitle.Name = "labelTab2ShowMonitorTitle";
+            this.labelTab2ShowMonitorTitle.Size = new System.Drawing.Size(407, 19);
+            this.labelTab2ShowMonitorTitle.TabIndex = 52;
+            this.labelTab2ShowMonitorTitle.Text = "Index  Manufacturer      Model           Resolution         Size,in  ";
+            // 
+            // groupBox9
+            // 
+            this.groupBox9.Controls.Add(this.label29);
+            this.groupBox9.Controls.Add(this.labelTextOfflinePC2);
+            this.groupBox9.Controls.Add(this.label33);
+            this.groupBox9.Controls.Add(this.labelTextOnlinePC2);
+            this.groupBox9.Controls.Add(this.label35);
+            this.groupBox9.Controls.Add(this.labelTextAllPC2);
+            this.groupBox9.Location = new System.Drawing.Point(448, 355);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(1);
+            this.groupBox9.Name = "groupBox9";
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBox9.Size = new System.Drawing.Size(200, 33);
+            this.groupBox9.TabIndex = 75;
+            this.groupBox9.TabStop = false;
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(129, 14);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(40, 13);
+            this.label29.TabIndex = 20;
+            this.label29.Text = "Offline:";
+            // 
+            // labelTextOfflinePC2
+            // 
+            this.labelTextOfflinePC2.AutoSize = true;
+            this.labelTextOfflinePC2.Location = new System.Drawing.Point(167, 14);
+            this.labelTextOfflinePC2.Name = "labelTextOfflinePC2";
+            this.labelTextOfflinePC2.Size = new System.Drawing.Size(27, 13);
+            this.labelTextOfflinePC2.TabIndex = 21;
+            this.labelTextOfflinePC2.Text = "num";
+            this.labelTextOfflinePC2.Visible = false;
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(58, 14);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(40, 13);
+            this.label33.TabIndex = 18;
+            this.label33.Text = "Online:";
+            // 
+            // labelTextOnlinePC2
+            // 
+            this.labelTextOnlinePC2.AutoSize = true;
+            this.labelTextOnlinePC2.Location = new System.Drawing.Point(96, 14);
+            this.labelTextOnlinePC2.Name = "labelTextOnlinePC2";
+            this.labelTextOnlinePC2.Size = new System.Drawing.Size(27, 13);
+            this.labelTextOnlinePC2.TabIndex = 19;
+            this.labelTextOnlinePC2.Text = "num";
+            this.labelTextOnlinePC2.Visible = false;
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(4, 14);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(21, 13);
+            this.label35.TabIndex = 14;
+            this.label35.Text = "All:";
+            // 
+            // labelTextAllPC2
+            // 
+            this.labelTextAllPC2.AutoSize = true;
+            this.labelTextAllPC2.Location = new System.Drawing.Point(23, 14);
+            this.labelTextAllPC2.Name = "labelTextAllPC2";
+            this.labelTextAllPC2.Size = new System.Drawing.Size(27, 13);
+            this.labelTextAllPC2.TabIndex = 17;
+            this.labelTextAllPC2.Text = "num";
+            this.labelTextAllPC2.Visible = false;
+            // 
+            // listViewSortedPC1
+            // 
+            this.listViewSortedPC1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.namepc});
+            this.listViewSortedPC1.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listViewSortedPC1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSortedPC1.HideSelection = false;
+            this.listViewSortedPC1.Location = new System.Drawing.Point(452, 22);
+            this.listViewSortedPC1.MultiSelect = false;
+            this.listViewSortedPC1.Name = "listViewSortedPC1";
+            this.listViewSortedPC1.Size = new System.Drawing.Size(193, 333);
+            this.listViewSortedPC1.TabIndex = 73;
+            this.listViewSortedPC1.UseCompatibleStateImageBehavior = false;
+            this.listViewSortedPC1.View = System.Windows.Forms.View.Details;
+            this.listViewSortedPC1.SelectedIndexChanged += new System.EventHandler(this.listViewPC1_SelectedIndexChanged);
+            // 
+            // namepc
+            // 
+            this.namepc.Width = 200;
             // 
             // panel5
             // 
@@ -1956,17 +2169,6 @@
             this.labelTab2ShowNamePC.Text = "Name PC";
             this.labelTab2ShowNamePC.Visible = false;
             // 
-            // listFilteredPC
-            // 
-            this.listFilteredPC.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.listFilteredPC.FormattingEnabled = true;
-            this.listFilteredPC.ItemHeight = 19;
-            this.listFilteredPC.Location = new System.Drawing.Point(458, 20);
-            this.listFilteredPC.Name = "listFilteredPC";
-            this.listFilteredPC.Size = new System.Drawing.Size(182, 327);
-            this.listFilteredPC.TabIndex = 66;
-            this.listFilteredPC.SelectedIndexChanged += new System.EventHandler(this.listFilteredPC_SelectedIndexChanged);
-            // 
             // butGetPC2
             // 
             this.butGetPC2.Location = new System.Drawing.Point(15, 15);
@@ -2056,11 +2258,9 @@
             // 
             // splitContainer2.Panel2
             // 
+            this.splitContainer2.Panel2.Controls.Add(this.groupBox10);
+            this.splitContainer2.Panel2.Controls.Add(this.listViewSortedPC2);
             this.splitContainer2.Panel2.Controls.Add(this.groupBox8);
-            this.splitContainer2.Panel2.Controls.Add(this.labelTab3ViewListFilteredARM);
-            this.splitContainer2.Panel2.Controls.Add(this.label26);
-            this.splitContainer2.Panel2.Controls.Add(this.groupBox6);
-            this.splitContainer2.Panel2.Controls.Add(this.listBoxTab3FilteredPCNames);
             this.splitContainer2.Size = new System.Drawing.Size(1069, 809);
             this.splitContainer2.SplitterDistance = 389;
             this.splitContainer2.TabIndex = 0;
@@ -2605,6 +2805,99 @@
             this.buttonTab3GetPC.UseVisualStyleBackColor = true;
             this.buttonTab3GetPC.Click += new System.EventHandler(this.buttonTab3GetPC_Click);
             // 
+            // groupBox10
+            // 
+            this.groupBox10.Controls.Add(this.label26);
+            this.groupBox10.Controls.Add(this.labelTextOfflinePC3);
+            this.groupBox10.Controls.Add(this.label38);
+            this.groupBox10.Controls.Add(this.labelTextOnlinePC3);
+            this.groupBox10.Controls.Add(this.label40);
+            this.groupBox10.Controls.Add(this.labelTextAllPC3);
+            this.groupBox10.Location = new System.Drawing.Point(5, 330);
+            this.groupBox10.Margin = new System.Windows.Forms.Padding(1);
+            this.groupBox10.Name = "groupBox10";
+            this.groupBox10.Padding = new System.Windows.Forms.Padding(1);
+            this.groupBox10.Size = new System.Drawing.Size(200, 33);
+            this.groupBox10.TabIndex = 75;
+            this.groupBox10.TabStop = false;
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(129, 14);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(40, 13);
+            this.label26.TabIndex = 20;
+            this.label26.Text = "Offline:";
+            // 
+            // labelTextOfflinePC3
+            // 
+            this.labelTextOfflinePC3.AutoSize = true;
+            this.labelTextOfflinePC3.Location = new System.Drawing.Point(167, 14);
+            this.labelTextOfflinePC3.Name = "labelTextOfflinePC3";
+            this.labelTextOfflinePC3.Size = new System.Drawing.Size(27, 13);
+            this.labelTextOfflinePC3.TabIndex = 21;
+            this.labelTextOfflinePC3.Text = "num";
+            this.labelTextOfflinePC3.Visible = false;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(58, 14);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(40, 13);
+            this.label38.TabIndex = 18;
+            this.label38.Text = "Online:";
+            // 
+            // labelTextOnlinePC3
+            // 
+            this.labelTextOnlinePC3.AutoSize = true;
+            this.labelTextOnlinePC3.Location = new System.Drawing.Point(96, 14);
+            this.labelTextOnlinePC3.Name = "labelTextOnlinePC3";
+            this.labelTextOnlinePC3.Size = new System.Drawing.Size(27, 13);
+            this.labelTextOnlinePC3.TabIndex = 19;
+            this.labelTextOnlinePC3.Text = "num";
+            this.labelTextOnlinePC3.Visible = false;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(4, 14);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(21, 13);
+            this.label40.TabIndex = 14;
+            this.label40.Text = "All:";
+            // 
+            // labelTextAllPC3
+            // 
+            this.labelTextAllPC3.AutoSize = true;
+            this.labelTextAllPC3.Location = new System.Drawing.Point(23, 14);
+            this.labelTextAllPC3.Name = "labelTextAllPC3";
+            this.labelTextAllPC3.Size = new System.Drawing.Size(27, 13);
+            this.labelTextAllPC3.TabIndex = 17;
+            this.labelTextAllPC3.Text = "num";
+            this.labelTextAllPC3.Visible = false;
+            // 
+            // listViewSortedPC2
+            // 
+            this.listViewSortedPC2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.pcname});
+            this.listViewSortedPC2.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listViewSortedPC2.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewSortedPC2.HideSelection = false;
+            this.listViewSortedPC2.Location = new System.Drawing.Point(10, 12);
+            this.listViewSortedPC2.MultiSelect = false;
+            this.listViewSortedPC2.Name = "listViewSortedPC2";
+            this.listViewSortedPC2.Size = new System.Drawing.Size(193, 316);
+            this.listViewSortedPC2.TabIndex = 74;
+            this.listViewSortedPC2.UseCompatibleStateImageBehavior = false;
+            this.listViewSortedPC2.View = System.Windows.Forms.View.Details;
+            this.listViewSortedPC2.SelectedIndexChanged += new System.EventHandler(this.listViewlistViewSortedPC2_SelectedIndexChanged);
+            // 
+            // pcname
+            // 
+            this.pcname.Width = 200;
+            // 
             // groupBox8
             // 
             this.groupBox8.Controls.Add(this.textBoxTab3PatternSizeMonitor);
@@ -2685,465 +2978,14 @@
             this.checkBoxTab3SearchByMonitor.UseVisualStyleBackColor = true;
             this.checkBoxTab3SearchByMonitor.CheckedChanged += new System.EventHandler(this.checkBoxTab3SearchByMonitor_CheckedChanged);
             // 
-            // labelTab3ViewListFilteredARM
-            // 
-            this.labelTab3ViewListFilteredARM.AutoSize = true;
-            this.labelTab3ViewListFilteredARM.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewListFilteredARM.Location = new System.Drawing.Point(105, 344);
-            this.labelTab3ViewListFilteredARM.Name = "labelTab3ViewListFilteredARM";
-            this.labelTab3ViewListFilteredARM.Size = new System.Drawing.Size(78, 19);
-            this.labelTab3ViewListFilteredARM.TabIndex = 19;
-            this.labelTab3ViewListFilteredARM.Text = "Text All PC";
-            this.labelTab3ViewListFilteredARM.Visible = false;
-            // 
-            // label26
-            // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(17, 344);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(82, 19);
-            this.label26.TabIndex = 18;
-            this.label26.Text = "ARM Count";
-            // 
-            // groupBox6
-            // 
-            this.groupBox6.Controls.Add(this.panelTab3ViewMonitor);
-            this.groupBox6.Controls.Add(this.panelTab3ViewStorage);
-            this.groupBox6.Controls.Add(this.panelTab3ViewRAM);
-            this.groupBox6.Controls.Add(this.panel4);
-            this.groupBox6.Controls.Add(this.panel3);
-            this.groupBox6.Controls.Add(this.panel2);
-            this.groupBox6.Controls.Add(this.panel1);
-            this.groupBox6.Location = new System.Drawing.Point(209, 12);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(451, 783);
-            this.groupBox6.TabIndex = 1;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "groupBox6";
-            // 
-            // panelTab3ViewMonitor
-            // 
-            this.panelTab3ViewMonitor.Controls.Add(this.label25);
-            this.panelTab3ViewMonitor.Controls.Add(this.labelTab3TitleMonitor);
-            this.panelTab3ViewMonitor.Location = new System.Drawing.Point(13, 513);
-            this.panelTab3ViewMonitor.Name = "panelTab3ViewMonitor";
-            this.panelTab3ViewMonitor.Size = new System.Drawing.Size(395, 106);
-            this.panelTab3ViewMonitor.TabIndex = 25;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(5, 5);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(52, 15);
-            this.label25.TabIndex = 9;
-            this.label25.Text = "Monitor";
-            // 
-            // labelTab3TitleMonitor
-            // 
-            this.labelTab3TitleMonitor.AutoSize = true;
-            this.labelTab3TitleMonitor.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3TitleMonitor.Location = new System.Drawing.Point(5, 25);
-            this.labelTab3TitleMonitor.Name = "labelTab3TitleMonitor";
-            this.labelTab3TitleMonitor.Size = new System.Drawing.Size(175, 15);
-            this.labelTab3TitleMonitor.TabIndex = 11;
-            this.labelTab3TitleMonitor.Text = "Model                   Manufacturer";
-            // 
-            // panelTab3ViewStorage
-            // 
-            this.panelTab3ViewStorage.Controls.Add(this.label20);
-            this.panelTab3ViewStorage.Controls.Add(this.labelTab3TitleStorage);
-            this.panelTab3ViewStorage.Location = new System.Drawing.Point(13, 401);
-            this.panelTab3ViewStorage.Name = "panelTab3ViewStorage";
-            this.panelTab3ViewStorage.Size = new System.Drawing.Size(395, 106);
-            this.panelTab3ViewStorage.TabIndex = 24;
-            this.panelTab3ViewStorage.LocationChanged += new System.EventHandler(this.panelTab3ViewStorage_LocationChanged);
-            this.panelTab3ViewStorage.SizeChanged += new System.EventHandler(this.panelTab3ViewStorage_SizeChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(5, 5);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(49, 15);
-            this.label20.TabIndex = 9;
-            this.label20.Text = "Storage";
-            // 
-            // labelTab3TitleStorage
-            // 
-            this.labelTab3TitleStorage.AutoSize = true;
-            this.labelTab3TitleStorage.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3TitleStorage.Location = new System.Drawing.Point(5, 25);
-            this.labelTab3TitleStorage.Name = "labelTab3TitleStorage";
-            this.labelTab3TitleStorage.Size = new System.Drawing.Size(330, 15);
-            this.labelTab3TitleStorage.TabIndex = 11;
-            this.labelTab3TitleStorage.Text = "Index  Type      Model                                                        Siz" +
-    "e,Gb.";
-            // 
-            // panelTab3ViewRAM
-            // 
-            this.panelTab3ViewRAM.Controls.Add(this.labelTab3ViewTotalSizeRAM);
-            this.panelTab3ViewRAM.Controls.Add(this.label17);
-            this.panelTab3ViewRAM.Controls.Add(this.label15);
-            this.panelTab3ViewRAM.Controls.Add(this.labelTab3TitleViewRAM);
-            this.panelTab3ViewRAM.Location = new System.Drawing.Point(13, 327);
-            this.panelTab3ViewRAM.Name = "panelTab3ViewRAM";
-            this.panelTab3ViewRAM.Size = new System.Drawing.Size(395, 68);
-            this.panelTab3ViewRAM.TabIndex = 24;
-            this.panelTab3ViewRAM.SizeChanged += new System.EventHandler(this.panelTab3ViewRAM_SizeChanged);
-            // 
-            // labelTab3ViewTotalSizeRAM
-            // 
-            this.labelTab3ViewTotalSizeRAM.AutoSize = true;
-            this.labelTab3ViewTotalSizeRAM.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewTotalSizeRAM.Location = new System.Drawing.Point(110, 25);
-            this.labelTab3ViewTotalSizeRAM.Name = "labelTab3ViewTotalSizeRAM";
-            this.labelTab3ViewTotalSizeRAM.Size = new System.Drawing.Size(55, 15);
-            this.labelTab3ViewTotalSizeRAM.TabIndex = 13;
-            this.labelTab3ViewTotalSizeRAM.Text = "Total, Gb";
-            this.labelTab3ViewTotalSizeRAM.Visible = false;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(5, 25);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(79, 15);
-            this.label17.TabIndex = 12;
-            this.label17.Text = "Total size, Gb";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(5, 5);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(33, 15);
-            this.label15.TabIndex = 9;
-            this.label15.Text = "RAM";
-            // 
-            // labelTab3TitleViewRAM
-            // 
-            this.labelTab3TitleViewRAM.AutoSize = true;
-            this.labelTab3TitleViewRAM.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3TitleViewRAM.Location = new System.Drawing.Point(5, 45);
-            this.labelTab3TitleViewRAM.Name = "labelTab3TitleViewRAM";
-            this.labelTab3TitleViewRAM.Size = new System.Drawing.Size(155, 15);
-            this.labelTab3TitleViewRAM.TabIndex = 11;
-            this.labelTab3TitleViewRAM.Text = "Slot    Size(GB)    SN number";
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.label13);
-            this.panel4.Controls.Add(this.labelTab3ViewModelCPU);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(13, 277);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(395, 44);
-            this.panel4.TabIndex = 23;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(5, 5);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(29, 15);
-            this.label13.TabIndex = 9;
-            this.label13.Text = "CPU";
-            // 
-            // labelTab3ViewModelCPU
-            // 
-            this.labelTab3ViewModelCPU.AutoSize = true;
-            this.labelTab3ViewModelCPU.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewModelCPU.Location = new System.Drawing.Point(110, 25);
-            this.labelTab3ViewModelCPU.Name = "labelTab3ViewModelCPU";
-            this.labelTab3ViewModelCPU.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewModelCPU.TabIndex = 10;
-            this.labelTab3ViewModelCPU.Text = "label5";
-            this.labelTab3ViewModelCPU.Visible = false;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 25);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(42, 15);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Model";
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.labelTab3ViewSNMainboard);
-            this.panel3.Controls.Add(this.label21);
-            this.panel3.Controls.Add(this.label6);
-            this.panel3.Controls.Add(this.labelTab3ViewModelMainBoard);
-            this.panel3.Controls.Add(this.label7);
-            this.panel3.Controls.Add(this.labelTab3ViewManufacturerMainBoard);
-            this.panel3.Controls.Add(this.label8);
-            this.panel3.Controls.Add(this.labelTab3ViewVersionBioslMainBoard);
-            this.panel3.Controls.Add(this.label10);
-            this.panel3.Location = new System.Drawing.Point(13, 184);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(395, 85);
-            this.panel3.TabIndex = 22;
-            // 
-            // labelTab3ViewSNMainboard
-            // 
-            this.labelTab3ViewSNMainboard.AutoSize = true;
-            this.labelTab3ViewSNMainboard.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewSNMainboard.Location = new System.Drawing.Point(116, 5);
-            this.labelTab3ViewSNMainboard.Name = "labelTab3ViewSNMainboard";
-            this.labelTab3ViewSNMainboard.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewSNMainboard.TabIndex = 10;
-            this.labelTab3ViewSNMainboard.Text = "label9";
-            this.labelTab3ViewSNMainboard.Visible = false;
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(89, 5);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(21, 15);
-            this.label21.TabIndex = 9;
-            this.label21.Text = "SN";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 5);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 15);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "MainBoard";
-            // 
-            // labelTab3ViewModelMainBoard
-            // 
-            this.labelTab3ViewModelMainBoard.AutoSize = true;
-            this.labelTab3ViewModelMainBoard.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewModelMainBoard.Location = new System.Drawing.Point(110, 45);
-            this.labelTab3ViewModelMainBoard.Name = "labelTab3ViewModelMainBoard";
-            this.labelTab3ViewModelMainBoard.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewModelMainBoard.TabIndex = 3;
-            this.labelTab3ViewModelMainBoard.Text = "label5";
-            this.labelTab3ViewModelMainBoard.Visible = false;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(5, 45);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 15);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Model";
-            // 
-            // labelTab3ViewManufacturerMainBoard
-            // 
-            this.labelTab3ViewManufacturerMainBoard.AutoSize = true;
-            this.labelTab3ViewManufacturerMainBoard.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewManufacturerMainBoard.Location = new System.Drawing.Point(110, 25);
-            this.labelTab3ViewManufacturerMainBoard.Name = "labelTab3ViewManufacturerMainBoard";
-            this.labelTab3ViewManufacturerMainBoard.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewManufacturerMainBoard.TabIndex = 5;
-            this.labelTab3ViewManufacturerMainBoard.Text = "label9";
-            this.labelTab3ViewManufacturerMainBoard.Visible = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(5, 25);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(83, 15);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Manufacturer";
-            // 
-            // labelTab3ViewVersionBioslMainBoard
-            // 
-            this.labelTab3ViewVersionBioslMainBoard.AutoSize = true;
-            this.labelTab3ViewVersionBioslMainBoard.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewVersionBioslMainBoard.Location = new System.Drawing.Point(110, 65);
-            this.labelTab3ViewVersionBioslMainBoard.Name = "labelTab3ViewVersionBioslMainBoard";
-            this.labelTab3ViewVersionBioslMainBoard.Size = new System.Drawing.Size(49, 15);
-            this.labelTab3ViewVersionBioslMainBoard.TabIndex = 7;
-            this.labelTab3ViewVersionBioslMainBoard.Text = "label13";
-            this.labelTab3ViewVersionBioslMainBoard.Visible = false;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(5, 65);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(77, 15);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "Version BIOS";
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.label4);
-            this.panel2.Controls.Add(this.labelTab3ViewPCName);
-            this.panel2.Location = new System.Drawing.Point(13, 19);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(395, 25);
-            this.panel2.TabIndex = 21;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(5, 10);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 15);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Computer Name:";
-            // 
-            // labelTab3ViewPCName
-            // 
-            this.labelTab3ViewPCName.AutoSize = true;
-            this.labelTab3ViewPCName.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewPCName.Location = new System.Drawing.Point(110, 10);
-            this.labelTab3ViewPCName.Name = "labelTab3ViewPCName";
-            this.labelTab3ViewPCName.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewPCName.TabIndex = 1;
-            this.labelTab3ViewPCName.Text = "label5";
-            this.labelTab3ViewPCName.Visible = false;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.label24);
-            this.panel1.Controls.Add(this.labelTab3ViewInstallDateOS);
-            this.panel1.Controls.Add(this.label18);
-            this.panel1.Controls.Add(this.label19);
-            this.panel1.Controls.Add(this.labelTab3ViewBuildOS);
-            this.panel1.Controls.Add(this.labelTab3ViewVersionOS);
-            this.panel1.Controls.Add(this.label9);
-            this.panel1.Controls.Add(this.labelTab3ViewPlatformOS);
-            this.panel1.Controls.Add(this.label16);
-            this.panel1.Location = new System.Drawing.Point(13, 57);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(395, 107);
-            this.panel1.TabIndex = 20;
-            // 
-            // label24
-            // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(5, 85);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(70, 15);
-            this.label24.TabIndex = 20;
-            this.label24.Text = "Install date";
-            // 
-            // labelTab3ViewInstallDateOS
-            // 
-            this.labelTab3ViewInstallDateOS.AutoSize = true;
-            this.labelTab3ViewInstallDateOS.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewInstallDateOS.Location = new System.Drawing.Point(110, 85);
-            this.labelTab3ViewInstallDateOS.Name = "labelTab3ViewInstallDateOS";
-            this.labelTab3ViewInstallDateOS.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewInstallDateOS.TabIndex = 19;
-            this.labelTab3ViewInstallDateOS.Text = "label9";
-            this.labelTab3ViewInstallDateOS.Visible = false;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(5, 5);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(105, 15);
-            this.label18.TabIndex = 12;
-            this.label18.Text = "Operating System";
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(5, 65);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(55, 15);
-            this.label19.TabIndex = 18;
-            this.label19.Text = "Platform";
-            // 
-            // labelTab3ViewBuildOS
-            // 
-            this.labelTab3ViewBuildOS.AutoSize = true;
-            this.labelTab3ViewBuildOS.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewBuildOS.Location = new System.Drawing.Point(110, 45);
-            this.labelTab3ViewBuildOS.Name = "labelTab3ViewBuildOS";
-            this.labelTab3ViewBuildOS.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewBuildOS.TabIndex = 15;
-            this.labelTab3ViewBuildOS.Text = "label9";
-            this.labelTab3ViewBuildOS.Visible = false;
-            // 
-            // labelTab3ViewVersionOS
-            // 
-            this.labelTab3ViewVersionOS.AutoSize = true;
-            this.labelTab3ViewVersionOS.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewVersionOS.Location = new System.Drawing.Point(110, 25);
-            this.labelTab3ViewVersionOS.Name = "labelTab3ViewVersionOS";
-            this.labelTab3ViewVersionOS.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewVersionOS.TabIndex = 13;
-            this.labelTab3ViewVersionOS.Text = "label5";
-            this.labelTab3ViewVersionOS.Visible = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(5, 45);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 15);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "Build";
-            // 
-            // labelTab3ViewPlatformOS
-            // 
-            this.labelTab3ViewPlatformOS.AutoSize = true;
-            this.labelTab3ViewPlatformOS.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTab3ViewPlatformOS.Location = new System.Drawing.Point(110, 65);
-            this.labelTab3ViewPlatformOS.Name = "labelTab3ViewPlatformOS";
-            this.labelTab3ViewPlatformOS.Size = new System.Drawing.Size(42, 15);
-            this.labelTab3ViewPlatformOS.TabIndex = 17;
-            this.labelTab3ViewPlatformOS.Text = "label9";
-            this.labelTab3ViewPlatformOS.Visible = false;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(5, 25);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(48, 15);
-            this.label16.TabIndex = 14;
-            this.label16.Text = "Version";
-            // 
-            // listBoxTab3FilteredPCNames
-            // 
-            this.listBoxTab3FilteredPCNames.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxTab3FilteredPCNames.FormattingEnabled = true;
-            this.listBoxTab3FilteredPCNames.ItemHeight = 19;
-            this.listBoxTab3FilteredPCNames.Location = new System.Drawing.Point(14, 12);
-            this.listBoxTab3FilteredPCNames.Name = "listBoxTab3FilteredPCNames";
-            this.listBoxTab3FilteredPCNames.Size = new System.Drawing.Size(189, 327);
-            this.listBoxTab3FilteredPCNames.TabIndex = 0;
-            this.listBoxTab3FilteredPCNames.SelectedIndexChanged += new System.EventHandler(this.listBoxTab3FilteredPCNames_SelectedIndexChanged);
-            // 
             // tabPage6
             // 
+            this.tabPage6.Controls.Add(this.button_DeletePreviosARM);
+            this.tabPage6.Controls.Add(this.button_DelAllOldPC);
+            this.tabPage6.Controls.Add(this.listViewPCSameMB);
             this.tabPage6.Controls.Add(this.listBoxTab5ListManufacturer);
             this.tabPage6.Controls.Add(this.buttonTab4GetMainBoardMAC);
             this.tabPage6.Controls.Add(this.buttonTab4GetMainBoardWithSameSN);
-            this.tabPage6.Controls.Add(this.listBoxTab5ListSerail);
             this.tabPage6.Controls.Add(this.buttonTab4GetPC);
             this.tabPage6.Location = new System.Drawing.Point(4, 22);
             this.tabPage6.Name = "tabPage6";
@@ -3152,11 +2994,53 @@
             this.tabPage6.TabIndex = 3;
             this.tabPage6.Text = "Servide tab";
             this.tabPage6.UseVisualStyleBackColor = true;
+            this.tabPage6.Enter += new System.EventHandler(this.tabPage6_Enter);
+            // 
+            // button_DeletePreviosARM
+            // 
+            this.button_DeletePreviosARM.Location = new System.Drawing.Point(184, 352);
+            this.button_DeletePreviosARM.Name = "button_DeletePreviosARM";
+            this.button_DeletePreviosARM.Size = new System.Drawing.Size(204, 37);
+            this.button_DeletePreviosARM.TabIndex = 77;
+            this.button_DeletePreviosARM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button_DeletePreviosARM.UseVisualStyleBackColor = true;
+            this.button_DeletePreviosARM.Visible = false;
+            this.button_DeletePreviosARM.Click += new System.EventHandler(this.button_DeletePreviosARM_Click);
+            // 
+            // button_DelAllOldPC
+            // 
+            this.button_DelAllOldPC.Location = new System.Drawing.Point(394, 84);
+            this.button_DelAllOldPC.Name = "button_DelAllOldPC";
+            this.button_DelAllOldPC.Size = new System.Drawing.Size(198, 58);
+            this.button_DelAllOldPC.TabIndex = 76;
+            this.button_DelAllOldPC.Text = "remove old pc";
+            this.button_DelAllOldPC.UseVisualStyleBackColor = true;
+            this.button_DelAllOldPC.Click += new System.EventHandler(this.button_DelAllOldPC_Click);
+            // 
+            // listViewPCSameMB
+            // 
+            this.listViewPCSameMB.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1});
+            this.listViewPCSameMB.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listViewPCSameMB.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.listViewPCSameMB.HideSelection = false;
+            this.listViewPCSameMB.Location = new System.Drawing.Point(184, 15);
+            this.listViewPCSameMB.MultiSelect = false;
+            this.listViewPCSameMB.Name = "listViewPCSameMB";
+            this.listViewPCSameMB.Size = new System.Drawing.Size(204, 331);
+            this.listViewPCSameMB.TabIndex = 75;
+            this.listViewPCSameMB.UseCompatibleStateImageBehavior = false;
+            this.listViewPCSameMB.View = System.Windows.Forms.View.Details;
+            this.listViewPCSameMB.SelectedIndexChanged += new System.EventHandler(this.listViewPCSameMB_SelectedIndexChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Width = 200;
             // 
             // listBoxTab5ListManufacturer
             // 
             this.listBoxTab5ListManufacturer.FormattingEnabled = true;
-            this.listBoxTab5ListManufacturer.Location = new System.Drawing.Point(184, 399);
+            this.listBoxTab5ListManufacturer.Location = new System.Drawing.Point(184, 459);
             this.listBoxTab5ListManufacturer.Name = "listBoxTab5ListManufacturer";
             this.listBoxTab5ListManufacturer.Size = new System.Drawing.Size(204, 173);
             this.listBoxTab5ListManufacturer.TabIndex = 5;
@@ -3164,7 +3048,7 @@
             // 
             // buttonTab4GetMainBoardMAC
             // 
-            this.buttonTab4GetMainBoardMAC.Location = new System.Drawing.Point(15, 115);
+            this.buttonTab4GetMainBoardMAC.Location = new System.Drawing.Point(15, 228);
             this.buttonTab4GetMainBoardMAC.Name = "buttonTab4GetMainBoardMAC";
             this.buttonTab4GetMainBoardMAC.Size = new System.Drawing.Size(162, 44);
             this.buttonTab4GetMainBoardMAC.TabIndex = 4;
@@ -3181,15 +3065,6 @@
             this.buttonTab4GetMainBoardWithSameSN.Text = "Get MainBoard with same SN";
             this.buttonTab4GetMainBoardWithSameSN.UseVisualStyleBackColor = true;
             this.buttonTab4GetMainBoardWithSameSN.Click += new System.EventHandler(this.buttonTab4GetMainBoardWithSameSN_Click);
-            // 
-            // listBoxTab5ListSerail
-            // 
-            this.listBoxTab5ListSerail.FormattingEnabled = true;
-            this.listBoxTab5ListSerail.Location = new System.Drawing.Point(184, 15);
-            this.listBoxTab5ListSerail.Name = "listBoxTab5ListSerail";
-            this.listBoxTab5ListSerail.Size = new System.Drawing.Size(204, 342);
-            this.listBoxTab5ListSerail.TabIndex = 2;
-            this.listBoxTab5ListSerail.SelectedIndexChanged += new System.EventHandler(this.listBoxTab5ListSerail_SelectedIndexChanged);
             // 
             // buttonTab4GetPC
             // 
@@ -3241,9 +3116,15 @@
             this.tabControl2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            this.groupBoxViewCountPC.ResumeLayout(false);
+            this.groupBoxViewCountPC.PerformLayout();
             this.groupBoxPingRMS.ResumeLayout(false);
             this.groupBoxPingRMS.PerformLayout();
             this.tabPage4.ResumeLayout(false);
+            this.groupSMonitor.ResumeLayout(false);
+            this.groupSMonitor.PerformLayout();
+            this.groupBox9.ResumeLayout(false);
+            this.groupBox9.PerformLayout();
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgShowMonitors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgShowMainBoard)).EndInit();
@@ -3265,7 +3146,6 @@
             this.tabPage5.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
-            this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
@@ -3282,23 +3162,10 @@
             this.groupBox2.PerformLayout();
             this.groupBoxsearchbyCPU.ResumeLayout(false);
             this.groupBoxsearchbyCPU.PerformLayout();
+            this.groupBox10.ResumeLayout(false);
+            this.groupBox10.PerformLayout();
             this.groupBox8.ResumeLayout(false);
             this.groupBox8.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.panelTab3ViewMonitor.ResumeLayout(false);
-            this.panelTab3ViewMonitor.PerformLayout();
-            this.panelTab3ViewStorage.ResumeLayout(false);
-            this.panelTab3ViewStorage.PerformLayout();
-            this.panelTab3ViewRAM.ResumeLayout(false);
-            this.panelTab3ViewRAM.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.tabPage6.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -3349,7 +3216,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.Button butGetPC;
-        private System.Windows.Forms.ListBox listPC1;
         private System.Windows.Forms.Label labelAll;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button butShowFilteredPC;
@@ -3390,7 +3256,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SizeDisc;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsSSD;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.ListBox listFilteredPC;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.GroupBox groupNamePC;
         private System.Windows.Forms.Label labelTab2ShowOSBIT;
@@ -3435,45 +3300,9 @@
         private System.Windows.Forms.Button buttonOnOFFCheckSSD;
         private System.Windows.Forms.ComboBox comboBoxTab3ListSizeSSD;
         private System.Windows.Forms.RadioButton radioButtonSizeSSD;
-        private System.Windows.Forms.ListBox listBoxTab3FilteredPCNames;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label labelTab3ViewPCName;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.Label labelTab3ViewPlatformOS;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label labelTab3ViewBuildOS;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label labelTab3ViewVersionOS;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label labelTab3ViewModelCPU;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label labelTab3ViewVersionBioslMainBoard;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label labelTab3ViewManufacturerMainBoard;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label labelTab3ViewModelMainBoard;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panelTab3ViewRAM;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Label labelTab3TitleViewRAM;
-        private System.Windows.Forms.Label labelTab3ViewTotalSizeRAM;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Panel panelTab3ViewStorage;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.Label labelTab3TitleStorage;
         private System.Windows.Forms.TabPage tabPage6;
         private System.Windows.Forms.Button buttonTab4GetPC;
         private System.Windows.Forms.Button buttonTab4GetMainBoardWithSameSN;
-        private System.Windows.Forms.ListBox listBoxTab5ListSerail;
-        private System.Windows.Forms.Label labelTab3ViewSNMainboard;
-        private System.Windows.Forms.Label label21;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.CheckBox checkBoxTab3SearchByOS;
         private System.Windows.Forms.Button buttonSelectBitOS;
@@ -3489,15 +3318,8 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label labelTab2ShowOSInstallDate;
         private System.Windows.Forms.Label labelTab2ShowDateCollectedInfo;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.Label labelTab3ViewInstallDateOS;
-        private System.Windows.Forms.Label labelTab3ViewListFilteredARM;
-        private System.Windows.Forms.Label label26;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.DataGridView dgShowMonitors;
-        private System.Windows.Forms.Panel panelTab3ViewMonitor;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label labelTab3TitleMonitor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Manufacturer1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Model1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Size1;
@@ -3537,8 +3359,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label labelOnline;
-        private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label labelIP;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button buttonTestOnlinePC;
@@ -3551,6 +3371,43 @@
         private System.Windows.Forms.RadioButton radioButtonRMSRemoteTerminal;
         private System.Windows.Forms.RadioButton radioButtonRMSFileTransfer;
         private System.Windows.Forms.RadioButton radioButtonRMSRemoteControle;
+        private System.Windows.Forms.ListView listViewPC1;
+        private System.Windows.Forms.ColumnHeader PC;
+        private System.Windows.Forms.Button buttonTestListPCOnlone;
+        private System.Windows.Forms.Button buttonViewOffline;
+        private System.Windows.Forms.Button buttonViewOnline;
+        private System.Windows.Forms.Button buttonViewOFFandON;
+        private System.Windows.Forms.ListView listViewSortedPC1;
+        private System.Windows.Forms.ColumnHeader namepc;
+        private System.Windows.Forms.ListView listViewSortedPC2;
+        private System.Windows.Forms.ColumnHeader pcname;
+        private System.Windows.Forms.GroupBox groupBoxViewCountPC;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label labelTextOfflinePC;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label labelTextOnlinePC;
+        private System.Windows.Forms.GroupBox groupBox9;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label labelTextOfflinePC2;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label labelTextOnlinePC2;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.Label labelTextAllPC2;
+        private System.Windows.Forms.GroupBox groupBox10;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label labelTextOfflinePC3;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label labelTextOnlinePC3;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label labelTextAllPC3;
+        private System.Windows.Forms.ListView listViewPCSameMB;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.Button button_DelAllOldPC;
+        private System.Windows.Forms.Button button_DeletePreviosARM;
+        private System.Windows.Forms.Button button_LoadToXLSX;
+        private System.Windows.Forms.Button button_DelOutdateData;
+        private System.Windows.Forms.GroupBox groupSMonitor;
+        private System.Windows.Forms.Label labelTab2ShowMonitorTitle;
     }
 }
 

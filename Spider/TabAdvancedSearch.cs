@@ -179,21 +179,29 @@ namespace Spider
 
         private void buttonAdvancedSearch_Click(object sender, EventArgs e)
         {
-            this.listBoxTab3FilteredPCNames.Items.Clear();
+            this.tmplistView.Items.Clear();
+            this.tmpdicpcstatus.Clear();
 
             if (filtercomputer != null)
             {
                 bool flag = true;
                 filteredComputers = dicPC.Where(x => (flag = true) == true && filtercomputer(x.Value, ref flag)).ToDictionary(x => x.Key, x => x.Value);
-                this.listBoxTab3FilteredPCNames.Items.AddRange(filteredComputers.Keys.ToArray());
-                this.labelTab3ViewListFilteredARM.Text = filteredComputers.Count().ToString();
+                foreach  (string pcname in filteredComputers.Keys)
+                {
+                    this.tmplistView.Items.Add(pcname);
+                    this.tmpdicpcstatus.Add(pcname, new PCstatus(String.Empty, String.Empty, OnlineState.Undefined));
+                }
+                //this.labelTab3ViewListFilteredARM.Text = filteredComputers.Count().ToString();
             }
             else
             {
-                this.labelTab3ViewListFilteredARM.Text = "";
+                //this.labelTab3ViewListFilteredARM.Text = "";
                 MessageBox.Show("Not filter SET");
             }
-            this.labelTab3ViewListFilteredARM.Visible = true;
+            this.tmplabelAllPC.Text = this.tmpdicpcstatus.Count.ToString();
+            this.tmplabelAllPC.Visible = true;
+            this.tmplabelOnlinePC.Visible = false;
+            this.tmplabelOfflinePC.Visible = false;
         }
 
         private void comboBoxTab3ListCPU_SelectedIndexChanged(object sender, EventArgs e)
@@ -532,17 +540,17 @@ namespace Spider
 
         private void panelTab3ViewRAM_SizeChanged(object sender, EventArgs e)
         {
-            RelocationPanel(this.panelTab3ViewRAM, this.panelTab3ViewStorage);
+            //RelocationPanel(this.panelTab3ViewRAM, this.panelTab3ViewStorage);
         }
 
         private void panelTab3ViewStorage_SizeChanged(object sender, EventArgs e)
         {
-            RelocationPanel(this.panelTab3ViewStorage, this.panelTab3ViewMonitor);
+            //RelocationPanel(this.panelTab3ViewStorage, this.panelTab3ViewMonitor);
         }
 
         private void panelTab3ViewStorage_LocationChanged(object sender, EventArgs e)
         {
-            RelocationPanel(this.panelTab3ViewStorage, this.panelTab3ViewMonitor);
+            //RelocationPanel(this.panelTab3ViewStorage, this.panelTab3ViewMonitor);
         }
 
 
@@ -854,53 +862,70 @@ namespace Spider
         #endregion
 
 
-        private void listBoxTab3FilteredPCNames_SelectedIndexChanged(object sender, EventArgs e)
+        private void listViewlistViewSortedPC2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listBoxTab3FilteredPCNames.SelectedIndex != -1)
+            if (this.tmplistView.SelectedItems.Count >0 )
             {
-                this.FilteredPC = this.filteredComputers?[this.listBoxTab3FilteredPCNames.SelectedItem.ToString()];
-                this.labelTab3ViewPCName.Text = this.FilteredPC.Name;
-                this.labelTab3ViewVersionOS.Text = this.FilteredPC.OS.ProductName;
-                this.labelTab3ViewBuildOS.Text = this.FilteredPC.OS.Build;
-                this.labelTab3ViewPlatformOS.Text = this.FilteredPC.OS.IsX64 ? "x64" : "x86";
-                this.labelTab3ViewInstallDateOS.Text = $"{this.FilteredPC.OS.InstallDate.Year}" +
-                                                       $"-{this.FilteredPC.OS.InstallDate.Month}" +
-                                                       $"-{this.FilteredPC.OS.InstallDate.Day}";
-                this.labelTab3ViewModelMainBoard.Text = this.FilteredPC.MainBoard.Product;
-                this.labelTab3ViewSNMainboard.Text = this.FilteredPC.MainBoard.SerialNumber;
-                this.labelTab3ViewManufacturerMainBoard.Text = this.FilteredPC.MainBoard.Manufacturer;
-                this.labelTab3ViewVersionBioslMainBoard.Text = this.FilteredPC.MainBoard.SMBIOSBIOSVersion;
-                if (this.FilteredPC.CPU.Name.Contains("Intel") || this.FilteredPC.CPU.Name.Contains("Pentium"))
-                    this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Blue;
+                ShowComputer2(this.tmplistView);
+                //this.FilteredPC = this.filteredComputers?[this.tmplistView.SelectedItems[0].Text];
+                //this.labelTab3ViewPCName.Text = this.FilteredPC.Name;
+                //this.labelTab3ViewVersionOS.Text = this.FilteredPC.OS.ProductName;
+                //this.labelTab3ViewBuildOS.Text = this.FilteredPC.OS.Build;
+                //this.labelTab3ViewPlatformOS.Text = this.FilteredPC.OS.IsX64 ? "x64" : "x86";
+                //this.labelTab3ViewInstallDateOS.Text = $"{this.FilteredPC.OS.InstallDate.Year}" +
+                //                                       $"-{this.FilteredPC.OS.InstallDate.Month}" +
+                //                                       $"-{this.FilteredPC.OS.InstallDate.Day}";
+                //this.labelTab3ViewModelMainBoard.Text = this.FilteredPC.MainBoard.Product;
+                //this.labelTab3ViewSNMainboard.Text = this.FilteredPC.MainBoard.SerialNumber;
+                //this.labelTab3ViewManufacturerMainBoard.Text = this.FilteredPC.MainBoard.Manufacturer;
+                //this.labelTab3ViewVersionBioslMainBoard.Text = this.FilteredPC.MainBoard.SMBIOSBIOSVersion;
+                //if (this.FilteredPC.CPU.Name.Contains("Intel") || this.FilteredPC.CPU.Name.Contains("Pentium"))
+                //    this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Blue;
+                //else
+                //    this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Red;
+                //this.labelTab3ViewModelCPU.Text = this.FilteredPC.CPU.Name;
+                //this.labelTab3ViewTotalSizeRAM.Text = this.FilteredPC.Memory.Sum(x => x.Capacity).ToString();
+                //int count = this.FilteredPC.Memory.Count;
+                //this.panelTab3ViewRAM.Size = new System.Drawing.Size(395, 85);
+                //ResizePanel(this.panelTab3ViewRAM, count);
+
+                //ViewRAM(this.FilteredPC.Memory, this.panelTab3ViewRAM, this.labelTab3TitleViewRAM);
+                //ViewListDisk(this.FilteredPC.Storage, this.panelTab3ViewStorage, this.labelTab3TitleStorage);
+                //ViewMonitor(this.FilteredPC.Monitors, this.panelTab3ViewMonitor, this.labelTab3TitleMonitor);
+
+
+                //this.labelTab3ViewPCName.Visible = true;
+                //this.labelTab3ViewVersionOS.Visible = true;
+                //this.labelTab3ViewBuildOS.Visible = true;
+                //this.labelTab3ViewPlatformOS.Visible = true;
+                //this.labelTab3ViewModelMainBoard.Visible = true;
+                //this.labelTab3ViewManufacturerMainBoard.Visible = true;
+                //this.labelTab3ViewVersionBioslMainBoard.Visible = true;
+                //this.labelTab3ViewModelCPU.Visible = true;
+                //this.labelTab3ViewTotalSizeRAM.Visible = true;
+                //this.labelTab3ViewSNMainboard.Visible = true;
+                //this.labelTab3ViewInstallDateOS.Visible = true;
+
+
+                if ((this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus == OnlineState.Online) | (this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus == OnlineState.Offline))
+                {
+                    this.labelDNSname.Text = this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].DNSName;
+                    this.labelIP.Text = this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].IP;
+                    this.labelDNSname.Visible = true;
+                    this.labelIP.Visible = true;
+                }
+                if (this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus == OnlineState.Online)
+                {
+
+                    EnableRMS();
+                }
                 else
-                    this.labelTab3ViewModelCPU.ForeColor = System.Drawing.Color.Red;
-                this.labelTab3ViewModelCPU.Text = this.FilteredPC.CPU.Name;
-                this.labelTab3ViewTotalSizeRAM.Text = this.FilteredPC.Memory.Sum(x => x.Capacity).ToString();
-                int count = this.FilteredPC.Memory.Count;
-                this.panelTab3ViewRAM.Size = new System.Drawing.Size(395, 85);
-                ResizePanel(this.panelTab3ViewRAM, count);
+                {
 
-                ViewRAM(this.FilteredPC.Memory, this.panelTab3ViewRAM, this.labelTab3TitleViewRAM);
-                ViewListDisk(this.FilteredPC.Storage, this.panelTab3ViewStorage, this.labelTab3TitleStorage);
-                ViewMonitor(this.FilteredPC.Monitors, this.panelTab3ViewMonitor, this.labelTab3TitleMonitor);
+                    DisableRMS(this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus);
+                }
 
 
-
-
-
-
-
-                this.labelTab3ViewPCName.Visible = true;
-                this.labelTab3ViewVersionOS.Visible = true;
-                this.labelTab3ViewBuildOS.Visible = true;
-                this.labelTab3ViewPlatformOS.Visible = true;
-                this.labelTab3ViewModelMainBoard.Visible = true;
-                this.labelTab3ViewManufacturerMainBoard.Visible = true;
-                this.labelTab3ViewVersionBioslMainBoard.Visible = true;
-                this.labelTab3ViewModelCPU.Visible = true;
-                this.labelTab3ViewTotalSizeRAM.Visible = true;
-                this.labelTab3ViewSNMainboard.Visible = true;
-                this.labelTab3ViewInstallDateOS.Visible = true;
 
             }
         }

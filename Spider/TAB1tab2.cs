@@ -70,11 +70,7 @@ namespace Spider
                 this.dgShowMonitors.Rows.Add(item.Manufacturer, item.Model, item.Size, item.Resolution, item.Count);
             }
             this.dgShowMonitors.ClearSelection();
-
-
-
-
-            this.listFilteredPC.Items.Clear();
+            this.tmplistView.Items.Clear();
 
 
 
@@ -96,8 +92,8 @@ namespace Spider
                 };
                 ShowPCtoList(dicPC, os);
             }
-
         }
+
         private void dgShowMonitors_SelectionChanged(object sender, EventArgs e)
         {
             foreach (DataGridViewRow row in dgShowMonitors.SelectedRows)
@@ -115,7 +111,6 @@ namespace Spider
                 ShowPCtoList(dicPC, monitor);
                 }
             }
-
         }
 
         private void dgShowMainBoard_SelectionChanged(object sender, EventArgs e)
@@ -131,7 +126,6 @@ namespace Spider
                 };
                 ShowPCtoList(dicPC, mb);
             }
-
         }
 
         private void dgShowStorages_SelectionChanged(object sender, EventArgs e)
@@ -147,7 +141,6 @@ namespace Spider
                 };
                 ShowPCtoList(dicPC, disc);
             }
-
         }
 
         private void dgShowCPU_SelectionChanged(object sender, EventArgs e)
@@ -167,7 +160,9 @@ namespace Spider
 
         private void ShowPCtoList<T>(SortedDictionary<string, ComputerInfo> dicComputers, T pattern) where T : new()
         {
-            this.listFilteredPC.Items.Clear();
+            
+            this.tmplistView.Items.Clear();
+            this.tmpdicpcstatus.Clear();
             Type t = dicComputers.First().Value.GetType();
             PropertyInfo[] members = t.GetProperties(BindingFlags.Public | BindingFlags.Instance);
             foreach (PropertyInfo memberInfo in members)
@@ -180,7 +175,10 @@ namespace Spider
                             if (ositem is IIsSame) {
                                 if ((ositem as IIsSame).IsSame(pattern))
                                 {
-                                    this.listFilteredPC.Items.Add(item.Key);
+                                    
+                                    this.tmplistView.Items.Add(item.Key);
+                                    this.tmpdicpcstatus.Add(item.Key, new PCstatus(string.Empty, string.Empty, OnlineState.Undefined));                                   
+
                                 }
                             }                        
                         }                       
@@ -195,23 +193,30 @@ namespace Spider
                         {
                             if ((obj as IIsSame).IsSame(pattern))
                             {
-                                this.listFilteredPC.Items.Add(item.Key);
+                                
+                                this.tmplistView.Items.Add(item.Key);
+                                this.tmpdicpcstatus.Add(item.Key, new PCstatus(string.Empty, string.Empty, OnlineState.Undefined));
                             }
                         }
                     }
                 }
             }
+
+            this.tmplabelAllPC.Text = this.tmpdicpcstatus.Count().ToString();
+            this.tmplabelAllPC.Visible = true;
+            this.tmplabelOnlinePC.Visible = false;
+            this.tmplabelOfflinePC.Visible = false;
         }
 
-        private void listFilteredPC_SelectedIndexChanged(object sender, EventArgs e)
+        
+
+
+
+        private void ShowComputer2(ListView listView)
         {
-            ShowComputer(this.listFilteredPC);            
-        }
-
-        private void ShowComputer(ListBox listBox) {
-            if (listBox.SelectedIndex != -1)
+            if (listView.SelectedItems.Count > 0)
             {
-                this.pc = dicPC[listBox.SelectedItem.ToString()]; // .GetItemText(this.listPC1.SelectedItem)];
+                this.pc = dicPC[listView.SelectedItems[0].Text]; // .GetItemText(this.listPC1.SelectedItem)];
                 ////this.dataGridView1.DataSource = this.apps;
                 this.labelTab2ShowNamePC.Text = pc.Name;
                 this.labelTab2ShowDateCollectedInfo.Text = pc.DateCollectedInfo.ToString();
@@ -235,6 +240,7 @@ namespace Spider
                 this.labelTab2ShowRAMTotal.Text = $"Total: {pc.Memory.Sum(x => x.Capacity)} GB.";
                 ViewRAM(pc.Memory, this.groupRAM, this.labelTab2ShowRAMtitle);
                 ViewListDisk(pc.Storage, this.groupSTorage, this.labelTab2ShowStorageTitle);
+                ViewMonitor(pc.Monitors, this.groupSMonitor, this.labelTab2ShowMonitorTitle);
 
                 this.labelTab2ShowOSBIT.Visible = true;
                 this.labelTab2ShowDateCollectedInfo.Visible = true;

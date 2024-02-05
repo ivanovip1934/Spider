@@ -31,38 +31,102 @@ namespace Spider
             showPC = new HWInfoGeneral();
             dicPC = showPC.GetDicPC();
 
-            this.listPC1.Items.Clear();
-            this.listPC1.Items.AddRange(dicPC.Select(x => x.Key).ToArray());
-            this.labelTextAllPC.Text = listPC1.Items.Count.ToString();
-            this.labelTextAllPC.Visible = true;
+            string[] query = dicPC.Select(x => x.Key).ToArray();
+            ShowPC(query);
+
+
+            //this.listPC1.Items.Clear();
+            //this.listPC1.Items.AddRange(dicPC.Select(x => x.Key).ToArray());
+            //this.labelTextAllPC.Text = listPC1.Items.Count.ToString();
+            //this.labelTextAllPC.Visible = true;
+
+            //this.listViewPC1.Items.Clear();
+            //foreach (KeyValuePair<string, ComputerInfo> kvp in dicPC) { 
+            
+            ////this.listViewPC1.Items.Add(kvp.Key);
+            //}
         }
         private void listPC1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            ShowComputer(this.listPC1);
-            if (this.listPC1.SelectedIndex != -1)
+            //ShowComputer(this.listPC1);
+            //if (this.listPC1.SelectedIndex != -1)
+            //{
+            //    this.pc = dicPC[this.listPC1.SelectedItem.ToString()]; // .GetItemText(this.listPC1.SelectedItem)];                
+            //    PartitionInfo systempart = pc.Partitions.FirstOrDefault(x => x.IsSystem == true);
+            //    int MaxValue = systempart.FullSize;
+            //    int Value = systempart.AvailableFreeSpace;                
+            //    this.progressBar1.Maximum = MaxValue;
+            //    this.progressBar1.Value = MaxValue - Value;
+            //    this.progressBar1.Step = 0;
+            //    if (Value < 10) {                    
+            //        this.progressBar1.ColorBar = Brushes.Red;                    
+            //    }else if (Value >= 10)
+            //    {
+            //       this.progressBar1.ColorBar = Brushes.Lime;
+            //    }
+            //    this.progressBar1.PerformStep();
+            //    this.labelTextTotalSize.Text = $"{MaxValue} Gb.";       
+            //    this.labelTextFreeSpace.Text = $"{Value} Gb.";
+            //    this.labelViewModelStorage.Text = $"{this.pc.Storage.FirstOrDefault(x=>x.Index == systempart.IndexDisc)?.Model}";
+            //    this.labelTextTotalSize.Visible = true;
+            //    this.labelTextFreeSpace.Visible = true;                
+            //    this.labelTab2ShowNamePC.Visible = true;                
+            //    this.labelViewModelStorage.Visible = true;
+            //    DisableRMS();
+            //}
+
+        }
+
+        private void listViewPC1_SelectedIndexChanged(object sender, EventArgs e) {
+
+            ShowComputer2(this.tmplistView);
+            if (this.tmplistView.SelectedItems.Count> 0)
             {
-                this.pc = dicPC[this.listPC1.SelectedItem.ToString()]; // .GetItemText(this.listPC1.SelectedItem)];                
+            //    var2 = lst.Items.IndexOf(lst.SelectedItems[0]);
+            //}
+            //if (this.listViewPC1.Se != -1)
+            //{
+                //this.pc = dicPC[this.listPC1.SelectedItem.ToString()];
+                this.pc = dicPC[this.tmplistView.SelectedItems[0].Text];// .GetItemText(this.listPC1.SelectedItem)];                
                 PartitionInfo systempart = pc.Partitions.FirstOrDefault(x => x.IsSystem == true);
                 int MaxValue = systempart.FullSize;
-                int Value = systempart.AvailableFreeSpace;                
+                int Value = systempart.AvailableFreeSpace;
                 this.progressBar1.Maximum = MaxValue;
                 this.progressBar1.Value = MaxValue - Value;
                 this.progressBar1.Step = 0;
-                if (Value < 10) {                    
-                    this.progressBar1.ColorBar = Brushes.Red;                    
-                }else if (Value >= 10)
+                if (Value < 10)
                 {
-                   this.progressBar1.ColorBar = Brushes.Lime;
+                    this.progressBar1.ColorBar = Brushes.Red;
+                }
+                else if (Value >= 10)
+                {
+                    this.progressBar1.ColorBar = Brushes.Lime;
                 }
                 this.progressBar1.PerformStep();
-                this.labelTextTotalSize.Text = $"{MaxValue} Gb.";       
+                this.labelTextTotalSize.Text = $"{MaxValue} Gb.";
                 this.labelTextFreeSpace.Text = $"{Value} Gb.";
-                this.labelViewModelStorage.Text = $"{this.pc.Storage.FirstOrDefault(x=>x.Index == systempart.IndexDisc)?.Model}";
+                this.labelViewModelStorage.Text = $"{this.pc.Storage.FirstOrDefault(x => x.Index == systempart.IndexDisc)?.Model}";
                 this.labelTextTotalSize.Visible = true;
-                this.labelTextFreeSpace.Visible = true;                
-                this.labelTab2ShowNamePC.Visible = true;                
+                this.labelTextFreeSpace.Visible = true;
+                this.labelTab2ShowNamePC.Visible = true;
                 this.labelViewModelStorage.Visible = true;
-                DisableRMS();
+
+                if ((this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus == OnlineState.Online) | (this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus == OnlineState.Offline))
+                {
+                    this.labelDNSname.Text = this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].DNSName;
+                    this.labelIP.Text = this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].IP;
+                    this.labelDNSname.Visible = true;
+                    this.labelIP.Visible = true;
+                }                
+                if (this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus == OnlineState.Online)
+                {
+
+                    EnableRMS();
+                }
+                else {
+
+                    DisableRMS(this.tmpdicpcstatus[this.tmplistView.SelectedItems[0].Text].OnlineStatus);
+                }                
             }
 
         }
@@ -74,20 +138,47 @@ namespace Spider
             Regex rgx = new Regex(pattern, RegexOptions.IgnoreCase);
 
             string[] query = dicPC.Where(x => rgx.IsMatch(x.Value.CPU.Name)).Where(x=>(x.Value.Storage.Any(y=>y.IsSSD == true)) == flag).Select(x => x.Key).ToArray();
-            this.listPC1.Items.Clear();
-            this.listPC1.Items.AddRange(query);
-            this.labelTextAllPC.Text = query.Length.ToString();
-            this.labelTextAllPC.Visible = true;
+            ShowPC(query);
+
+            //this.listPC1.Items.Clear();
+            //this.listPC1.Items.AddRange(query);
+            //this.listViewPC1.Items.Clear();
+            //foreach  (string _pcname in query)
+            //{
+            //    this.listViewPC1.Items.Add(_pcname);
+            //}
+            //this.labelTextAllPC.Text = query.Length.ToString();
+            //this.labelTextAllPC.Visible = true;
 
         }
 
         private void buttonSizeDiscSless10G_Click(object sender, EventArgs e)
         {
             string[] query = dicPC.Where(x => x.Value.Partitions.FirstOrDefault(y=>y.IsSystem == true ).AvailableFreeSpace < 10 ).Select(x => x.Key).ToArray();
-            this.listPC1.Items.Clear();
-            this.listPC1.Items.AddRange(query);
-            this.labelTextAllPC.Text = query.Length.ToString();
-            this.labelTextAllPC.Visible = true;            
+            ShowPC(query);
+        }
+
+        private void ShowPC( string[] arrpcname ) {
+
+            
+            this.listViewPC1.Items.Clear();
+            foreach (string _pcname in arrpcname)
+            {
+                this.listViewPC1.Items.Add(_pcname);
+            }
+            this.tmplabelAllPC.Text = arrpcname.Length.ToString();
+            this.tmplabelAllPC.Visible = true;
+            this.tmplabelOnlinePC.Visible = false;
+            this.tmplabelOfflinePC.Visible = false;
+            this.buttonViewOnline.Enabled = false;
+            this.buttonViewOffline.Enabled = false;
+            this.tmpdicpcstatus.Clear();   
+
+            foreach (string pcname in arrpcname)
+            {
+                this.tmpdicpcstatus.Add(pcname, new PCstatus(string.Empty, string.Empty, OnlineState.Undefined));
+            }
+
         }
 
         private void ViewRAM(List<RAMInfo> memoryinfos, Control tabPage, Label label) {
@@ -140,7 +231,7 @@ namespace Spider
             int shift = 20;
 
            
-            string typeStorage = String.Empty; // SSD or HDD
+            // string typeStorage = String.Empty; // SSD or HDD
             discinfos.Sort();
             foreach (DiskInfo discinfo in discinfos)
             {
@@ -180,6 +271,14 @@ namespace Spider
 
         private void ViewMonitor(List<MonitorInfo> monitorinfos, Control tabPage, Label label)
         {
+            string manufacturer = String.Empty;
+            string model = String.Empty;
+            string trueresolution = String.Empty;
+            string panelsize = String.Empty;
+            string tmpstr = String.Empty;
+            int sizemanufacturer = 0;
+            int sizemodel = 0;
+            
             if (this.ArrlabelMonitorView != null)
             {
                 for (int k = 0; k < this.ArrlabelMonitorView.Length; k++)
@@ -194,6 +293,15 @@ namespace Spider
             int b = 20;
             foreach (MonitorInfo monitorinfo in monitorinfos)
             {
+                
+                manufacturer = string.Concat(monitorinfo.Manufacturer, new string(' ', 20 - monitorinfo.Manufacturer.ToString().Length) );
+                sizemanufacturer = manufacturer.Length;                
+                model = monitorinfo.Model is null? "--": monitorinfo.Model;
+                model =  model.Length >15?  model :  string.Concat(model, new string(' ', 15 - model.Length));
+                sizemodel = model.Length;
+                trueresolution = monitorinfo.TrueResolution is null ? "--" : monitorinfo.TrueResolution;
+                trueresolution = string.Concat(trueresolution , new string(' ', 20 - trueresolution.Length));
+                panelsize = ((monitorinfo.PanelSize is null) || (monitorinfo.PanelSize == "Unknown")) ? "--": monitorinfo.PanelSize;                
                 this.ArrlabelMonitorView[i] = (
                     new Label
                     {
@@ -204,7 +312,7 @@ namespace Spider
                         Name = $"LabelMemorybank{i + 1}",
                         Size = new System.Drawing.Size(59, 20),
                         TabIndex = 30,
-                        Text = $"  {i + 1}           {monitorinfo.Manufacturer}     {monitorinfo.Model} {monitorinfo.PanelSize} {monitorinfo.TrueResolution}"
+                        Text = $"  {i + 1}      {manufacturer}{model}{trueresolution}{panelsize}" 
                     }
                     );
                 tabPage.Controls.Add(this.ArrlabelMonitorView[i]);
@@ -232,10 +340,11 @@ namespace Spider
                 string pattern = $"^{button.Text.Trim()}";
                 Regex rgx = new Regex(pattern, RegexOptions.IgnoreCase);
                 string[] query = dicPC.Where(x => rgx.IsMatch(x.Value.Name)).Select(x => x.Key).ToArray();
-                this.listPC1.Items.Clear();
-                this.listPC1.Items.AddRange(query);
-                this.labelTextAllPC.Text = query.Length.ToString();
-                this.labelTextAllPC.Visible = true;
+                ShowPC(query);
+                //this.listPC1.Items.Clear();
+                //this.listPC1.Items.AddRange(query);
+                //this.labelTextAllPC.Text = query.Length.ToString();
+                //this.labelTextAllPC.Visible = true;
             }
         }
 

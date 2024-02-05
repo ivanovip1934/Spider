@@ -16,7 +16,7 @@ namespace Spider
             //ShowResultSearch showRes = new ShowResultSearch();
             //HWInfoGeneral showPC = new HWInfoGeneral();
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            Application.SetCompatibleTextRenderingDefault(false);           
             Application.Run(new form1());
         }
     }

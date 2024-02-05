@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -11,6 +12,8 @@ namespace Spider
     public partial class form1
     {
         Dictionary<string, ComputerInfo> PCWithSameMainBoardSN;
+        List<PCNameStatus> pCNameStatuses = new List<PCNameStatus>();
+        
 
         private void buttonTab4GetPC_Click(object sender, EventArgs e)
         {
@@ -23,11 +26,17 @@ namespace Spider
 
 
 
+
         }
 
         private void buttonTab4GetMainBoardWithSameSN_Click(object sender, EventArgs e)
         {
-            this.listBoxTab5ListSerail.Items.Clear();
+            
+            ComputerInfo current;
+            ListViewItem tmplistviewitem;
+            this.tmplistView.Items.Clear();
+            pCNameStatuses.Clear();
+            this.button_DeletePreviosARM.Visible = false;
             List<string> arrNamePC = new List<string>();
             ComputerInfo infoPC;
             List<ComputerInfo> lsinfoPC = new List<ComputerInfo>();
@@ -40,47 +49,34 @@ namespace Spider
 
                 dicpc.Remove(item);
                 lsinfoPC = dicpc.Where(x => x.MainBoard.IsSameMAC(mb)).ToList();
-                if (lsinfoPC.Count > 0) {
-                    this.listBoxTab5ListSerail.Items.Add(infoPC.Name);
+                if (lsinfoPC.Count > 0) {                    
+                    //this.listViewPCSameMB.Items.Add(infoPC.Name);
+                    //current = new PCNameStatus(item.Name, NameState.Current);
+                    current = item;
                     foreach (ComputerInfo infopc in lsinfoPC) {
-                        this.listBoxTab5ListSerail.Items.Add(infopc.Name);
+                        if (current.DateCollectedInfo.CompareTo(infopc.DateCollectedInfo) > 0)
+                        {
+                            pCNameStatuses.Add(new PCNameStatus(infopc.Name, NameState.Previous));
+                            tmplistviewitem = this.listViewPCSameMB.Items.Add(infopc.Name);
+                            tmplistviewitem.ForeColor =  Color.Red;
+                        }
+                        else
+                        {
+                            pCNameStatuses.Add(new PCNameStatus(current.Name, NameState.Previous));
+                            tmplistviewitem = this.listViewPCSameMB.Items.Add(current.Name);
+                            tmplistviewitem.ForeColor = Color.Red;
+                            current = infopc;
+                        }
+                        //this.listViewPCSameMB.Items.Add(infopc.Name);
                         dicpc.Remove(infopc);
                     }
-                }               
+                    pCNameStatuses.Add(new PCNameStatus(current.Name, NameState.Current));
+                    tmplistviewitem = this.listViewPCSameMB.Items.Add(current.Name);
+                    tmplistviewitem.ForeColor = Color.Green;
+                }            
                 
             }
-
-
-
-
-            //string SN = String.Empty;
-            //int i
-
-            //foreach (KeyValuePair<string, ComputerInfo> item in dicPC) {
-            //    i = 0;
-            //    SN = item.Value.MainBoard.SerialNumber;
-            //    foreach (KeyValuePair<string, ComputerInfo> item1 in dicPC) {
-            //        if (SN == item1.Value.MainBoard.SerialNumber)
-            //            i++;
-            //    }
-            //    if (i >1)
-
-            //}
-
-            //var var1 = from item in dicPC
-            //           group item by item.Value.MainBoard.SerialNumber
-            //           into ws
-            //           where ws.Count() > 1
-            //           select ws;
-
-            //foreach (IGrouping<string, KeyValuePair<string, ComputerInfo>> item1 in var1)
-            //{
-            //    this.listBoxTab5ListSerail.Items.AddRange(item1.Select(x => x.Value.Name).ToArray());
-
-            //}
-
-            //    //dicPC.GroupBy(x=>x.Value.MainBoard.SerialNumber, (PC, var1)=> new { pc.Name,var1.Count})
-
+            
         }
 
 
@@ -94,7 +90,7 @@ namespace Spider
         private void listBoxTab5ListManufacturer_SelectedIndexChanged(object sender, EventArgs e)
         {
             string pattern = @":\[(.*)\]";
-            string str1 = String.Empty;
+            string str1 = String.Empty;       
             string str123 = String.Empty;
             if (this.listBoxTab5ListManufacturer.SelectedIndex != -1) {
                 var var1 = dicPC.Where(x => x.Value.MainBoard.Manufacturer == this.listBoxTab5ListManufacturer.SelectedItem.ToString() && x.Value.MainBoard.MAC != null).SelectMany(x => x.Value.MainBoard.MAC);
@@ -102,19 +98,27 @@ namespace Spider
                 foreach (var item in arrstr) {
                     str1 += item + "\n";                
                 }
-
             }
             MessageBox.Show(str1);   
         }
 
-        private void listBoxTab5ListSerail_SelectedIndexChanged(object sender, EventArgs e)
+        private void listViewPCSameMB_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (this.listBoxTab5ListSerail.SelectedIndex != -1)
+            ShowComputer2(this.tmplistView);
+
+            if (this.tmplistView.SelectedItems.Count > 0 && pCNameStatuses.Count >0)
             {
-                ShowComputer(this.listBoxTab5ListSerail);
+                // check arm name is previos
+                string PCName = this.tmplistView.SelectedItems[0].Text;
+                if (pCNameStatuses.First(x => x.Name.Equals(PCName)).State == NameState.Previous) { 
+                    this.button_DeletePreviosARM.Text = $"DELETE {PCName}.xml file";
+                    this.button_DeletePreviosARM.Visible = true;
+                }else
+                    this.button_DeletePreviosARM.Visible = false;
             }
 
         }
+
 
     }
 }

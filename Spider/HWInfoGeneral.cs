@@ -13,7 +13,7 @@ namespace Spider
     {
 
         
-        string GetPathToDirARM()
+        public string GetPathToDirARM()
         {
             if (Environment.MachineName == "DESKTOP-JO3F2UG")
                 return @"P:\Progects\Spider\ARM";
